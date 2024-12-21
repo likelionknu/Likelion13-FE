@@ -1,0 +1,11 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  font-family: Pretendard, system-ui; /*기본폰트 Pretendard, */
+  max-width: 1440px;
+  margin: 0 0;
+}
+
+body {
+  width: 1440px; /* 1440px 고정 -> 반응형 웹페이지 거부 */
+}
