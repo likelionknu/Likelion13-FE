@@ -15,6 +15,7 @@ const MainPage = () => {
       <div>
         <h2> Color </h2>
         <div style={{ width: '50px', height: '50px', backgroundColor: '#4A7EDC' }}></div>
+        <h2>github Action, Vercel - CI test</h2>
       </div>
     </div>
   )
