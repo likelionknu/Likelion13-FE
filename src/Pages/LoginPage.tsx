@@ -6,7 +6,7 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   const handleTestLogin = () => {
-    alert('테스트 로그인 성공')
+    alert('테스트 로그인 성공, 메인페이지로 이동할게요')
     testLogin()
     navigate('/')
   }
@@ -14,6 +14,8 @@ const LoginPage = () => {
   return (
     <div>
       <h1>로그인 페이지</h1>
+
+      <div>강남대학교 멋쟁이 사자처럼에 오신걸 환영해요!</div>
 
       {isLoggedIn ? (
         <div>
