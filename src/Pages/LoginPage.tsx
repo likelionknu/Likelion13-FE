@@ -40,14 +40,14 @@ const LoginPage = () => {
               alert('로그인 기능 미구현 - /store/useAuthStore.ts 파일을 확인해봐요')
             }}
           >
-            로그인 할래요
+            로그인
           </button>
           <Link to='/signup'>
-            <button>회원가입 할래요</button>
+            <button>회원가입</button>
           </Link>
 
           <br />
-          <button onClick={handleTestLogin}>테스트로그인 할래요</button>
+          <button onClick={handleTestLogin}>테스트로그인</button>
         </div>
       )}
     </div>

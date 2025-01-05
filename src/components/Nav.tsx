@@ -10,7 +10,7 @@ const Nav = () => {
   const handleLogout = () => {
     logout()
     navigate('/') // 로그아웃하면 메인페이지로 이동
-    alert('로그아웃 되었어요')
+    alert('로그아웃합니다')
   }
 
   return (
@@ -18,7 +18,7 @@ const Nav = () => {
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', backgroundColor: 'orange' }}>
         <Link
           to='/'
-          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width:'700px' }}
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '700px' }}
         >
           <img
             src={logo1}
