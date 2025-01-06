@@ -22,21 +22,21 @@ const SectionSelectPage = () => {
         <img src={메인} alt="메인" style={{ width: '100%' }} />
       </div>
       <div>
-      <Link to="/signup" style={{ textDecoration: 'none' }}>
+      <Link to="/backend-question" style={{ textDecoration: 'none' }}>
           <button
             style={{ ...styles.button, position: 'absolute', top: '70%', left: '30%', transform: 'translate(-50%, -50%)' }}
           >
             백엔드 파트
           </button>
         </Link>
-        <Link to="#" style={{ textDecoration: 'none' }}>
+        <Link to="/frontend-question" style={{ textDecoration: 'none' }}>
           <button
             style={{ ...styles.button, position: 'absolute', top: '70%', left: '40%', transform: 'translate(-50%, -50%)' }}
           >
             프론트엔드 파트
           </button>
         </Link>
-        <Link to="#" style={{ textDecoration: 'none' }}>
+        <Link to="/design-question" style={{ textDecoration: 'none' }}>
           <button
             style={{ ...styles.button, position: 'absolute', top: '70%', left: '50%', transform: 'translate(-50%, -50%)' }}
           >
