@@ -1,11 +1,48 @@
+import { Link } from 'react-router-dom'; 
+import 메인 from '../assets/images/ex.png';
+
+const styles: { [key: string]: React.CSSProperties } = {
+  button: {
+    display: 'block',
+    margin: '20px auto',
+    padding: '12px 36px',
+    backgroundColor: '#FFF',
+    border: '2px solid #165EE0',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    textDecoration: 'none', 
+    fontWeight:'bold',
+  },
+};
+
 const SectionSelectPage = () => {
   return (
     <div>
-      <h1>섹션 선택 페이지 - 각 세션 질문파트 미구현</h1>
+      <div style={{ position: 'relative' }}>
+        <img src={메인} alt="메인" style={{ width: '100%' }} />
+      </div>
       <div>
-        <button onClick={() => {}}>백엔드 파트</button>
-        <button>프론트엔드 파트</button>
-        <button>디자인 파트 </button>
+      <Link to="/signup" style={{ textDecoration: 'none' }}>
+          <button
+            style={{ ...styles.button, position: 'absolute', top: '70%', left: '30%', transform: 'translate(-50%, -50%)' }}
+          >
+            백엔드 파트
+          </button>
+        </Link>
+        <Link to="#" style={{ textDecoration: 'none' }}>
+          <button
+            style={{ ...styles.button, position: 'absolute', top: '70%', left: '40%', transform: 'translate(-50%, -50%)' }}
+          >
+            프론트엔드 파트
+          </button>
+        </Link>
+        <Link to="#" style={{ textDecoration: 'none' }}>
+          <button
+            style={{ ...styles.button, position: 'absolute', top: '70%', left: '50%', transform: 'translate(-50%, -50%)' }}
+          >
+            디자인 파트
+          </button>
+        </Link>
       </div>
     </div>
   )

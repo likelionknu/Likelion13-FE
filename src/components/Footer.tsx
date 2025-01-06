@@ -1,14 +1,37 @@
 // import { FaInstagram } from 'react-icons/fa'
 // 인스타그램 아이콘 추가
 
+const styles = {
+  footer: {
+    backgroundColor: '#F8F8F8',
+    color: '#B3B3B3',
+    marginTop: '50px',
+    padding: '20px 0',
+  },
+  linkContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '60px 0',
+  },
+  link: {
+    color: '#B3B3B3',
+    textDecoration: 'none',
+    margin: '0 15px',
+    fontSize: '18px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+
+};
+
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: '#F8F8F8', marginTop: '50px' }}>
-      <div>
-        <a href='https://www.instagram.com/zanmang_loopy/'>인스타그램</a>
-        <a href='https://www.naver.com/'>멋쟁이사자</a>
-        <a href='https://www.naver.com/'>임시링크1</a>
-        <a href='https://www.naver.com/'>임시링크2</a>
+    <footer style={styles.footer}>
+      <div style={styles.linkContainer}>
+        <a href='https://www.instagram.com/likelion.knu/' style={styles.link}>인스타그램</a>
+        <a href='https://www.naver.com/'  style={styles.link}>멋쟁이사자</a>
+        <a href='https://www.naver.com/'  style={styles.link}>임시링크1</a>
+        <a href='https://www.naver.com/'  style={styles.link}>임시링크2</a>
       </div>
 
       <div>
