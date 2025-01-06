@@ -5,8 +5,15 @@ import MyPage from '../Pages/MyPage'
 import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
 import SectionSelectPage from '../Pages/SectionSelectPage'
+import BackendQuestionPage from '../Pages/BackendQuestionPage'
+import FrontendQuestionPage from '../Pages/FrontendQuestionPage'
+import DesignQuestionPage from '../Pages/DesignQuestionPage'
+
+
 
 import Footer from '../components/Footer'
+import WarningPage from '../Pages/WarningPage'
+import CompletedPage from '../Pages/CompletedPage'
 
 const Router = () => {
   return (
@@ -36,6 +43,26 @@ const Router = () => {
         <Route
           path='/SectionSelect'
           element={<SectionSelectPage />}
+        />
+        <Route
+          path='/backend-question'
+          element={<BackendQuestionPage />}
+        />
+        <Route
+          path='/frontend-question'
+          element={<FrontendQuestionPage />}
+        />
+        <Route
+          path='/design-question'
+          element={<DesignQuestionPage />}
+        />
+        <Route
+          path='/warning'
+          element={<WarningPage />}
+        />
+        <Route
+          path='/complete'
+          element={<CompletedPage />}
         />
       </Routes>
       <Footer />
