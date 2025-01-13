@@ -28,8 +28,12 @@ const Nav = () => {
           <div>Like Lion KNU</div>
         </Link>
 
-        <button onClick={() => alert('소개 페이지 누르면 어디로 가야합니까?')}>
-          <Link to='/'>소개</Link>
+        <button onClick={() => alert('소개를 누르면 어디로 가야하나요?')}>
+          <Link to=''>소개</Link>
+        </button>
+
+        <button onClick={() => alert('프로젝트 탭이 없어서 일단 여기다가 만들어둠!')}>
+          <Link to='/project-introduce'>프로젝트</Link>
         </button>
 
         {isLoggedIn ? (

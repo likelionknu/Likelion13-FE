@@ -1,0 +1,82 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.main {
+  flex: 1;
+  padding: 50px;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+}
+
+.description {
+  margin-bottom: 24px;
+}
+
+.questionBox {
+  margin-bottom: 24px;
+}
+
+.question {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.textarea {
+  width: 90%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 1rem;
+  resize: none;
+}
+
+.charCount {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.prevButton {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+.saveButton {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.nextButton {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+}

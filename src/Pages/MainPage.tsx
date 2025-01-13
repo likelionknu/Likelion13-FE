@@ -208,8 +208,9 @@ const MainPage = () => {
             </div>
           </div>
         </div>
-        
+        <Link to= '/project-introduce'>
         <button style={styles.button}>더보기</button>
+        </Link>
       </div>
 
       <div style={{ ...styles.section, backgroundColor: '#E0E8FF' }}>
