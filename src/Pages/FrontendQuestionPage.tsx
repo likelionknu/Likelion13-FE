@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from '../assets/FrontendQuestionPage.module.css';
 
 const FrontendQuestionPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,8 +22,14 @@ const FrontendQuestionPage = () => {
   const startIndex = (currentPage - 1) * questionsPerPage;
   const endIndex = currentPage * questionsPerPage;
   const currentQuestions = questions.slice(startIndex, endIndex);
-
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
+  
+  useEffect(() => {
+    const savedAnswers = localStorage.getItem("frontendAnswers");
+    if (savedAnswers) {
+      setAnswers(JSON.parse(savedAnswers));
+    }
+  }, []);
 
   const handleAnswerChange = (index: number, value: string) => {
     const newAnswers = [...answers];
@@ -42,43 +49,48 @@ const FrontendQuestionPage = () => {
     }
   };
 
+  const handleSave = () => {
+    localStorage.setItem("frontendAnswers", JSON.stringify(answers));
+    alert("임시 저장되었습니다.");
+  };
+
   const handleSubmit = () => {
     navigate("/warning"); 
   };
 
   return (
-    <div style={styles.page}>
+    <div className={styles.page}>
 
-      <main style={styles.main}>
-        <h1 style={styles.title}>프론트엔드 파트</h1>
-        <p style={styles.description}>질문에 대한 자유로운 답변을 작성해주세요. 그 외 덧붙이는 말! </p>
+      <main className={styles.main}>
+        <h1 className={styles.title}>프론트엔드 파트</h1>
+        <p className={styles.description}>질문에 대한 자유로운 답변을 작성해주세요. 그 외 덧붙이는 말! </p>
         {currentQuestions.map((question, index) => (
-          <div key={index} style={styles.questionBox}>
-            <p style={styles.question}>{question}</p>
+          <div key={index} className={styles.questionBox}>
+            <p className={styles.question}>{question}</p>
             <textarea
               placeholder="내용을 입력해주세요."
               rows={10}
               maxLength={1000}
-              value={answers[index]}
-              onChange={(e) => handleAnswerChange(index, e.target.value)}
-              style={styles.textarea}
+              value={answers[startIndex + index]}
+              onChange={(e) => handleAnswerChange(startIndex + index, e.target.value)}
+              className={styles.textarea}
             />
-            <div style={styles.charCount}>
-              {answers[index].length} / 1000
+            <div className={styles.charCount}>
+            {answers[startIndex + index].length} / 1000
             </div>
           </div>
         ))}
       </main>
 
-      <div style={styles.buttonGroup}>
+      <div className={styles.buttonGroup}>
       {currentPage === 2 && (
-          <button style={styles.prevButton} onClick={handlePrev}>이전</button>
+          <button className={styles.prevButton} onClick={handlePrev}>이전</button>
         )}
-        <button style={styles.saveButton}>임시저장</button>
+        <button className={styles.saveButton} onClick={handleSave}>임시저장</button>
         {currentPage === 2 ? (
-          <button style={styles.nextButton} onClick={handleSubmit}>제출하기</button>
+          <button className={styles.nextButton} onClick={handleSubmit}>제출하기</button>
         ) : (
-          <button style={styles.nextButton} onClick={handleNext}>다음</button>
+          <button className={styles.nextButton} onClick={handleNext}>다음</button>
         )}
       </div>
     </div>
@@ -86,72 +98,3 @@ const FrontendQuestionPage = () => {
 };
 
 export default FrontendQuestionPage;
-
-const styles: { [key: string]: React.CSSProperties } = {
-  page: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
-    fontFamily: "Arial, sans-serif",
-  },
-  main: {
-    flex: 1,
-    padding: "50px",
-  },
-  title: {
-    fontSize: "1.8rem",
-    marginBottom: "16px",
-  },
-  description: {
-    marginBottom: "24px",
-  },
-  questionBox: {
-    marginBottom: "24px",
-  },
-  question: {
-    fontSize: "1rem",
-    marginBottom: "20px",
-  },
-  textarea: {
-    width: "90%",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    padding: "8px",
-    fontSize: "1rem",
-    resize: "none",
-  },
-  buttonGroup: {
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "16px",
-  },
-  prevButton: {
-    padding: "8px 16px",
-    margin: "0 8px",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "1rem",
-    cursor: "pointer",
-    backgroundColor: "#ddd",
-  },
-  saveButton: {
-    padding: "8px 16px",
-    margin: "0 8px",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "1rem",
-    cursor: "pointer",
-    backgroundColor: "#007bff",
-    color: "white",
-  },
-  nextButton: {
-    padding: "8px 16px",
-    margin: "0 8px",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "1rem",
-    cursor: "pointer",
-    backgroundColor: "#28a745",
-    color: "white",
-  },
-};

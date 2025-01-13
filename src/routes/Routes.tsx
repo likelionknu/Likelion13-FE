@@ -14,6 +14,7 @@ import DesignQuestionPage from '../Pages/DesignQuestionPage'
 import Footer from '../components/Footer'
 import WarningPage from '../Pages/WarningPage'
 import CompletedPage from '../Pages/CompletedPage'
+import ProjectIntroPage from '../Pages/ProjectIntroPage'
 
 const Router = () => {
   return (
@@ -28,6 +29,10 @@ const Router = () => {
           path='/*'
           element={<MainPage />}
         />
+        <Route
+          path='/project-introduce'
+          element={<ProjectIntroPage />}
+          />
         <Route
           path='/mypage'
           element={<MyPage />}
