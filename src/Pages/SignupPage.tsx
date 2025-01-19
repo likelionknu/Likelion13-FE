@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuthStore } from '../store/useAuthStore'
 
 const SignupPage = () => {
   const [isCompleted, setIsCompleted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [isEmailVerified, setIsEmailVerified] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     department: '',
@@ -14,9 +16,13 @@ const SignupPage = () => {
     email: '',
     verificationCode: '',
     password: '',
-    passwordConfirm: '',
+    passwordCheck: '',
   })
-  const { login } = useAuthStore()
+
+  const [sendResponseMessage, setSendResponseMessage] = useState('')
+  const [verificationMessage, setVerificationMessage] = useState('')
+
+ 
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,47 +33,105 @@ const SignupPage = () => {
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSendVerification = async () => {
+    setIsLoading(true)
+    setError('')
+    try {
+      const url = `http://localhost:8080/api/v1/send?email=${formData.email}&verifyCode=string`
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (response.ok) {
+        setSendResponseMessage(await response.text())
+      } else {
+        throw new Error('인증번호 전송에 실패했습니다.')
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('인증번호 전송에 실패했습니다.')
+      }
+      console.error('[이메일 인증 에러]', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleVerification = async () => {
+    setIsLoading(true)
+    setError('')
+    try {
+      const url = `http://localhost:8080/api/v1/verify?email=${formData.email}&verifyCode=${formData.verificationCode}`
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (response.ok) {
+        setVerificationMessage(await response.text())
+        if (verificationMessage === '인증이 완료되었습니다.') {
+          setIsEmailVerified(true)
+        }
+      } else {
+        throw new Error('인증 확인에 실패했습니다.')
+      }
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('인증 확인에 실패했습니다.')
+      }
+      console.error('[인증 확인 에러]', err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    // test code
-    alert('임시 회원가입 성공 - 폼 데이터 콘솔로 확인해주세요')
-    console.log('회원가입 폼 데이터:', JSON.stringify(formData))
-    login({
-      name: formData.name,
-      department: formData.department,
-      studentId: formData.studentId,
-      grade: formData.grade,
-      phone: formData.phone,
-      email: formData.email,
-    })
-    setIsCompleted(true)
-    // test code
-
-    // try {
-    //   const response = await fetch('백엔드URL/signup', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(formData),
-    //   })
-
-    //   if (response.ok) {
-    //     alert('회원가입 성공!')
-    //     login({
-    //       name: formData.name,
-    //       department: formData.department,
-    //       studentId: formData.studentId,
-    //       grade: formData.grade,
-    //       phone: formData.phone,
-    //       email: formData.email,
-    //     })
-    //   }
-    // } catch (error) {
-    //   console.error('회원가입 실패:', error)
-    //   alert('회원가입에 실패했습니다.')
-    // }
+    setIsLoading(true)
+    setError('')
+    
+    try {
+      const signUpData = {
+        name: formData.name,
+        department: formData.department,
+        studentId: formData.studentId,
+        phone: formData.phone,
+        email: formData.email,
+        password: formData.password,
+        passwordCheck: formData.passwordCheck,
+        grade: formData.grade
+      }
+  
+      const response = await fetch('http://localhost:8080/api/v1/sign-up', {
+        method: 'POST',
+        headers: {
+          'accept': '*/*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(signUpData)
+      })
+  
+      if (response.ok) {
+        alert('회원가입이 완료되었습니다.')
+        setIsCompleted(true)
+      } else {
+        throw new Error('회원가입에 실패했습니다.')
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '회원가입에 실패했습니다.')
+      console.error('[회원가입 에러]', err)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   if (isCompleted) {
@@ -83,7 +147,8 @@ const SignupPage = () => {
   return (
     <div>
       <h1>회원가입</h1>
-      <form onSubmit={handleSubmit}>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <form onSubmit={handleSignUp}>
         <div>
           <div>이름</div>
           <input
@@ -134,8 +199,16 @@ const SignupPage = () => {
             name='email'
             value={formData.email}
             onChange={handleChange}
+            disabled={isEmailVerified}
           />
-          <button type='button'>인증번호 전송</button>
+          <button
+            type='button'
+            onClick={handleSendVerification}
+            disabled={isLoading || isEmailVerified}
+          >
+            {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
+          </button>
+          {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
 
           <div>인증번호</div>
           <input
@@ -143,7 +216,16 @@ const SignupPage = () => {
             name='verificationCode'
             value={formData.verificationCode}
             onChange={handleChange}
+            disabled={isEmailVerified}
           />
+          <button
+            type='button'
+            onClick={handleVerification}
+            disabled={isLoading || isEmailVerified}
+          >
+            {isLoading ? '인증 중...' : isEmailVerified ? '인증 완료' : '인증 확인'}
+          </button>
+          {isEmailVerified && <div style={{ color: 'green' }}>인증 완료</div>}
 
           <div>비밀번호</div>
           <input
@@ -162,8 +244,8 @@ const SignupPage = () => {
           <div>비밀번호 확인</div>
           <input
             type={showPassword ? 'text' : 'password'}
-            name='passwordConfirm'
-            value={formData.passwordConfirm}
+            name='passwordCheck'
+            value={formData.passwordCheck}
             onChange={handleChange}
           />
 

@@ -78,6 +78,21 @@ const MyPage = () => {
         </div>
         <div>
           <div>비밀번호 변경</div>
+          <input
+            type='password'
+            name='password'
+            placeholder='비밀번호'
+            autoComplete='new-password'
+          />
+        </div>
+        <div>
+          <div>비밀번호 확인</div>
+          <input
+            type='password'
+            name='passwordConfirm'
+            placeholder='비밀번호 확인'
+            autoComplete='new-password'
+          />
         </div>
         <button type='submit'>저장하기</button>
       </form>
