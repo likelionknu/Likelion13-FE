@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from  '../assets/ProjectIntroPage.module.css';
 import 침 from '../assets/images/chim.jpg';
 
