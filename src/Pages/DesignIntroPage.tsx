@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'; 
-import 메인 from '../assets/images/main.png';
+import 메인 from '../assets/images/Main.png';
 import 디자인 from '../assets/images/DesignIntro.png';
 import WANT from '../assets/images/IntroWant.png';
 import styles from '../assets/IntroPage.module.css';
