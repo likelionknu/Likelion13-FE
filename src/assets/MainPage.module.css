@@ -1,0 +1,123 @@
+.button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 36px;
+  background-color: #fff;
+  border: 2px solid #165ee0;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.section {
+  margin: 20px 0;
+  padding: 40px 30px;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 30px;
+}
+
+.sectionText {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 6px;
+  width: 416px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cardImg {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 0 22px;
+}
+
+.cardDescription {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  padding: 0 22px;
+  margin-bottom: 20px;
+}
+
+.faqCard {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.faqQuestion {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #165ee0;
+  margin-bottom: 10px;
+}
+
+.faqAnswer {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #f0f4ff;
+  position: relative;
+}
+
+.timelineHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+.timelineMonth {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.timelineBody {
+  position: relative;
+  width: 100%;
+  height: 350px;
+}
+
+.timelineEvent {
+  position: absolute;
+  padding: 14px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  text-align: center;
+}

@@ -8,7 +8,9 @@ import SectionSelectPage from '../Pages/SectionSelectPage'
 import BackendQuestionPage from '../Pages/BackendQuestionPage'
 import FrontendQuestionPage from '../Pages/FrontendQuestionPage'
 import DesignQuestionPage from '../Pages/DesignQuestionPage'
-
+import FrontIntroPage from '../Pages/FrontIntroPage'
+import BackIntroPage from '../Pages/BackIntroPage'
+import DesignIntroPage from '../Pages/DesignIntroPage'
 
 
 import Footer from '../components/Footer'
@@ -60,6 +62,18 @@ const Router = () => {
         <Route
           path='/design-question'
           element={<DesignQuestionPage />}
+        />
+        <Route
+          path='/FrontIntro'
+          element={<FrontIntroPage/>}
+        />
+        <Route
+          path='/BackIntro'
+          element={<BackIntroPage/>}
+        />
+        <Route
+          path='/DesignIntro'
+          element={<DesignIntroPage/>}
         />
         <Route
           path='/warning'
