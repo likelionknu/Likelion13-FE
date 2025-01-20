@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import 침팬지 from '../assets/images/chim.jpg';
-import 메인 from '../assets/images/main.png';
+import 메인 from '../assets/images/Main.png';
 import styles from '../assets/MainPage.module.css';
 
 const events = [
