@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../assets/BackendQuestionPage.module.css';
+import styles from '../assets/QuestionPage.module.css';
+import QuestionModal from "../components/QuestionModal";
 
 const BackendQuestionPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const questions = [
@@ -51,18 +54,48 @@ const BackendQuestionPage = () => {
   };
 
   const handleSave = () => {
-    // 로컬 스토리지에 현재 답변 저장
     localStorage.setItem("backendAnswers", JSON.stringify(answers));
     alert("임시 저장되었습니다.");
   };
 
   const handleSubmit = () => {
-    navigate("/warning");
+    setIsFirstModalOpen(true);
+  };
+
+  const handleFirstModalClose = async () => {
+    setIsFirstModalOpen(false);
+  
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answers: answers,
+        }),
+      });
+  
+      if (response.ok) {
+      const responseData = await response.json();
+      console.log('서버 응답:', responseData);
+      
+        setIsSecondModalOpen(true);
+      } else {
+        alert("서버 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      alert("서버 요청 중 오류가 발생했습니다.");
+    }
+  };
+  
+
+  const handleSecondModalClose = () => {
+    navigate("/MainPage"); 
   };
 
   return (
     <div className={styles.page}>
-
       <main className={styles.main}>
         <h1 className={styles.title}>백엔드 파트</h1>
         <p className={styles.description}>질문에 대한 자유로운 답변을 작성해주세요. 그 외 덧붙이는 말! </p>
@@ -87,7 +120,7 @@ const BackendQuestionPage = () => {
       </main>
 
       <div className={styles.buttonGroup}>
-      {currentPage === 2 && (
+        {currentPage === 2 && (
           <button className={styles.prevButton} onClick={handlePrev}>이전</button>
         )}
         <button className={styles.saveButton} onClick={handleSave}>임시저장</button>
@@ -97,6 +130,21 @@ const BackendQuestionPage = () => {
           <button className={styles.nextButton} onClick={handleNext}>다음</button>
         )}
       </div>
+
+      <QuestionModal
+        isOpen={isFirstModalOpen}
+        title="수정이 불가합니다"
+        message="답변을 제출하면 더 이상 수정할 수 없습니다. 계속하시겠습니까?"
+        onClose={handleFirstModalClose}
+      />
+
+      <QuestionModal
+        isOpen={isSecondModalOpen}
+        title="제출 완료"
+        message="답변이 성공적으로 제출되었습니다."
+        onClose={handleSecondModalClose}
+        isSecondModal={true} 
+      />
     </div>
   );
 };
