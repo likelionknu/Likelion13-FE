@@ -29,15 +29,6 @@
   margin-bottom: 20px;
 }
 
-.textarea {
-  width: 90%;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 8px;
-  font-size: 1rem;
-  resize: none;
-}
-
 .buttonGroup {
   display: flex;
   justify-content: center;
@@ -74,4 +65,29 @@
   cursor: pointer;
   background-color: #28a745;
   color: white;
+}
+
+.textareaWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.charCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none; /* 클릭 불가능 */
 }
