@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
-import 침팬지 from '../assets/images/chim.jpg';
 import 메인 from '../assets/images/Main.png';
+import 백 from '../assets/images/BackIntro.png';
+import 프론트 from '../assets/images/FrontIntro.png';
+import 디자인 from '../assets/images/DesignIntro.png';
 import styles from '../assets/MainPage.module.css';
 
 const events = [
   { line: 1, months: ["Feb", "Mar"], label: "아기사자 모집 및 지원", color: "#779BFE" },
-  { line: 2, months: ["Mar", "Jun"], label: "아기사자 면접, 멋쟁이 사자처럼 중앙 OT", color: "#4A7EDC"},
-  { line: 2, months: ["Jul", "Aug"], label: "파트별 세션", color: "#4A7EDC" },
-  { line: 3, months: ["May", "Aug"], label: "전국 연합 아이디어톤, 해커톤", color: "#165EE0" },
-  { line: 4, months: ["Aug", "Nov"], label: "2학기 OT, 파트별 세션, 데모데이 준비", color: "#96E8FF " },
-  { line: 5, months: ["Nov", "Dec"], label: "데모데이, 연합 해커톤", color: "#779BFE" },
+  { line: 2, months: ["Mar", "Jul"], label: "아기사자 면접, 멋쟁이 사자처럼 중앙 OT", color: "#4A7EDC"},
+  { line: 3, months: ["May", "Aug"], label: "전국 연합 아이디어톤", color: "#165EE0" },
+  { line: 3, months: ["Sep", "Oct"], label: "해커톤", color: "#165EE0" },
+  { line: 4, months: ["Aug", "Dec"], label: "2학기 OT, 파트별 세션, 데모데이 준비", color: "#96E8FF " },
+  { line: 5, months: ["Nov", "Jan"], label: "데모데이, 연합 해커톤", color: "#779BFE" },
 ];
 
 const MainPage = () => {
@@ -24,7 +26,6 @@ const MainPage = () => {
         </Link>
       </div>
 
-
       <div className={styles.section}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>강남대학교 멋쟁이 사자처럼</h1>
       <p className={styles.sectionText} style={{ textAlign: 'center'}}>
@@ -38,34 +39,46 @@ const MainPage = () => {
 
       
       <div className={styles.section} style={{ backgroundColor: '#E0E8FF' }}>
-      <h1 className={styles.sectionTitle} style={{textAlign: 'center' }}>같이 할수록 더 빛나는, 우리의 핵심<br /> 파트를 소개합니다!</h1>
+      <h1 className={styles.sectionTitle} style={{textAlign: 'center' }}>같이 할수록 더 빛나는, 우리의 핵심 파트를 <br /> 소개합니다!</h1>
         <div className={styles.cardContainer}>
-        <Link to='/BackIntro' style={{ textDecoration: 'none' }}>
-          <div className={styles.card}>
-            <img src={침팬지} alt="백엔드" className={styles.cardImg} />
-            <div className={styles.cardTitle}>백엔드</div>
-            <div className={styles.cardDescription}>
-              웹과 애플리케이션의 핵심 기능을 설계하고 구현하는 분야로, 주로 눈에 보이지 않는 서버와 데이터 베이스를 관리하며 서비스의 근간을 담당합니다.
+        <Link to='/BackIntro' className={styles.cardLink}>
+         <div className={styles.card}>
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#165EE0' }}>
+              <img src={백} alt="백엔드" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>백엔드</div>
+              <div className={styles.cardDescription}>
+                웹과 애플리케이션의 핵심 기능을 설계하고 구현하는 분야로, 주로 눈에 보이지 않는 서버와 데이터 베이스를 관리하며 서비스의 근간을 담당합니다.
+              </div>
             </div>
           </div>
         </Link>
 
-        <Link to='/FrontIntro' style={{ textDecoration: 'none' }}>
+        <Link to='/FrontIntro' className={styles.cardLink}>
           <div className={styles.card}>
-            <img src={침팬지} alt="프론트엔드" className={styles.cardImg} />
-            <div className={styles.cardTitle}>프론트엔드</div>
-            <div className={styles.cardDescription}>
-              사용자가 서비스를 이용하는 인터페이스를 구축하는 분야로, 웹사이트와 애플리케이션의 디자인, 동작, 반응성을 설계합니다. 사용자가 직접 상호작용하는 모든 요소를 담당합니다.
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#7899FE' }}>
+              <img src={프론트} alt="프론트엔드" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>프론트엔드</div>
+              <div className={styles.cardDescription}>
+                사용자가 서비스를 이용하는 인터페이스를 구축하는 분야로, 웹사이트와 애플리케이션의 디자인, 동작, 반응성을 설계합니다. 사용자가 직접 상호작용하는 모든 요소를 담당합니다.
+              </div>
             </div>
           </div>
         </Link>
 
-        <Link to='/DesignIntro' style={{ textDecoration: 'none' }}>
+        <Link to='/DesignIntro' className={styles.cardLink}>
           <div className={styles.card}>
-            <img src={침팬지} alt="디자인" className={styles.cardImg} />
-            <div className={styles.cardTitle}>디자인</div>
-            <div className={styles.cardDescription}>
-              사용자 경험과 사용자 인터페이스를 설계하여 화면과 서비스가 더 직관적이고 편리하게 사용될 수 있도록 돕는 작업을 담당합니다. 혁신적인 아이디어를 현실로 구현하는 데 중요한 역할을 합니다.
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#96E8FF' }}>
+              <img src={디자인} alt="디자인" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>디자인</div>
+              <div className={styles.cardDescription}>
+                사용자 경험과 사용자 인터페이스를 설계하여 화면과 서비스가 더 직관적이고 편리하게 사용될 수 있도록 돕는 작업을 담당합니다. 혁신적인 아이디어를 현실로 구현하는 데 중요한 역할을 합니다.
+              </div>
             </div>
           </div>
         </Link>
@@ -75,37 +88,50 @@ const MainPage = () => {
 
       <div className={styles.section}>
         <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>지난 프로젝트</h1>
-
         <div className={styles.cardContainer}>
           <div className={styles.card}>
-            <img src={침팬지} alt="팜투마켓" className={styles.cardImg} />
-            <div className={styles.cardTitle}>팜투마켓</div>
-            <div className={styles.cardDescription}>
-              온라인 거래가 없으면 수익을 내기 어려운 현대 사회에서 전자기기 사용에 어려움을 겪는 노년층은 온라인 시장에서 자연스레 소외된다. 이처럼 소외계층 중심으로 기획된 농산물 공급자와 판매자를 중개 해주는 웹 커뮤니티 시스템 팜투마켓입니다.
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#E2FFF8' }}>
+              <img src={백} alt="팜투마켓" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>팜투마켓</div>
+              <div className={styles.cardDescription}>
+                온라인 거래가 없으면 수익을 내기 어려운 현대 사회에서 전자기기 사용에 어려움을 겪는 노년층은 온라인 시장에서 자연스레 소외된다. 이처럼 소외계층 중심으로 기획된 농산물 공급자와 판매자를 중개 해주는 웹 커뮤니티 시스템 팜투마켓입니다.
+              </div>
             </div>
           </div>
 
           <div className={styles.card}>
-            <img src={침팬지} alt="DLIFEBOAT" className={styles.cardImg} />
-            <div className={styles.cardTitle}>D.LIFEBOAT</div>
-            <div className={styles.cardDescription}>
-              방대한 정보의 홍수 속에서, 사용자가 정확하고 원하는 여행 정보만을 필요로할 때 사용할 수 있는 chat gpt 챗봇 형태의 서비스 입니다. 사용자가 입력한 키워드를 기반으로 유튜브 영상까지 추천
-              해줍니다.
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#EAFFE4' }}>
+              <img src={프론트} alt="DLIFEBOAT" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>D.LIFEBOAT</div>
+              <div className={styles.cardDescription}>
+                방대한 정보의 홍수 속에서, 사용자가 정확하고 원하는 여행 정보만을 필요로할 때 사용할 수 있는 chat gpt 챗봇 형태의 서비스 입니다. 사용자가 입력한 키워드를 기반으로 유튜브 영상까지 추천
+                해줍니다.
+              </div>
             </div>
           </div>
 
           <div className={styles.card}>
-            <img src={침팬지} alt="투자가머니" className={styles.cardImg} />
-            <div className={styles.cardTitle}>투자가머니</div>
-            <div className={styles.cardDescription}>
-              라인연령제한, 지식부족, 자금부족, 사전에 정의되지 않은 주식 시장만의 용어로 인해 금융 투자에 어려움 느껴 시도조차 못하거나, 포기한 잘파세대들을 위한 블록체인 거래 기반 모의 주식 서비스
-              투자가 머니 입니다.
+            <div className={styles.cardImgContainer} style={{ backgroundColor: '#DCDBFF' }}>
+              <img src={디자인} alt="투자가머니" className={styles.cardImg} />
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.cardTitle}>투자가머니</div>
+              <div className={styles.cardDescription}>
+                라인연령제한, 지식부족, 자금부족, 사전에 정의되지 않은 주식 시장만의 용어로 인해 금융 투자에 어려움 느껴 시도조차 못하거나, 포기한 잘파세대들을 위한 블록체인 거래 기반 모의 주식 서비스
+                투자가 머니 입니다.
+              </div>
             </div>
           </div>
         </div>
-        <Link to= '/project-introduce'>
-        <button className={styles.button}>더보기</button>
-        </Link>
+        <div style={{ marginTop:'90px' }}>
+          <Link to= '/project-introduce' style={{ textDecoration: 'none' }}>
+          <button className={styles.button}>더보기</button>
+          </Link>
+        </div>
       </div>
 
       <div className={styles.section} style={{backgroundColor: '#E0E8FF' }}>
@@ -114,7 +140,7 @@ const MainPage = () => {
    
         <div className={styles.timelineContainer}>
           <div className={styles.timelineHeader}>
-            {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].map((month) => (
+            {["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].map((month) => (
               <div key={month} className={styles.timelineMonth}>
                 {month}
               </div>
@@ -123,8 +149,8 @@ const MainPage = () => {
 
           <div className={styles.timelineBody}>
             {events.map((event, index) => {
-              const startMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(event.months[0]);
-              const endMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].indexOf(event.months[1]);
+              const startMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].indexOf(event.months[0]);
+              const endMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].indexOf(event.months[1]);
 
               const left = (startMonth / 12) * 100;  // startMonth를 12로 나누어 비율로 계산
               const width = ((endMonth - startMonth + 1) / 12) * 100;

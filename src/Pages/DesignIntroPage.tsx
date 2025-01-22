@@ -26,8 +26,8 @@ const DesignIntroPage = () => {
 
     <div className={styles.section}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>디자인 파트</h1>
-      <div className={styles.sectionContent}>
-        <div className={styles.imageWrapper}>
+      <div className={styles.sectionContent} style={{ border :'1px solid #96E8FF' }}>
+        <div className={styles.imageWrapper} style={{ backgroundColor: '#96E8FF'}}>
           <img src={디자인} alt="디자인" className={styles.sectionImage} />
         </div>
         <div className={styles.textWrapper}>

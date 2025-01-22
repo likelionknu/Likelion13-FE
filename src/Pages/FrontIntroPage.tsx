@@ -27,8 +27,8 @@ const FrontIntroPage = () => {
 
     <div className={styles.section}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>프론트엔드 파트</h1>
-      <div className={styles.sectionContent}>
-        <div className={styles.imageWrapper}>
+      <div className={styles.sectionContent} style={{ border :'1px solid #7899FE' }}>
+        <div className={styles.imageWrapper}  style={{ backgroundColor: '#7899FE' }}>
           <img src={프론트} alt="프론트" className={styles.sectionImage} />
         </div>
         <div className={styles.textWrapper}>
@@ -48,7 +48,7 @@ const FrontIntroPage = () => {
         </div>
         <div className={styles.text2Wrapper}>
         <p className={styles.sectionText}>
-         {'협업을 즐기는 사람을 원해요\n팀원들과 원활하게 소통하며 함께 성장하고, 협력할 수 있는 사람을 원해요\n팀원과 원활한 소통이 가능하신 분\n코딩을 잘 몰라도, 배우고 성장하려는 열정이 있는 분\n문제의 상황에 직면했을 때 해결 방안을 적극적으로 모색하고 실행하는 사람'}
+         {'팀원들과 원활하게 소통하며 함께 성장하고, 협력할 수 있는 분\n코딩을 잘 몰라도, 배우고 성장하려는 열정이 있는 분\n문제의 상황에 직면했을 때 해결 방안을 적극적으로 모색하고 실행하는 분'}
         </p>
         </div>
       </div>

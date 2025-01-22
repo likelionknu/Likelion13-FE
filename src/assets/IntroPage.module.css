@@ -36,8 +36,7 @@
 }
 
 .section {
-  margin: 20px 0;
-  padding: 40px 30px;
+  padding: 10px 40px 60px 40px;
 }
 
 .sectionTitle {
@@ -56,18 +55,17 @@
   display: flex;
   align-items: center;
   border-radius: 5px;  
-  border: 1px solid #7899FE;
   width: 90%;  
   margin: 0 auto; 
 }
 
 .imageWrapper {
   flex: 3;
-  background-color: #7899FE;
   border-radius: 3px;  
   display: flex;
   align-items: center;
   justify-content: center;
+  height : 280px;
 }
 
 .textWrapper {
@@ -75,36 +73,68 @@
 }
 
 .sectionImage {
-  width: 70%;
+  width: 55%;
   height: auto;
 }
 
-.image2Wrapper {
-  /* background-color: #fff;
-  border-radius: 50%;  */
+.section2Content {
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 220px;  
-  height: 220px;  
-  margin: 0 auto; 
-  padding: 10px; 
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
 }
 
-.text2Wrapper {
-  text-align: center; 
+
+.image2Wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .section2Image {
-  width: 100%; 
-  height: auto;
-  object-fit: cover;  
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.text2Wrapper {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 700px;
+  width: 100%;
+  border-radius: 25px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-left: 40px; 
+}
+
+.text2Wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  left: -20px; 
+  width: 0;
+  height: 0;
+  border-right: 20px solid #fff;
+  border-top: 20px solid transparent; 
+  border-bottom: 20px solid transparent;
+  transform: translateY(-50%);
 }
 
 .sectionText {
   font-size: 1.1rem;
   line-height: 1.8;
-  text-align: center; 
-  padding: 20px 40px; 
+  text-align: center;
+  padding: 20px 40px;
   white-space: pre-line;
+  font-weight: 500;
+  margin: 0;
 }

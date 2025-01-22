@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import 메인 from '../assets/images/Main.png';
 import 백 from '../assets/images/BackIntro.png';
 import WANT from '../assets/images/IntroWant.png';
-
 import styles from '../assets/IntroPage.module.css';
 
 const BackIntroPage = () => {
@@ -29,8 +28,8 @@ const BackIntroPage = () => {
 
     <div className={styles.section}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>백엔드 파트</h1>
-      <div className={styles.sectionContent}>
-        <div className={styles.imageWrapper}>
+      <div className={styles.sectionContent} style={{ border :'1px solid #165EE0' }}>
+        <div className={styles.imageWrapper} style={{ backgroundColor: '#165EE0' }}>
           <img src={백} alt="백" className={styles.sectionImage} />
         </div>
         <div className={styles.textWrapper}>
