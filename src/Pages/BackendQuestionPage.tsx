@@ -23,7 +23,6 @@ const BackendQuestionPage = () => {
   const startIndex = (currentPage - 1) * questionsPerPage;
   const endIndex = currentPage * questionsPerPage;
   const currentQuestions = questions.slice(startIndex, endIndex);
-
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
 
   useEffect(() => {
@@ -70,16 +69,18 @@ const BackendQuestionPage = () => {
         {currentQuestions.map((question, index) => (
           <div key={index} className={styles.questionBox}>
             <p className={styles.question}>{question}</p>
-            <textarea
-              placeholder="내용을 입력해주세요."
-              rows={10}
-              maxLength={1000}
-              value={answers[startIndex + index]}
-              onChange={(e) => handleAnswerChange(startIndex + index, e.target.value)}
-              className={styles.textarea}
-            />
-            <div className={styles.charCount}>
-            {answers[startIndex + index].length} / 1000
+            <div className={styles.textareaWrapper}>
+              <textarea
+                placeholder="내용을 입력해주세요."
+                rows={10}
+                maxLength={1000}
+                value={answers[startIndex + index]}
+                onChange={(e) => handleAnswerChange(startIndex + index, e.target.value)}
+                className={styles.textarea}
+              />
+              <span className={styles.charCount}>
+                {answers[startIndex + index].length} / 1000
+              </span>
             </div>
           </div>
         ))}
