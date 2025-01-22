@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'; 
-import 메인 from '../assets/images/main.png';
+import 메인 from '../assets/images/Main.png';
 import styles from '../assets/SectionSelectPage.module.css'; 
 
 const SectionSelectPage = () => {
