@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'; 
-import 메인 from '../assets/images/main.png';
+import 메인 from '../assets/images/Main.png';
 import 디자인 from '../assets/images/DesignIntro.png';
 import WANT from '../assets/images/IntroWant.png';
 import styles from '../assets/IntroPage.module.css';
@@ -26,8 +26,8 @@ const DesignIntroPage = () => {
 
     <div className={styles.section}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>디자인 파트</h1>
-      <div className={styles.sectionContent}>
-        <div className={styles.imageWrapper}>
+      <div className={styles.sectionContent} style={{ border :'1px solid #96E8FF' }}>
+        <div className={styles.imageWrapper} style={{ backgroundColor: '#96E8FF'}}>
           <img src={디자인} alt="디자인" className={styles.sectionImage} />
         </div>
         <div className={styles.textWrapper}>
