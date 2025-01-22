@@ -31,6 +31,7 @@
 
 .button:hover {
   background-color: #e0e0e0;
+  border-color: #e0e0e0;
 }
 
 .active {
@@ -47,11 +48,13 @@
 }
 
 .projectCard {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
   background-color: #fff;
-  text-align: left;
+  border-radius: 6px;
+  width: 400px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display:flex;
+  flex-direction: column;
+  min-height: 350px;
   transition: transform 0.3s ease;
 }
 
@@ -60,19 +63,30 @@
 }
 
 .image {
+  width: 55%;
   height: auto;
-  max-height: 250px;
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 0 auto 15px;
 }
 
 .projectTitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
+  margin-bottom: 10px;
+  padding: 20px 22px 0;
 }
 
 .projectDescription {
-  font-size: 1rem;
-  color: #555;
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 30px;
+  padding: 0 22px;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.cardImgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height : 280px;
 }

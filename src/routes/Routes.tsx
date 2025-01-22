@@ -14,8 +14,6 @@ import DesignIntroPage from '../Pages/DesignIntroPage'
 
 
 import Footer from '../components/Footer'
-import WarningPage from '../Pages/WarningPage'
-import CompletedPage from '../Pages/CompletedPage'
 import ProjectIntroPage from '../Pages/ProjectIntroPage'
 
 const Router = () => {
@@ -74,14 +72,6 @@ const Router = () => {
         <Route
           path='/DesignIntro'
           element={<DesignIntroPage/>}
-        />
-        <Route
-          path='/warning'
-          element={<WarningPage />}
-        />
-        <Route
-          path='/complete'
-          element={<CompletedPage />}
         />
       </Routes>
       <Footer />

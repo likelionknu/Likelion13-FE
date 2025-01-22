@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../assets/DesignQuestionPage.module.css';
+import styles from '../assets/QuestionPage.module.css';
+import QuestionModal from "../components/QuestionModal";
 
 const DesignQuestionPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
 
   const questions = [
     "Q. 동아리에 지원하게 된 이유를 작성해주세요.",
@@ -56,9 +59,39 @@ const DesignQuestionPage = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/warning");
+    setIsFirstModalOpen(true);
   };
 
+  const handleFirstModalClose = async () => {
+    setIsFirstModalOpen(false);
+  
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answers: answers,
+        }),
+      });
+  
+      if (response.ok) {
+      const responseData = await response.json();
+      console.log('서버 응답:', responseData);
+      
+        setIsSecondModalOpen(true);
+      } else {
+        alert("서버 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      alert("서버 요청 중 오류가 발생했습니다.");
+    }
+  };
+
+  const handleSecondModalClose = () => {
+    navigate("/MainPage");  };
+ 
   return (
     <div className={styles.page}>
 
@@ -96,6 +129,21 @@ const DesignQuestionPage = () => {
           <button className={styles.nextButton} onClick={handleNext}>다음</button>
         )}
       </div>
+
+      <QuestionModal
+        isOpen={isFirstModalOpen}
+        title="수정이 불가합니다"
+        message="답변을 제출하면 더 이상 수정할 수 없습니다. 계속하시겠습니까?"
+        onClose={handleFirstModalClose}
+      />
+
+      <QuestionModal
+        isOpen={isSecondModalOpen}
+        title="제출 완료"
+        message="답변이 성공적으로 제출되었습니다."
+        onClose={handleSecondModalClose}
+        isSecondModal={true}
+      />
     </div>
   );
 };
