@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import '../assets/SignupPage.css'
+
 const SignupPage = () => {
   const [isCompleted, setIsCompleted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -22,7 +24,6 @@ const SignupPage = () => {
   const [sendResponseMessage, setSendResponseMessage] = useState('')
   const [verificationMessage, setVerificationMessage] = useState('')
 
- 
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,7 +99,7 @@ const SignupPage = () => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
-    
+
     try {
       const signUpData = {
         name: formData.name,
@@ -108,18 +109,18 @@ const SignupPage = () => {
         email: formData.email,
         password: formData.password,
         passwordCheck: formData.passwordCheck,
-        grade: formData.grade
+        grade: formData.grade,
       }
-  
+
       const response = await fetch('http://localhost:8080/api/v1/sign-up', {
         method: 'POST',
         headers: {
-          'accept': '*/*',
+          accept: '*/*',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(signUpData)
+        body: JSON.stringify(signUpData),
       })
-  
+
       if (response.ok) {
         alert('회원가입이 완료되었습니다.')
         setIsCompleted(true)
@@ -145,115 +146,124 @@ const SignupPage = () => {
   }
 
   return (
-    <div>
-      <h1>회원가입</h1>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <form onSubmit={handleSignUp}>
-        <div>
-          <div>이름</div>
-          <input
-            type='text'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-          />
+    <div className='signup-container'>
+      <div className='signup-box'>
+        <h1>회원가입</h1>
 
-          <div>학부</div>
-          <input
-            type='text'
-            name='department'
-            value={formData.department}
-            onChange={handleChange}
-          />
-
-          <div>학번</div>
-          <input
-            type='text'
-            name='studentId'
-            value={formData.studentId}
-            onChange={handleChange}
-          />
-
-          <div>학년</div>
-          <input
-            type='text'
-            name='grade'
-            value={formData.grade}
-            onChange={handleChange}
-          />
-
-          <div>전화번호</div>
-          <input
-            type='tel'
-            name='phone'
-            placeholder='010-0000-0000'
-            pattern='(010)-\d{4}-\d{4}'
-            maxLength={13}
-            value={formData.phone}
-            onChange={handleChange}
-          />
-
-          <div>이메일</div>
-          <input
-            type='email'
-            name='email'
-            value={formData.email}
-            onChange={handleChange}
-            disabled={isEmailVerified}
-          />
-          <button
-            type='button'
-            onClick={handleSendVerification}
-            disabled={isLoading || isEmailVerified}
-          >
-            {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
-          </button>
-          {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
-
-          <div>인증번호</div>
-          <input
-            type='text'
-            name='verificationCode'
-            value={formData.verificationCode}
-            onChange={handleChange}
-            disabled={isEmailVerified}
-          />
-          <button
-            type='button'
-            onClick={handleVerification}
-            disabled={isLoading || isEmailVerified}
-          >
-            {isLoading ? '인증 중...' : isEmailVerified ? '인증 완료' : '인증 확인'}
-          </button>
-          {isEmailVerified && <div style={{ color: 'green' }}>인증 완료</div>}
-
-          <div>비밀번호</div>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name='password'
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <button
-            type='button'
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {showPassword ? '비밀번호 숨기기' : '비밀번호 보이기'}
-          </button>
-
-          <div>비밀번호 확인</div>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            name='passwordCheck'
-            value={formData.passwordCheck}
-            onChange={handleChange}
-          />
-
+        <form onSubmit={handleSignUp}>
           <div>
-            <button type='submit'>회원가입하기</button>
+            <div>이름</div>
+            <input
+              type='text'
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
+            />
+
+            <div>학부</div>
+            <input
+              type='text'
+              name='department'
+              value={formData.department}
+              onChange={handleChange}
+            />
+
+            <div>학번</div>
+            <input
+              type='text'
+              name='studentId'
+              value={formData.studentId}
+              onChange={handleChange}
+            />
+
+            <div>학년</div>
+            <input
+              type='text'
+              name='grade'
+              value={formData.grade}
+              onChange={handleChange}
+            />
+
+            <div>전화번호</div>
+            <input
+              type='tel'
+              name='phone'
+              placeholder='010-0000-0000'
+              pattern='(010)-\d{4}-\d{4}'
+              maxLength={13}
+              value={formData.phone}
+              onChange={handleChange}
+            />
+
+            <div>이메일</div>
+            <input
+              type='email'
+              name='email'
+              value={formData.email}
+              onChange={handleChange}
+              disabled={isEmailVerified}
+            />
+            <button
+              type='button'
+              onClick={handleSendVerification}
+              disabled={isLoading || isEmailVerified}
+            >
+              {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
+            </button>
+            {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
+
+            {}
+            <div>인증번호</div>
+            <input
+              type='text'
+              name='verificationCode'
+              value={formData.verificationCode}
+              onChange={handleChange}
+              disabled={isEmailVerified}
+            />
+            <button
+              type='button'
+              onClick={handleVerification}
+              disabled={isLoading || isEmailVerified}
+            >
+              {isLoading ? '인증 중...' : isEmailVerified ? '인증 완료' : '인증 확인'}
+            </button>
+            {isEmailVerified && <div style={{ color: 'green' }}>인증 완료</div>}
+
+            <div>비밀번호</div>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name='password'
+              value={formData.password}
+              onChange={handleChange}
+            />
+
+            <button
+              type='button'
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? '감추기' : '보이기'}
+            </button>
+
+            <div>비밀번호 확인</div>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name='passwordCheck'
+              value={formData.passwordCheck}
+              onChange={handleChange}
+            />
           </div>
-        </div>
-      </form>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+
+          <button
+            id='signup-button'
+            type='submit'
+          >
+            회원가입하기
+          </button>
+        </form>
+        
+      </div>
     </div>
   )
 }

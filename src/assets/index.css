@@ -2,10 +2,10 @@
 
 :root {
   font-family: Pretendard, system-ui; /*기본폰트 Pretendard, */
-  max-width: 1440px;
+  max-width: 1920px;
   margin: 0 0;
 }
 
 body {
-  width: 1440px; /* 1440px 고정 -> 반응형 웹페이지 거부 */
+  width: 1920px; /* 1440px 고정 -> 반응형 웹페이지 거부 */
 }
