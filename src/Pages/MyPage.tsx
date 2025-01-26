@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 
 const MyPage = () => {
@@ -6,6 +7,15 @@ const MyPage = () => {
 
   const user = useAuthStore((state) => state.user)
   console.log('user:', user) // user 정보 확인
+
+  const { logout } = useAuthStore()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate('/') // 로그아웃하면 메인페이지로 이동
+    alert('로그아웃합니다')
+  }
 
   const EditTab = () => (
     <div>
@@ -115,6 +125,7 @@ const MyPage = () => {
       <div>
         <button onClick={() => setActiveTab('edit')}>수정하기</button>
         <button onClick={() => setActiveTab('result')}>결과보기</button>
+        <button onClick={handleLogout}>로그아웃</button>
       </div>
 
       {activeTab === 'edit' ? <EditTab /> : <ResultTab />}

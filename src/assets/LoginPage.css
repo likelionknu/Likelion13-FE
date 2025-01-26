@@ -1,0 +1,89 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+}
+
+.login-box {
+  width: 500px;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #7899fe;
+  box-shadow: 0px 10px 10px 5px rgba(75, 75, 75, 0.25);
+  text-align: center;
+  padding: 30px;
+}
+
+.login-box h1 {
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #000;
+  line-height: 55px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.login-box input {
+  width: 355px;
+  height: 30px;
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #bfbfbf;
+  border-radius: 4px;
+}
+
+.login-box button {
+  background: #e0e0e0;
+  width: 70%;
+  height: 45px;
+  padding: 10px;
+  gap: 10px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* .login-box button:hover {
+  background: silver;
+  color: #fff;
+} */
+
+.password-input {
+  position: relative;
+}
+
+/* 눈 아이콘 위치 right, top 으로 absolute  */
+.password-toggle-icon {
+  position: absolute;
+  right: 10%;
+  top: 38%;
+  width: 20px;
+  cursor: pointer;
+}
+
+.login-box .login-button {
+  background: #7899fe;
+  color: #000;
+  margin-top: 20px;
+}
+
+.login-box .signup-link {
+  display: block;
+  text-decoration: none;
+}
+
+.password-input .password-error {
+  color: #ff6060;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 5px;
+}
