@@ -1,0 +1,35 @@
+.footer {
+  background-color: #F8F8F8;
+  color: #B3B3B3;
+  margin-top: 50px;
+  padding: 20px 0;
+}
+
+.link-container {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  margin: 60px auto;
+}
+
+.link {
+  color: #B3B3B3;
+  text-decoration: none;
+  margin: 0 15px;
+  display: flex;
+  align-items: center;
+}
+
+.link img {
+  width: 100%;
+}
+
+.bt-container {
+  padding: 20px 80px;
+}
+
+.bt-font {
+  line-height: 16px;
+  font-size: 16px;
+  padding-top: 10px;
+}

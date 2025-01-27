@@ -30,6 +30,9 @@
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+  width: 80%;
+  position: relative;
+  margin: 0 auto; 
 }
 
 .cardLink {
@@ -85,6 +88,12 @@
   flex-grow: 1;
 }
 
+.faqContainer{
+  width: 86%;
+  position: relative;
+  margin: 0 auto; 
+}
+
 .faqCard {
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -110,10 +119,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  padding: 20px;
-  background-color: #f0f4ff;
+  width: 86%;
+  padding: 30px;
+  background-color: #fff;
   position: relative;
+  margin: 0 auto; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; 
 }
 
 .timelineHeader {
@@ -134,7 +146,16 @@
 .timelineBody {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 330px;
+}
+
+.timelineLine {
+  position: absolute;
+  left: 0;
+  margin-top: 30px;
+  width: 100%; 
+  border-top: 1px solid #e4e4e4; 
+  z-index: 1;
 }
 
 .timelineEvent {
@@ -145,4 +166,6 @@
   font-size: 14px;
   white-space: nowrap;
   text-align: center;
+  z-index: 2;
+  transform: translateY(-50%);
 }
