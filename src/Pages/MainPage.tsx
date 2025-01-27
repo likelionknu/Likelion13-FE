@@ -6,11 +6,12 @@ import 디자인 from '../assets/images/DesignIntro.png';
 import styles from '../assets/MainPage.module.css';
 
 const events = [
-  { line: 1, months: ["Feb", "Mar"], label: "아기사자 모집 및 지원", color: "#779BFE" },
-  { line: 2, months: ["Mar", "Jul"], label: "아기사자 면접, 멋쟁이 사자처럼 중앙 OT", color: "#4A7EDC"},
-  { line: 3, months: ["May", "Aug"], label: "전국 연합 아이디어톤", color: "#165EE0" },
-  { line: 3, months: ["Sep", "Oct"], label: "해커톤", color: "#165EE0" },
-  { line: 4, months: ["Aug", "Dec"], label: "2학기 OT, 파트별 세션, 데모데이 준비", color: "#96E8FF " },
+  { line: 1, months: ["Mar", "Apr"], label: "아기사자 모집 및 지원", color: "#779BFE" },
+  { line: 2, months: ["Mar", "Mar"], label: "오티", color: "#4A7EDC"},
+  { line: 2, months: ["Apr", "Jun"], label: "파트별 세션", color: "#4A7EDC"},
+  { line: 3, months: ["May", "May"], label: "아이디어톤", color: "#165EE0" },
+  { line: 3, months: ["Jul", "Aug"], label: "해커톤", color: "#165EE0" },
+  { line: 4, months: ["Aug", "Dec"], label: "2학기 오티, 파트별 세션, 데모데이 준비", color: "#96E8FF " },
   { line: 5, months: ["Nov", "Jan"], label: "데모데이, 연합 해커톤", color: "#779BFE" },
 ];
 
@@ -148,6 +149,16 @@ const MainPage = () => {
           </div>
 
           <div className={styles.timelineBody}>
+
+          {[...Array(5)].map((_, lineIndex) => (
+            <div
+              key={lineIndex}
+              className={styles.timelineLine}
+              style={{
+                top: `${lineIndex * 63}px`,
+              }}
+            />
+          ))}
             {events.map((event, index) => {
               const startMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].indexOf(event.months[0]);
               const endMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].indexOf(event.months[1]);
@@ -160,8 +171,8 @@ const MainPage = () => {
                   key={index}
                   className={styles.timelineEvent}
                   style={{
-                    top: `${event.line * 60}px`,  // line에 맞춰 세로 위치 계산
-                    left: `${left}%`,  // 시작 월을 기준으로 위치 조정
+                    top: `${event.line * 63}px`,
+                    left: `${left}%`, 
                     width: `${width}%`,  
                     backgroundColor: event.color,  
                   }}
@@ -177,7 +188,7 @@ const MainPage = () => {
       <div className={styles.section}>
         <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>자주 묻는 질문</h1>
 
-        <div>
+        <div className={styles.faqContainer}>
           <div className={styles.faqCard}>
             <div className={styles.faqQuestion}>동아리 활동을 하려면 노트북이 필요한가요?</div>
             <div className={styles.faqAnswer}>
