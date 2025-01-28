@@ -38,7 +38,7 @@ const Nav = () => {
 
         <button
           className='nav-button'
-          onClick={() => alert('프로젝트 탭이 없어서 일단 여기다가 만들어둠!')}
+          onClick={() => ''}
         >
           <Link
             className='nav-link-button'

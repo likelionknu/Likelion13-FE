@@ -84,6 +84,19 @@
   pointer-events: none;
 }
 
+.modalImageContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* 메시지와 버튼 사이 여백 */
+}
+
+.modalImage {
+  max-width: 100%; /* 부모 요소의 너비에 맞게 조정 */
+  max-height: 200px; /* 이미지의 최대 높이 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  border-radius: 8px; /* 모서리 둥글게 */
+}
+
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -102,7 +115,8 @@
   background-color: white;
   padding: 30px 20px;
   border-radius: 15px;
-  width: 450px;
+  width: 515px;
+  height: 480px;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 더 뚜렷한 그림자 */
   transform: translateY(-20px);
@@ -133,7 +147,7 @@
 .confirmButton {
   padding: 12px 20px;
   border: none;
-  border-radius: 25px; /* 버튼 모서리를 둥글게 */
+  border-radius: 8px; /* 버튼 모서리를 둥글게 */
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
