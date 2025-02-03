@@ -9,16 +9,16 @@ const Footer = () => {
     <footer className="footer">
       <div className="link-container">
         <a href="https://www.instagram.com/likelion.knu/" className="link">
-          <img src={인스타} alt="인스타그램" />
+          <img src={인스타} alt="강남대_멋쟁이사자처럼_인스타그램" />
         </a>
-        <a href="https://www.naver.com/" className="link">
-          <img src={멋사2} alt="멋사2" />
+        <a href="https://likelion13-fe.vercel.app/" className="link">
+          <img src={멋사2} alt="강남대_멋쟁이사자처럼" />
         </a>
-        <a href="https://www.naver.com/" className="link">
-          <img src={멋사3} alt="멋사3" />
+        <a href="https://likelion.net/" className="link">
+          <img src={멋사3} alt="테킷" />
         </a>
-        <a href="https://www.naver.com/" className="link">
-          <img src={멋사4} alt="멋사4" />
+        <a href="https://likelion.university/" className="link">
+          <img src={멋사4} alt="멋사_공식홈페이지" />
         </a>
       </div>
 
