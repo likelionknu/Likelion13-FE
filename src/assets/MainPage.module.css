@@ -58,6 +58,7 @@
 }
 
 .card {
+  cursor: pointer;
   background-color: #fff;
   border-radius: 6px;
   width: 400px;
