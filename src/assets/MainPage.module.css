@@ -1,3 +1,14 @@
+.mainImageContainer {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+}
+
+.mainImage {
+  width: 100%;
+  max-height: 780px;
+}
+
 .button {
   display: block;
   margin: 20px auto;

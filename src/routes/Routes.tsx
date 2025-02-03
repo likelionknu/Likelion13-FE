@@ -12,13 +12,15 @@ import FrontIntroPage from '../Pages/FrontIntroPage'
 import BackIntroPage from '../Pages/BackIntroPage'
 import DesignIntroPage from '../Pages/DesignIntroPage'
 
-
 import Footer from '../components/Footer'
 import ProjectIntroPage from '../Pages/ProjectIntroPage'
+
+import './Routes.css'
 
 const Router = () => {
   return (
     <BrowserRouter>
+    <div className = "pages-container">
       <Nav />
       <Routes>
         <Route
@@ -75,6 +77,7 @@ const Router = () => {
         />
       </Routes>
       <Footer />
+      </div>
     </BrowserRouter>
   )
 }
