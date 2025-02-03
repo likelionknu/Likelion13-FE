@@ -35,6 +35,10 @@ const DesignQuestionPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   const handleAnswerChange = (index: number, value: string) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;

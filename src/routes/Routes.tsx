@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Nav from '../components/Nav'
 import MainPage from '../Pages/MainPage'
 import MyPage from '../Pages/MyPage'
@@ -11,15 +12,25 @@ import DesignQuestionPage from '../Pages/DesignQuestionPage'
 import FrontIntroPage from '../Pages/FrontIntroPage'
 import BackIntroPage from '../Pages/BackIntroPage'
 import DesignIntroPage from '../Pages/DesignIntroPage'
-
 import Footer from '../components/Footer'
 import ProjectIntroPage from '../Pages/ProjectIntroPage'
 
 import './Routes.css'
 
+const ScrollToTop = () => {
+  const location = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo({top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
+  return null;
+};
+
 const Router = () => {
   return (
     <BrowserRouter>
+    <ScrollToTop />
     <div className = "pages-container">
       <Nav />
       <Routes>
