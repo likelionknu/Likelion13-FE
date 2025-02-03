@@ -18,8 +18,8 @@ const events = [
 const MainPage = () => {
   return (
     <div>
-      <div style={{ position: 'relative' }}>
-        <img src={메인} alt="메인" style={{ width: '100%' }} />
+      <div className={styles.mainImageContainer}>
+        <img src={메인} alt="메인" className={styles.mainImage} />
         <Link to='/SectionSelect' style={{ textDecoration: 'none' }}>
           <button className={styles.button} style={{position: 'absolute', top: '80%', left: '45%' }}>
             13기 참여하러 가기

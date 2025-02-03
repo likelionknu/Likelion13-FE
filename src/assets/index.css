@@ -2,10 +2,11 @@
 
 :root {
   font-family: Pretendard, system-ui; /*기본폰트 Pretendard, */
-  max-width: 1920px;
+  max-width: 100%;
   margin: 0 0;
+  display: flex;
+  justify-content: center;
+
+  /* background-color: orange; */
 }
 
-body {
-  width: 1920px; /* 1440px 고정 -> 반응형 웹페이지 거부 */
-}
