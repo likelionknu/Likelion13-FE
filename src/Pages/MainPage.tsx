@@ -21,7 +21,7 @@ const MainPage = () => {
       <div className={styles.mainImageContainer}>
         <img src={메인} alt="메인" className={styles.mainImage} />
         <Link to='/SectionSelect' style={{ textDecoration: 'none' }}>
-          <button className={styles.button} style={{position: 'absolute', top: '80%', left: '45%' }}>
+          <button className={styles.button} style={{position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             13기 참여하러 가기
           </button>
         </Link>
@@ -39,6 +39,7 @@ const MainPage = () => {
       </div>
 
       
+      <div className={styles.sectionContainer}>
       <div className={styles.section} style={{ backgroundColor: '#E0E8FF' }}>
       <h1 className={styles.sectionTitle} style={{textAlign: 'center' }}>같이 할수록 더 빛나는, 우리의 핵심 파트를 <br /> 소개합니다!</h1>
         <div className={styles.cardContainer}>
@@ -85,7 +86,7 @@ const MainPage = () => {
         </Link>
         </div>
       </div>
-
+    </div>
 
       <div className={styles.section}>
         <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>지난 프로젝트</h1>
