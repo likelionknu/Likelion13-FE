@@ -32,7 +32,7 @@ const Nav = () => {
             className='nav-link-button'
             to=''
           >
-            지원하기(미구현)
+            지원하기
           </Link>
         </button>
 
