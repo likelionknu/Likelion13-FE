@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 
+import '../assets/Mypage.css'
+
 const MyPage = () => {
   const [activeTab, setActiveTab] = useState<'edit' | 'result'>('edit')
 
@@ -19,8 +21,9 @@ const MyPage = () => {
 
   const EditTab = () => (
     <div>
-      <h2>정보 수정</h2>
-      <form>
+      <div className='contents-title'>정보 수정</div>
+
+      <form className='edit-form'>
         <div>
           <div>이름</div>
           <input
@@ -104,31 +107,40 @@ const MyPage = () => {
             autoComplete='new-password'
           />
         </div>
-        <button type='submit'>저장하기</button>
+        <button type='submit'>수정하기</button>
       </form>
     </div>
   )
 
   const ResultTab = () => (
-    <div>
-      <h2>지원 결과</h2>
+    <div className='result-tab'>
+      <div className='contents-title'>지원 결과</div>
       <div>
-        <p>합격</p>
-        <p>불합격</p>
+        <p>합격?</p>
+        <p>불합격?</p>
       </div>
     </div>
   )
 
   return (
-    <div>
-      <h1>마이페이지</h1>
-      <div>
-        <button onClick={() => setActiveTab('edit')}>수정하기</button>
-        <button onClick={() => setActiveTab('result')}>결과보기</button>
+    <div className='mypage-container'>
+      <div className='mypage-tabs'>
+        <h2>마이페이지</h2>
+        <button
+          className={activeTab === 'edit' ? 'active' : ''}
+          onClick={() => setActiveTab('edit')}
+        >
+          수정하기
+        </button>
+        <button
+          className={activeTab === 'result' ? 'active' : ''}
+          onClick={() => setActiveTab('result')}
+        >
+          결과보기
+        </button>
         <button onClick={handleLogout}>로그아웃</button>
       </div>
-
-      {activeTab === 'edit' ? <EditTab /> : <ResultTab />}
+      <div className='mypage-contents'>{activeTab === 'edit' ? <EditTab /> : <ResultTab />}</div>
     </div>
   )
 }
