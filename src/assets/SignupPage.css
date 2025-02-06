@@ -2,38 +2,42 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  height: 1200px;
 }
 
 .signup-box div {
   color: #252525;
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: 33px; /* 137.5% */
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 .signup-box {
   width: 1000px;
   /* background-color: orange; */
   text-align: left;
-  margin: 100px;
+  margin: 50px 100px;
+
+  /* background-color: #7899fe; */
 }
 .signup-box h1 {
-  margin-bottom: 80px;
-  font-size: 48px;
+  margin-bottom: 60px;
+  font-size: 40px;
   color: #333;
 }
 
 .signup-box input {
   width: 350px;
-  height: 50px;
+  height: 40px;
   border: 1px solid #ccc;
   border-radius: 4px;
 
   font-family: Pretendard;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .signup-box button {
