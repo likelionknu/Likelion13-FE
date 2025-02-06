@@ -12,6 +12,7 @@ const Nav = () => {
   return (
     <div>
       <div className='nav-container'>
+        
         <div className='nav-logo-container'>
           <Link
             to='/'
