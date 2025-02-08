@@ -8,7 +8,6 @@ import MainPage from '../Pages/MainPage'
 import MyPage from '../Pages/MyPage'
 import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
-import SectionSelectPage from '../Pages/SectionSelectPage'
 import BackendQuestionPage from '../Pages/BackendQuestionPage'
 import FrontendQuestionPage from '../Pages/FrontendQuestionPage'
 import DesignQuestionPage from '../Pages/DesignQuestionPage'
@@ -98,10 +97,6 @@ const Router = () => {
           <Route
             path='/signup'
             element={<SignupPage />}
-          />
-          <Route
-            path='/SectionSelect'
-            element={<SectionSelectPage />}
           />
           <Route
             path='/backend-question'
