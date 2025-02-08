@@ -3,10 +3,16 @@
   font-family: Pretendard;
 }
 
-.nav-container {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+/* pc 화면일때 */
+@media screen and (min-width: 1024px) {
+  .nav-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    left: 50%;
+  }
+}
 
+.nav-container {
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
   text-decoration: none;
   display: flex;
