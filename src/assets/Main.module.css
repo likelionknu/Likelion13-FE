@@ -1,0 +1,197 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.main {
+  flex: 1;
+  padding: 50px;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+}
+
+.description {
+  margin-bottom: 24px;
+}
+
+.questionBox {
+  margin-bottom: 24px;
+}
+
+.question {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.prevButton,
+.saveButton,
+.nextButton {
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.prevButton {
+  background-color: #ddd;
+}
+
+.saveButton {
+  background-color: #007bff;
+  color: white;
+}
+
+.nextButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.textareaWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.charCount {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #888;
+  pointer-events: none;
+}
+
+.modalImageContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0; /* 메시지와 버튼 사이 여백 */
+}
+
+.modalImage {
+  max-width: 100%; /* 부모 요소의 너비에 맞게 조정 */
+  max-height: 200px; /* 이미지의 최대 높이 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  border-radius: 8px; /* 모서리 둥글게 */
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out; /* 배경 페이드 애니메이션 */
+}
+
+.modal {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 15px;
+  width: 515px;
+  height: 480px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 더 뚜렷한 그림자 */
+  transform: translateY(-20px);
+  animation: slideUp 0.4s ease-in-out forwards; /* 위로 슬라이드 애니메이션 */
+}
+
+.modal h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+.modal p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.cancelButton,
+.confirmButton {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px; /* 버튼 모서리를 둥글게 */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* 애니메이션 효과 */
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+  color: #555;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05); /* 살짝 확대 */
+}
+
+.confirmButton {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+.confirmButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* 살짝 확대 */
+  box-shadow: 0 6px 14px rgba(0, 123, 255, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

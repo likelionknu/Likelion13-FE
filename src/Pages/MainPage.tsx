@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Link } from 'react-router-dom';
+import Modal from "../components/MainSelectModal";
 import 메인 from '../assets/images/Main.png';
 import 백 from '../assets/images/BackIntro.png';
 import 프론트 from '../assets/images/FrontIntro.png';
@@ -16,15 +18,19 @@ const events = [
 ];
 
 const MainPage = () => {
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div>
       <div className={styles.mainImageContainer}>
         <img src={메인} alt="메인" className={styles.mainImage} />
-        <Link to='/SectionSelect' style={{ textDecoration: 'none' }}>
-          <button className={styles.button} style={{position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <button className={styles.button} 
+                   onClick={() => setIsModalOpen(true)}
+                  style={{position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}>
             13기 참여하러 가기
           </button>
-        </Link>
+          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
 
       <div className={styles.section}>
