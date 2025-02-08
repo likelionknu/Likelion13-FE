@@ -46,51 +46,53 @@ const MainPage = () => {
 
       
       <div className={styles.sectionContainer}>
-      <div className={styles.section} style={{ backgroundColor: '#E0E8FF' }}>
-      <h1 className={styles.sectionTitle} style={{textAlign: 'center' }}>같이 할수록 더 빛나는, 우리의 핵심 파트를 <br /> 소개합니다!</h1>
-        <div className={styles.cardContainer}>
-        <Link to='/BackIntro' className={styles.cardLink}>
-         <div className={styles.card}>
-            <div className={styles.cardImgContainer} style={{ backgroundColor: '#165EE0' }}>
-              <img src={백} alt="백엔드" className={styles.cardImg} />
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.cardTitle}>백엔드</div>
-              <div className={styles.cardDescription}>
-                웹과 애플리케이션의 핵심 기능을 설계하고 구현하는 분야로, 주로 눈에 보이지 않는 서버와 데이터 베이스를 관리하며 서비스의 근간을 담당합니다.
+        <div className={`${styles.section} ${styles.fullWidthSection}`} style={{ backgroundColor: '#E0E8FF' }}>
+          <div className={styles.contentContainer}>  
+          <h1 className={styles.sectionTitle} style={{textAlign: 'center' }}>같이 할수록 더 빛나는, 우리의 핵심 파트를 <br /> 소개합니다!</h1>
+            <div className={styles.cardContainer}>
+            <Link to='/BackIntro' className={styles.cardLink}>
+            <div className={styles.card}>
+                <div className={styles.cardImgContainer} style={{ backgroundColor: '#165EE0' }}>
+                  <img src={백} alt="백엔드" className={styles.cardImg} />
+                </div>
+                <div className={styles.cardContent}>
+                  <div className={styles.cardTitle}>백엔드</div>
+                  <div className={styles.cardDescription}>
+                    웹과 애플리케이션의 핵심 기능을 설계하고 구현하는 분야로, 주로 눈에 보이지 않는 서버와 데이터 베이스를 관리하며 서비스의 근간을 담당합니다.
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </Link>
+            </Link>
 
-        <Link to='/FrontIntro' className={styles.cardLink}>
-          <div className={styles.card}>
-            <div className={styles.cardImgContainer} style={{ backgroundColor: '#7899FE' }}>
-              <img src={프론트} alt="프론트엔드" className={styles.cardImg} />
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.cardTitle}>프론트엔드</div>
-              <div className={styles.cardDescription}>
-                사용자가 서비스를 이용하는 인터페이스를 구축하는 분야로, 웹사이트와 애플리케이션의 디자인, 동작, 반응성을 설계합니다. 사용자가 직접 상호작용하는 모든 요소를 담당합니다.
+            <Link to='/FrontIntro' className={styles.cardLink}>
+              <div className={styles.card}>
+                <div className={styles.cardImgContainer} style={{ backgroundColor: '#7899FE' }}>
+                  <img src={프론트} alt="프론트엔드" className={styles.cardImg} />
+                </div>
+                <div className={styles.cardContent}>
+                  <div className={styles.cardTitle}>프론트엔드</div>
+                  <div className={styles.cardDescription}>
+                    사용자가 서비스를 이용하는 인터페이스를 구축하는 분야로, 웹사이트와 애플리케이션의 디자인, 동작, 반응성을 설계합니다. 사용자가 직접 상호작용하는 모든 요소를 담당합니다.
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </Link>
+            </Link>
 
-        <Link to='/DesignIntro' className={styles.cardLink}>
-          <div className={styles.card}>
-            <div className={styles.cardImgContainer} style={{ backgroundColor: '#96E8FF' }}>
-              <img src={디자인} alt="디자인" className={styles.cardImg} />
-            </div>
-            <div className={styles.cardContent}>
-              <div className={styles.cardTitle}>디자인</div>
-              <div className={styles.cardDescription}>
-                사용자 경험과 사용자 인터페이스를 설계하여 화면과 서비스가 더 직관적이고 편리하게 사용될 수 있도록 돕는 작업을 담당합니다. 혁신적인 아이디어를 현실로 구현하는 데 중요한 역할을 합니다.
+            <Link to='/DesignIntro' className={styles.cardLink}>
+              <div className={styles.card}>
+                <div className={styles.cardImgContainer} style={{ backgroundColor: '#96E8FF' }}>
+                  <img src={디자인} alt="디자인" className={styles.cardImg} />
+                </div>
+                <div className={styles.cardContent}>
+                  <div className={styles.cardTitle}>디자인</div>
+                  <div className={styles.cardDescription}>
+                    사용자 경험과 사용자 인터페이스를 설계하여 화면과 서비스가 더 직관적이고 편리하게 사용될 수 있도록 돕는 작업을 담당합니다. 혁신적인 아이디어를 현실로 구현하는 데 중요한 역할을 합니다.
+                  </div>
+                </div>
               </div>
+            </Link>
             </div>
           </div>
-        </Link>
-        </div>
       </div>
     </div>
 
@@ -142,52 +144,52 @@ const MainPage = () => {
         </div>
       </div>
 
-      <div className={styles.section} style={{backgroundColor: '#E0E8FF' }}>
-        <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>주요 연간일정</h1>
+      <div className={`${styles.section} ${styles.fullWidthSection}`} style={{ backgroundColor: '#E0E8FF' }}>
+        <div className={styles.contentContainer}>
+          <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>주요 연간일정</h1>
+          <div className={styles.timelineContainer}>
+            <div className={styles.timelineHeader}>
+              {["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].map((month) => (
+                <div key={month} className={styles.timelineMonth}>
+                  {month}
+                </div>
+              ))}
+            </div>
 
-   
-        <div className={styles.timelineContainer}>
-          <div className={styles.timelineHeader}>
-            {["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].map((month) => (
-              <div key={month} className={styles.timelineMonth}>
-                {month}
-              </div>
+            <div className={styles.timelineBody}>
+
+            {[...Array(5)].map((_, lineIndex) => (
+              <div
+                key={lineIndex}
+                className={styles.timelineLine}
+                style={{
+                  top: `${lineIndex * 63}px`,
+                }}
+              />
             ))}
-          </div>
+              {events.map((event, index) => {
+                const startMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].indexOf(event.months[0]);
+                const endMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].indexOf(event.months[1]);
 
-          <div className={styles.timelineBody}>
+                const left = (startMonth / 12) * 100;  // startMonth를 12로 나누어 비율로 계산
+                const width = ((endMonth - startMonth + 1) / 12) * 100;
 
-          {[...Array(5)].map((_, lineIndex) => (
-            <div
-              key={lineIndex}
-              className={styles.timelineLine}
-              style={{
-                top: `${lineIndex * 63}px`,
-              }}
-            />
-          ))}
-            {events.map((event, index) => {
-              const startMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Jan"].indexOf(event.months[0]);
-              const endMonth = ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"].indexOf(event.months[1]);
-
-              const left = (startMonth / 12) * 100;  // startMonth를 12로 나누어 비율로 계산
-              const width = ((endMonth - startMonth + 1) / 12) * 100;
-
-              return (
-                <div
-                  key={index}
-                  className={styles.timelineEvent}
-                  style={{
-                    top: `${event.line * 63}px`,
-                    left: `${left}%`, 
-                    width: `${width}%`,  
-                    backgroundColor: event.color,  
-                  }}
-                >
-                  {event.label}
-                </div> 
-              );
-            })}
+                return (
+                  <div
+                    key={index}
+                    className={styles.timelineEvent}
+                    style={{
+                      top: `${event.line * 63}px`,
+                      left: `${left}%`, 
+                      width: `${width}%`,  
+                      backgroundColor: event.color,  
+                    }}
+                  >
+                    {event.label}
+                  </div> 
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

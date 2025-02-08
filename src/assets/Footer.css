@@ -3,6 +3,16 @@
   color: #B3B3B3;
   margin-top: 50px;
   padding: 20px 0;
+  width: 100vw;  
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.footerContainer{
+  max-width: 1880px;
+  min-width: 1880px;
+  margin: 0 auto; 
 }
 
 .link-container {
