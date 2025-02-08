@@ -4,9 +4,30 @@
   font-family: Pretendard, system-ui; /*기본폰트 Pretendard, */
   max-width: 100%;
   margin: 0 0;
-  display: flex;
-  justify-content: center;
 
   /* background-color: orange; */
 }
 
+/* PC 화면 (1024px 이상) */
+@media screen and (min-width: 1024px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+}
+
+/* 모바일 화면 (1024px 미만) */
+@media screen and (max-width: 1023px) {
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
