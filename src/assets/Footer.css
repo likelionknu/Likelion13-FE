@@ -1,18 +1,24 @@
 .footer {
-  background-color: #F8F8F8;
-  color: #B3B3B3;
+  background-color: #f8f8f8;
+  color: #b3b3b3;
   margin-top: 50px;
   padding: 20px 0;
-  width: 100vw;  
+  width: 100%;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
-.footerContainer{
+@media screen and (min-width: 1024px) {
+  .footer {
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.footerContainer {
   max-width: 1880px;
   min-width: 1880px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .link-container {
@@ -23,7 +29,7 @@
 }
 
 .link {
-  color: #B3B3B3;
+  color: #b3b3b3;
   text-decoration: none;
   margin: 0 15px;
   display: flex;
