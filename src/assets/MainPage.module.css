@@ -4,6 +4,13 @@
     width: 100%;
     max-height: 780px;
   }
+
+  .fullWidthSection {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 /* 모바일 */
@@ -54,17 +61,6 @@
 
 .section {
   padding: 10px 40px 60px 40px;
-}
-
-/* 오류 원인 vw랑 left 속성 강제하면 화면 으깨짐 -- 진형*/
-/* 1024px 화면 이상일때만 -> pc화면일때만 적용되게 수정 */
-@media screen and (min-width: 1024px) {
-  .fullWidthSection {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 .contentContainer {
