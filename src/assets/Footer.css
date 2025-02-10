@@ -16,13 +16,13 @@
 }
 
 .footerContainer {
-  max-width: 1880px;
-  min-width: 1880px;
+  max-width: 1800px;
+  min-width: 1400px;
   margin: 0 auto;
 }
 
 .link-container {
-  width: 40%;
+  width: 36%;
   display: flex;
   justify-content: space-between;
   margin: 60px auto;
@@ -37,11 +37,11 @@
 }
 
 .link img {
-  width: 100%;
+  width: 80%;
 }
 
 .bt-container {
-  padding: 20px 80px;
+  padding: 5px 10px;
 }
 
 .bt-font {

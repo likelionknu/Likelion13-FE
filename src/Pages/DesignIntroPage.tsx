@@ -8,7 +8,7 @@ import styles from '../assets/IntroPage.module.css';
 const DesignIntroPage = () => {
   return (
     <div>
-      <div style={{ position: 'relative' }}>
+      <div className={` ${styles.fullWidthSection}`} style={{ position: 'relative' }}>
         <img src={메인} alt="메인" className={styles.mainImage} />
         <img
           src={메인로고}
@@ -23,7 +23,7 @@ const DesignIntroPage = () => {
         끝까지 함께할 열정적인 분들을 찾고 있습니다!
         </div>
 
-       <Link to='/SectionSelect' style={{ textDecoration: 'none' }}>
+       <Link to='/design-question' style={{ textDecoration: 'none' }}>
           <button className={styles.button} style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}>
            13기 참여하러 가기
           </button>
@@ -45,7 +45,8 @@ const DesignIntroPage = () => {
       </div>
     </div>
 
-    <div className={styles.section} style={{backgroundColor: '#E0E8FF' }}>
+    <div className={`${styles.section} ${styles.fullWidthSection}`}
+         style={{backgroundColor: '#E0E8FF' }}>
       <h1 className={styles.sectionTitle} style={{ textAlign: 'center' }}>이런분들과 함께하고싶어요!</h1>
       <div className={styles.section2Content}>
         <div className={styles.image2Wrapper}>
