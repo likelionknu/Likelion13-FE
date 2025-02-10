@@ -5,6 +5,8 @@ import 메인 from '../assets/images/Main.png'
 import 백 from '../assets/images/BackIntro.png'
 import 프론트 from '../assets/images/FrontIntro.png'
 import 디자인 from '../assets/images/DesignIntro.png'
+import 메인로고 from '../assets/images/MainLogo.png'
+import 메인폰트 from '../assets/images/MainFont.png'
 import styles from '../assets/MainPage.module.css'
 
 const events = [
@@ -27,6 +29,16 @@ const MainPage = () => {
           src={메인}
           alt='메인'
           className={styles.mainImage}
+        />
+         <img
+          src={메인로고}
+          alt='메인로고'
+          className={styles.mainLogo}
+        />
+         <img
+          src={메인폰트}
+          alt='메인폰트'
+          className={styles.mainFont}
         />
         <button
           className={styles.button}
@@ -64,7 +76,6 @@ const MainPage = () => {
         </p>
       </div>
 
-      <div className={styles.sectionContainer}>
         <div
           className={`${styles.section} ${styles.fullWidthSection}`}
           style={{ backgroundColor: '#E0E8FF' }}
@@ -152,9 +163,9 @@ const MainPage = () => {
             </div>
           </div>
         </div>
-      </div>
 
       <div className={styles.section}>
+      <div className={styles.contentContainer}>
         <h1
           className={styles.sectionTitle}
           style={{ textAlign: 'center' }}
@@ -230,6 +241,7 @@ const MainPage = () => {
             <button className={styles.button}>더보기</button>
           </Link>
         </div>
+        </div>
       </div>
 
       <div
@@ -293,6 +305,7 @@ const MainPage = () => {
       </div>
 
       <div className={styles.section}>
+      <div className={styles.contentContainer}>
         <h1
           className={styles.sectionTitle}
           style={{ textAlign: 'center' }}
@@ -335,6 +348,7 @@ const MainPage = () => {
             <div className={styles.faqAnswer}>불가능합니다. 멋쟁이사자처럼에서는 하나의 파트를 선택 후 활동을 진행해, 수료증이 나와 여러 파트의 중복 지원은 불가합니다.</div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )
