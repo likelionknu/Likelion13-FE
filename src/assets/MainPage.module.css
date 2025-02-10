@@ -1,18 +1,12 @@
-/* pc 화면일때 */
+/* pc */
 @media screen and (min-width: 1024px) {
-  /* .mainImageContainer {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    position: relative;
-  } */
-
   .mainImage {
     width: 100%;
     max-height: 780px;
   }
 }
 
-/* 휴대폰 화면일때 */
+/* 모바일 */
 @media screen and (max-width: 1023px) {
   .mainImageContainer {
     position: relative;
@@ -22,6 +16,22 @@
     width: 100%;
     max-height: 780px;
   }
+}
+
+.mainLogo,
+.mainFont {
+  position: absolute; 
+  left: 50%; 
+  top: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+.mainLogo {
+  top: 60%; 
+}
+
+.mainFont {
+  top: 16%;
 }
 
 .button {
@@ -48,11 +58,9 @@
 
 /* 오류 원인 vw랑 left 속성 강제하면 화면 으깨짐 -- 진형*/
 /* 1024px 화면 이상일때만 -> pc화면일때만 적용되게 수정 */
-
 @media screen and (min-width: 1024px) {
   .fullWidthSection {
     width: 100vw;
-
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -65,9 +73,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 1880px;
-  max-width: 1880px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .sectionTitle {
@@ -84,11 +93,12 @@
 
 .cardContainer {
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  width: 80%;
-  position: relative;
-  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 30px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .cardLink {
@@ -99,12 +109,13 @@
 .card {
   cursor: pointer;
   background-color: #fff;
-  border-radius: 6px;
-  width: 400px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  flex: 1 1 calc(33.333% - 20px);
+  max-width: 350px;
+  min-height: 540px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  min-height: 350px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -152,7 +163,7 @@
 }
 
 .faqContainer {
-  width: 86%;
+  width: 100%;
   position: relative;
   margin: 0 auto;
 }
@@ -182,7 +193,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 86%;
+  width: 100%;
   padding: 30px;
   background-color: #fff;
   position: relative;

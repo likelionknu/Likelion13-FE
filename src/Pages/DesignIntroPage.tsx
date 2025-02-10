@@ -2,13 +2,19 @@ import { Link } from 'react-router-dom';
 import 메인 from '../assets/images/Main.png';
 import 디자인 from '../assets/images/DesignIntro.png';
 import WANT from '../assets/images/IntroWant.png';
+import 메인로고 from '../assets/images/MainLogo.png'
 import styles from '../assets/IntroPage.module.css';
 
 const DesignIntroPage = () => {
   return (
     <div>
       <div style={{ position: 'relative' }}>
-        <img src={메인} alt="메인" style={{ width: '100%' }} />
+        <img src={메인} alt="메인" className={styles.mainImage} />
+        <img
+          src={메인로고}
+          alt='메인로고'
+          className={styles.mainLogo}
+        />
         <div className={styles.mainBold}>
         Learn Create Elevate
         </div>
