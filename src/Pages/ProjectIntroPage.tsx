@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+
 import styles from  '../assets/ProjectIntroPage.module.css';
 import Project1 from '../assets/images/Project1.png';
 import Project2 from '../assets/images/Project2.png';
@@ -89,7 +92,8 @@ const backgroundColor =
               : "#DCDBFF";
               
         return (
-          <div key={index} className={styles.projectCard}>
+          <div key={index} className={styles.projectCard}
+          style={{ animationDelay: `${index * 0.1}s` }}  >
             <div className={styles.cardImgContainer}
             style={{textAlign: 'center', backgroundColor }}
             ><img src={project.image} alt={project.title} className={styles.image} /></div>

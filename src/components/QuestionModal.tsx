@@ -9,6 +9,7 @@ type ModalProps = {
   title: string;
   message: string;
   onSubmit?: () => void;
+  onClose: () => void;
   isSecondModal?: boolean;
 };
 
@@ -17,6 +18,7 @@ const QuestionModal: React.FC<ModalProps> = ({
   title,
   message,
   onSubmit,
+  onClose,
   isSecondModal = false,
 }) => {
   const navigate = useNavigate();
@@ -57,7 +59,7 @@ const QuestionModal: React.FC<ModalProps> = ({
             </button>
           ) : (
             <>
-              <button className={styles.cancelButton} onClick={() => navigate(-1)}>
+              <button className={styles.cancelButton} onClick={onClose}>
                 취소
               </button>
               <button className={styles.confirmButton} onClick={onSubmit}>

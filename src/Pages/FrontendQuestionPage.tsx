@@ -137,6 +137,7 @@ const FrontendQuestionPage = () => {
         title="수정이 불가합니다"
         message="답변을 제출하면 더 이상 수정할 수 없습니다. 계속하시겠습니까?"
         onSubmit={handleFirstModalClose}
+        onClose={() => setIsFirstModalOpen(false)}
       />
 
       <QuestionModal
@@ -144,6 +145,7 @@ const FrontendQuestionPage = () => {
         title="제출 완료"
         message="답변이 성공적으로 제출되었습니다."
         onSubmit={handleSecondModalClose}
+        onClose={() => setIsSecondModalOpen(false)}
         isSecondModal={true}
       />
     </div>

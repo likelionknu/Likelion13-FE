@@ -39,24 +39,27 @@
 .nextButton {
   padding: 8px 16px;
   margin: 0 8px;
-  border: none;
+  border: solid #007bff 1px;
   border-radius: 8px;
   font-size: 1rem;
+  background-color: white;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
-.prevButton {
-  background-color: #ddd;
+.prevButton:hover,
+.saveButton:hover,
+.nextButton:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  animation: glow 1.5s infinite alternate;
 }
 
-.saveButton {
-  background-color: #007bff;
-  color: white;
-}
-
-.nextButton {
-  background-color: #28a745;
-  color: white;
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(0, 123, 255, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); }
 }
 
 .textareaWrapper {
@@ -147,11 +150,11 @@
 .confirmButton {
   padding: 12px 20px;
   border: none;
-  border-radius: 8px; /* 버튼 모서리를 둥글게 */
+  border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* 애니메이션 효과 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
 .cancelButton {
@@ -161,7 +164,7 @@
 
 .cancelButton:hover {
   background-color: #e0e0e0;
-  transform: scale(1.05); /* 살짝 확대 */
+  transform: scale(1.05); 
 }
 
 .confirmButton {
