@@ -32,37 +32,33 @@ const MainPage = () => {
     // 로고와 텍스트 요소가 마운트되었는지 확인
     const logo = mainLogoRef.current
     const text = mainTextRef.current
-  
+
     if (!logo || !text) return
-  
+
     // 초기 상태 설정을 즉시 실행
-    gsap.set([logo, text], { 
+    gsap.set([logo, text], {
       opacity: 0,
-      y: 60
+      y: 60,
     })
-  
-    // 애니메이션 실행 지연
-    const timer = setTimeout(() => {
-      // 로고 애니메이션
-      gsap.to(logo, {
-        duration: 1.3,
-        y: 0,
-        opacity: 1,
-        ease: 'power3.out'
-      })
-  
-      // 메인 텍스트 애니메이션
-      gsap.to(text, {
-        duration: 1.3,
-        y: 0,
-        opacity: 1,
-        delay: 0.8,
-        ease: 'power1.out'
-      })
-    }, 100) // 100ms 지연
-  
+
+    // 로고 애니메이션
+    gsap.to(logo, {
+      duration: 1.3,
+      y: 0,
+      opacity: 1,
+      ease: 'power3.out',
+    })
+
+    // 메인 텍스트 애니메이션
+    gsap.to(text, {
+      duration: 1.3,
+      y: 0,
+      opacity: 1,
+      delay: 0.8,
+      ease: 'power1.out',
+    })
+
     return () => {
-      clearTimeout(timer)
       gsap.killTweensOf([logo, text])
     }
   }, []) // 컴포넌트 마운트 시에만 실행
@@ -79,7 +75,6 @@ const MainPage = () => {
             position: 'absolute',
             top: '15%',
             width: '1214px',
-            alignItems: 'center',
             textAlign: 'center',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -89,7 +84,7 @@ const MainPage = () => {
             color: 'white',
             letterSpacing: '-2px',
             textShadow: '0px 0px 20px rgba(255, 255, 255, 0.95)',
-            
+
             userSelect: 'none',
             opacity: 0,
           }}
@@ -106,6 +101,7 @@ const MainPage = () => {
           src={메인로고}
           alt='메인로고'
           className={styles.mainLogo}
+          style={{ position: 'absolute', top: '60%', opacity: 0, left: '50%', transform: 'translate(-50%, -50%)' }}
         />
         {/* <img
           src={메인폰트}
