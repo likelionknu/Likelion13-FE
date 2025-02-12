@@ -25,21 +25,6 @@
   }
 }
 
-.mainLogo,
-.mainFont {
-  position: absolute; 
-  left: 50%; 
-  top: 50%;
-  transform: translate(-50%, -50%); 
-}
-
-.mainLogo {
-  top: 60%; 
-}
-
-.mainFont {
-  top: 16%;
-}
 
 .button {
   display: block;
