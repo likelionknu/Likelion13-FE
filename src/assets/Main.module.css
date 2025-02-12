@@ -5,10 +5,19 @@
   font-family: Arial, sans-serif;
 }
 
+.mainLogo {
+  opacity: 0;  /* 초기 상태는 투명하게 */
+}
+
+.mainText {
+  opacity: 0;  /* 초기 상태는 투명하게 */
+}
+
 .main {
   flex: 1;
   padding: 50px;
 }
+
 
 .title {
   font-size: 1.8rem;

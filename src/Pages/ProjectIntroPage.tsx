@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
 
 import styles from  '../assets/ProjectIntroPage.module.css';
 import Project1 from '../assets/images/Project1.png';

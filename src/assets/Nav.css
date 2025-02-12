@@ -66,6 +66,7 @@
 }
 
 .nav-link-button {
+  position: relative;
   color: #000;
   text-decoration: none;
   font-family: Pretendard;
@@ -77,6 +78,8 @@
   /* 창 줄여도 줄바꿈 안되는 속성  */
   white-space: nowrap;
   min-width: fit-content;
+
+  z-index: 1;
 }
 
 .nav-dropdown {

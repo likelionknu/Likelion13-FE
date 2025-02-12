@@ -65,9 +65,9 @@ const Router = () => {
           <Route
             path='/'
             element={
-              <PageTransition>
+              // <PageTransition>
                 <MainPage />
-              </PageTransition>
+              // </PageTransition>
             }
           />
           <Route

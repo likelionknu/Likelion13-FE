@@ -86,7 +86,7 @@ const FrontendQuestionPage = () => {
       } else {
         alert("서버 오류가 발생했습니다.");
       }
-    } catch (error) {
+    } catch {
       alert("서버 요청 중 오류가 발생했습니다.");
     }
   };

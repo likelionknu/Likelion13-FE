@@ -23,7 +23,7 @@ const Nav = () => {
               alt='메인페이지로 이동'
               className='nav-logo'
             />
-            <div className='nav-title'>LIKE LION KNU</div>
+            <div className='nav-title'>LIKELION KNU</div>
           </Link>
         </div>
 

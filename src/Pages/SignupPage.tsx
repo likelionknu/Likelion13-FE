@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import SignUpCompleteModal from '../components/SignUpCompleteModal'
+
 import '../assets/SignupPage.css'
 
 const SignupPage = () => {
+
   const [isCompleted, setIsCompleted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isEmailVerified, setIsEmailVerified] = useState(false)
@@ -13,18 +16,20 @@ const SignupPage = () => {
     name: '',
     department: '',
     studentId: '',
-    grade: '',
     phone: '',
     email: '',
     verificationCode: '',
     password: '',
     passwordCheck: '',
+    grade: '',
   })
 
   const [sendResponseMessage, setSendResponseMessage] = useState('')
   const [verificationMessage, setVerificationMessage] = useState('')
 
   const navigate = useNavigate()
+
+  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -99,7 +104,7 @@ const SignupPage = () => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
-
+  
     try {
       const signUpData = {
         name: formData.name,
@@ -110,8 +115,9 @@ const SignupPage = () => {
         password: formData.password,
         passwordCheck: formData.passwordCheck,
         grade: formData.grade,
+        apply: false,
       }
-
+  
       const response = await fetch('http://localhost:8080/api/v1/sign-up', {
         method: 'POST',
         headers: {
@@ -120,29 +126,44 @@ const SignupPage = () => {
         },
         body: JSON.stringify(signUpData),
       })
-
+  
+      const responseText = await response.text()
+  
       if (response.ok) {
-        alert('회원가입이 완료되었습니다.')
+        // 회원가입 성공 시 모달 표시
         setIsCompleted(true)
+        setIsFirstModalOpen(true)
+        return
+      }
+  
+      // 에러 처리
+      if (response.status === 400) {
+        if (responseText.includes('중복')) {
+          setError('이미 존재하는 정보입니다.')
+        } else if (responseText.includes('비밀번호')) {
+          setError('비밀번호가 일치하지 않습니다.')
+        } else {
+          setError(responseText)
+        }
+      } else if (response.status === 500) {
+        console.error('서버 에러 상세:', responseText)
+        setError('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
       } else {
-        throw new Error('회원가입에 실패했습니다.')
+        setError(responseText || '회원가입에 실패했습니다.')
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : '회원가입에 실패했습니다.')
       console.error('[회원가입 에러]', err)
+      if (!error) {
+        setError(err instanceof Error ? err.message : '회원가입에 실패했습니다.')
+      }
     } finally {
       setIsLoading(false)
     }
   }
 
-  if (isCompleted) {
-    return (
-      <div>
-        <h1>회원가입이 완료되었습니다!</h1>
-        <p>환영합니다, {formData.name}님!</p>
-        <button onClick={() => navigate('/')}>메인페이지 구경하기</button>
-      </div>
-    )
+  const handleFirstModalClose = () => {
+    setIsFirstModalOpen(false)
+    navigate('/') // 메인으로 이동동
   }
 
   return (
@@ -158,6 +179,7 @@ const SignupPage = () => {
               name='name'
               value={formData.name}
               onChange={handleChange}
+              autoComplete='off'
             />
 
             <div>학부</div>
@@ -166,6 +188,7 @@ const SignupPage = () => {
               name='department'
               value={formData.department}
               onChange={handleChange}
+              autoComplete='off'
             />
 
             <div>학번</div>
@@ -174,6 +197,7 @@ const SignupPage = () => {
               name='studentId'
               value={formData.studentId}
               onChange={handleChange}
+              autoComplete='off'
             />
 
             <div>학년</div>
@@ -182,17 +206,18 @@ const SignupPage = () => {
               name='grade'
               value={formData.grade}
               onChange={handleChange}
+              autoComplete='off'
             />
 
             <div>전화번호</div>
             <input
               type='tel'
               name='phone'
-              placeholder='010-0000-0000'
-              pattern='(010)-\d{4}-\d{4}'
-              maxLength={13}
+              placeholder='01000000000'
+              maxLength={11}
               value={formData.phone}
               onChange={handleChange}
+              autoComplete='off'
             />
 
             <div>이메일</div>
@@ -202,6 +227,7 @@ const SignupPage = () => {
               value={formData.email}
               onChange={handleChange}
               disabled={isEmailVerified}
+              autoComplete='off'
             />
             <button
               type='button'
@@ -211,8 +237,6 @@ const SignupPage = () => {
               {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
             </button>
             {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
-
-            {}
             <div>인증번호</div>
             <input
               type='text'
@@ -220,6 +244,7 @@ const SignupPage = () => {
               value={formData.verificationCode}
               onChange={handleChange}
               disabled={isEmailVerified}
+              autoComplete='off'
             />
             <button
               type='button'
@@ -236,6 +261,7 @@ const SignupPage = () => {
               name='password'
               value={formData.password}
               onChange={handleChange}
+              autoComplete='new-password'
             />
 
             <button
@@ -251,6 +277,7 @@ const SignupPage = () => {
               name='passwordCheck'
               value={formData.passwordCheck}
               onChange={handleChange}
+              autoComplete='new-password'
             />
           </div>
           {error && <div style={{ color: 'red' }}>{error}</div>}
@@ -262,7 +289,18 @@ const SignupPage = () => {
             회원가입하기
           </button>
         </form>
-        
+
+        {isCompleted ? (
+          <SignUpCompleteModal
+            isOpen={isFirstModalOpen}
+            title='회원가입이 완료되었어요!'
+            message='메인 페이지로 구경하러 가볼까요?'
+            onSubmit={handleFirstModalClose}
+            onClose={() => setIsFirstModalOpen(false)}
+          />
+        ) : (
+          null
+        )}
       </div>
     </div>
   )

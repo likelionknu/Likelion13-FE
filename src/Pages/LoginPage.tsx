@@ -42,20 +42,20 @@ const LoginPage = () => {
         },
       })
 
-      console.log('[로그인 응답]', response.data)
-
+      console.log('[로그인 응답, 토큰값]', response.data)
       // JWT 토큰 저장
-      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('token', response.data)
 
       // 로그인 상태 업데이트
       login({
-        email: formData.email,
-        password: formData.password,
         name: response.data.name || '',
         department: response.data.department || '',
         studentId: response.data.studentId || '',
         grade: response.data.grade || '',
         phone: response.data.phone || '',
+        email: formData.email,
+        password: formData.password,
+        token: response.data.token,
       })
 
       navigate('/')
