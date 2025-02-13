@@ -8,6 +8,7 @@ interface User {
   phone: string
   email: string
   password: string
+  apply: boolean
   token: string // JWT 토큰
 }
 
@@ -38,6 +39,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         phone: '01012345678',
         email: 'test@kangnam.ac.kr',
         password: '0000',
+        apply: true,
         token: 'test-token',
       },
     }),
