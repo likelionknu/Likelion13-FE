@@ -9,6 +9,12 @@ import 백 from '../assets/images/BackIntro.png'
 import 프론트 from '../assets/images/FrontIntro.png'
 import 디자인 from '../assets/images/DesignIntro.png'
 import 메인로고 from '../assets/images/MainLogo.png'
+
+import Project1 from '../assets/images/Project1.png'
+import Project2 from '../assets/images/Project2.png'
+import Project3 from '../assets/images/Project3.png'
+
+
 // import 메인폰트 from '../assets/images/MainFont.png'
 import styles from '../assets/MainPage.module.css'
 
@@ -248,7 +254,7 @@ const MainPage = () => {
                 style={{ backgroundColor: '#E2FFF8' }}
               >
                 <img
-                  src={백}
+                  src={Project1}
                   alt='팜투마켓'
                   className={styles.cardImg}
                 />
@@ -268,7 +274,7 @@ const MainPage = () => {
                 style={{ backgroundColor: '#EAFFE4' }}
               >
                 <img
-                  src={프론트}
+                  src={Project2}
                   alt='DLIFEBOAT'
                   className={styles.cardImg}
                 />
@@ -288,7 +294,7 @@ const MainPage = () => {
                 style={{ backgroundColor: '#DCDBFF' }}
               >
                 <img
-                  src={디자인}
+                  src={Project3}
                   alt='투자가머니'
                   className={styles.cardImg}
                 />
