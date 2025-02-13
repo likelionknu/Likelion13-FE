@@ -28,6 +28,7 @@ const MyPage = () => {
     passwordConfirm: '',
   })
 
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -41,7 +42,7 @@ const MyPage = () => {
     e.preventDefault()
 
     if (formData.password !== formData.passwordConfirm) {
-      alert('비밀번호가 일치하지 않습니다.test')
+      alert('비밀번호가 일치하지 않습니다.')
       return
     }
 
@@ -81,15 +82,15 @@ const MyPage = () => {
           const errorMessage = error.response.data
           if (errorMessage === '기존 비밀번호와 같습니다.') {
             alert('기존 비밀번호와 같은 비밀번호는 사용할 수 없습니다.')
-          } 
+          }
           // else if (errorMessage.includes('비워둘 수 없습니다')) {
           //   alert('모든 필수 항목을 입력해주세요.')
-          // } 
+          // }
           // else if (errorMessage.includes('중복됩니다')) {
           //   alert('이미 사용 중인 학번 또는 전화번호입니다.')
-          // } 
+          // }
           else {
-            alert(`${errorMessage},??`)
+            alert(`${errorMessage}`)
           }
         } else {
           alert('정보 수정에 실패했습니다.')
@@ -125,23 +126,27 @@ const MyPage = () => {
 
         console.log('마이페이지 데이터:', response.data)
 
+        // 관리자 여부 확인
+        if (response.data.role === 'ADMIN') {
+          setIsAdmin(true)
+        }
+
         if (response.status === 200) {
-          const userData = response.data
           // 받아온 사용자 정보로 formData 업데이트
-          setFormData(prev => ({
+          setFormData((prev) => ({
             ...prev,
-            name: userData.name,
-            department: userData.department,
-            studentId: userData.studentId,
-            grade: userData.grade,
-            phone: userData.phone,
+            name: response.data.name,
+            department: response.data.department,
+            studentId: response.data.studentId,
+            grade: response.data.grade,
+            phone: response.data.phone,
             password: '',
             passwordConfirm: '',
           }))
 
           // Zustand store 업데이트
           login({
-            ...userData,
+            ...response.data,
             token: token,
           })
         }
@@ -158,16 +163,6 @@ const MyPage = () => {
     fetchUserData()
   }, [user?.token, login, logout, navigate])
 
-  const ResultTab = () => (
-    <div className='result-tab'>
-      <div className='contents-title'>결과 보기 </div>
-      <div>
-        <p>합격?</p>
-        <p>불합격?</p>
-      </div>
-    </div>
-  )
-
   return (
     <div className='mypage-container'>
       <div className='mypage-tabs'>
@@ -178,23 +173,33 @@ const MyPage = () => {
         >
           수정하기
         </button>
-        <button
-          className={activeTab === 'result' ? 'active' : ''}
-          onClick={() => setActiveTab('result')}
-        >
-          결과보기
-        </button>
+        {isAdmin ? (
+          <button
+            className={activeTab === 'result' ? 'active' : ''}
+            onClick={() => navigate('/admin')}
+          >
+            관리자페이지
+          </button>
+        ) : (
+          <button
+            className={activeTab === 'result' ? 'active' : ''}
+            onClick={() => setActiveTab('result')}
+          >
+            결과보기
+          </button>
+        )}
+
         <button onClick={handleLogout}>로그아웃</button>
       </div>
       <div className='mypage-contents'>
         {activeTab === 'edit' ? (
           <div>
             <div className='contents-title'>정보 수정</div>
-
             <form
               className='edit-form'
               onSubmit={handleSubmit}
             >
+              {/* 이름, 학년, 전화번호, 이메일 수정 불가가*/}
               <div>
                 <div>이름</div>
                 <input
@@ -203,6 +208,7 @@ const MyPage = () => {
                   placeholder='이름'
                   value={user?.name}
                   readOnly={true} // 수정 불가
+                  style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
               <div>
@@ -222,7 +228,8 @@ const MyPage = () => {
                   name='studentId'
                   placeholder='학번'
                   value={formData.studentId}
-                  onChange={handleChange}
+                  readOnly={true} // 학번 수정 불가
+                  style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
               <div>
@@ -232,7 +239,8 @@ const MyPage = () => {
                   name='grade'
                   placeholder='학년'
                   value={formData.grade}
-                  onChange={handleChange}
+                  readOnly={true} // 학년 수정 불가
+                  style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
               <div>
@@ -243,7 +251,8 @@ const MyPage = () => {
                   placeholder='01000000000'
                   maxLength={11}
                   value={formData.phone}
-                  onChange={handleChange}
+                  readOnly={true} // 전화번호 수정 불가
+                  style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
               <div>
@@ -254,6 +263,7 @@ const MyPage = () => {
                   placeholder='이메일'
                   value={user?.email}
                   readOnly={true} // 수정 불가
+                  style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
               <div>
@@ -278,12 +288,19 @@ const MyPage = () => {
                   autoComplete='new-password'
                 />
               </div>
-      
+
               <button type='submit'>수정하기</button>
             </form>
           </div>
         ) : (
-          <ResultTab />
+          //  결과보기 탭
+          <div className='result-tab'>
+            <div className='contents-title'>결과 보기</div>
+            <div className='passing-result-container'>
+              <div className='pass-name'>{user?.name}</div>
+              {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>}
+            </div>
+          </div>
         )}
       </div>
     </div>

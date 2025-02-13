@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import Nav from '../components/Nav'
 import MainPage from '../Pages/MainPage'
 import MyPage from '../Pages/MyPage'
+import AdminPage from '../Pages/AdminPage'
 import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
 import BackendQuestionPage from '../Pages/BackendQuestionPage'
@@ -86,6 +87,12 @@ const Router = () => {
             path='/mypage'
             element={<MyPage />}
           />
+
+          <Route
+            path='/admin'
+            element={<AdminPage />}
+          />
+          
           <Route
             path='/login'
             element={
