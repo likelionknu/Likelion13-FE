@@ -34,12 +34,17 @@ const MainPage = () => {
   const mainLogoRef = useRef(null)
   const mainTextRef = useRef(null)
 
+  const [logoLoaded, setLogoLoaded] = useState(false)
+
   useEffect(() => {
+    // 이미지 로드 후 실행
+    if (!logoLoaded || !mainLogoRef.current || !mainTextRef.current) return
+
     // 로고와 텍스트 요소가 마운트되었는지 확인
     const logo = mainLogoRef.current
     const text = mainTextRef.current
 
-    if (!logo || !text) return
+    // if (!logo || !text) return
 
     // 초기 상태 설정을 즉시 실행
     gsap.set([logo, text], {
@@ -67,7 +72,7 @@ const MainPage = () => {
     return () => {
       gsap.killTweensOf([logo, text])
     }
-  }, []) // 컴포넌트 마운트 시에만 실행
+  }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -106,6 +111,7 @@ const MainPage = () => {
           ref={mainLogoRef}
           src={메인로고}
           alt='메인로고'
+          onLoad={() => setLogoLoaded(true)}
           className={styles.mainLogo}
           style={{ position: 'absolute', top: '60%', opacity: 0, left: '50%', transform: 'translate(-50%, -50%)' }}
         />
