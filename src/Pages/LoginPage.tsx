@@ -55,6 +55,7 @@ const LoginPage = () => {
         phone: response.data.phone || '',
         email: formData.email,
         password: formData.password,
+        apply: response.data.apply || false,
         token: response.data.token,
       })
 
