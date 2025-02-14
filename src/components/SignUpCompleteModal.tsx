@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from '../assets/QuestionPage.module.css'
-import 모달1 from '../assets/images/ModalImg1.png'
+import 모달3 from '../assets/images/ModalImg3.png'
 
 
 type ModalProps = {
@@ -33,8 +33,8 @@ const QuestionModal: React.FC<ModalProps> = ({
         <p>{message}</p>
         <div className={styles.modalImageContainer}>
           <img
-            src={모달1}
-            alt='제출완'
+            src={모달3}
+            alt='회원가입완'
             className={styles.modalImage}
           />
         </div>

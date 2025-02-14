@@ -9,6 +9,7 @@ const MyPage = () => {
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
+  
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -38,6 +39,34 @@ const MyPage = () => {
       ...prev,
       [name]: value,
     }))
+  }
+
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm('정말 계정을 삭제하시겠습니까?')
+    if (!confirmDelete) return
+  
+    try {
+      const jwtToken = localStorage.getItem('token')
+  
+      const response = await axios.delete('http://localhost:8080/api/v1/delete-account', {
+        data: jwtToken,
+      });
+  
+      if (response.status === 200) {
+        alert('계정이 삭제되었습니다.')
+        logout() // 로그아웃 처리
+        navigate('/') // 메인 페이지로 이동
+      }
+    } catch (error) {
+      console.error('계정 삭제 실패:', error)
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('API 오류 응답:', error.response)
+        alert(`삭제 실패: ${error.response.data.message || error.response.data}`)
+      }
+      else {
+        alert('알 수 없는 오류가 발생했습니다.')
+      }
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -303,10 +332,8 @@ const MyPage = () => {
 
               <button
                 type='button'
-                className='delete-user-btn'
-                onClick={() => {
-                  alert('이걸 누르다니 그대는 강심장')
-                }}
+                className='delete-account-btn'
+                onClick={handleDeleteAccount}
               >
                 계정 지우기
               </button>
