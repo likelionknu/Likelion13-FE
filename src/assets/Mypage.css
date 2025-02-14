@@ -96,12 +96,12 @@
 
 .edit-form > button {
   width: 150px;
-  height: 50px;
+  height: 45px;
 
   font-size: 18px;
   cursor: pointer;
 
-  margin-top : 20px;
+  margin-top: 20px;
 
   border-radius: 5px;
   border: 1px solid #165ee0;
@@ -110,6 +110,34 @@
 }
 
 .edit-form > button:hover {
+  background: #e0e8ff;
+}
+
+.delete-user-btn {
+  margin-left: 800px;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-toggle-button {
+  width: 80px;
+  height: 30px;
+
+  margin-left: 20px;
+  border-radius: 5px;
+  border: 1px solid #165ee0;
+
+  background: none;
+
+  cursor: pointer;
+  font-size: 14px;
+  color: #165ee0;
+  transition: background-color 0.3s ease; /* 부드러운 전환 */
+}
+
+.password-toggle-button:hover {
   background: #e0e8ff;
 }
 
@@ -132,7 +160,7 @@
   margin-top: 25px;
 
   /* 컨테이너 양옆 내부 여백 */
-  padding: 0 35px;
+  padding: 0 25px;
 
   border-radius: 5px;
   border: 1px solid #7899fe;

@@ -10,6 +10,8 @@ const MyPage = () => {
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
 
+  const [showPassword, setShowPassword] = useState(false)
+
   const handleLogout = () => {
     logout()
     navigate('/') // 로그아웃하면 메인페이지로 이동
@@ -90,7 +92,7 @@ const MyPage = () => {
           //   alert('이미 사용 중인 학번 또는 전화번호입니다.')
           // }
           else {
-            alert(`${errorMessage}`)
+            alert(`${errorMessage} (from backend API)`)
           }
         } else {
           alert('정보 수정에 실패했습니다.')
@@ -266,21 +268,29 @@ const MyPage = () => {
                   style={{ backgroundColor: '#f0f0f0' }}
                 />
               </div>
-              <div>
+              <div className='password-input'>
                 <div>비밀번호 변경</div>
                 <input
-                  type='password'
+                  type={showPassword ? 'text' : 'password'}
                   name='password'
                   placeholder='비밀번호'
                   value={formData.password}
                   onChange={handleChange}
                   autoComplete='new-password'
                 />
+
+                <button
+                  type='button'
+                  className='password-toggle-button'
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? '숨기기' : '보이기'}
+                </button>
               </div>
               <div>
                 <div>비밀번호 확인</div>
                 <input
-                  type='password'
+                  type={showPassword ? 'text' : 'password'}
                   name='passwordConfirm'
                   placeholder='비밀번호 확인'
                   value={formData.passwordConfirm}
@@ -290,6 +300,16 @@ const MyPage = () => {
               </div>
 
               <button type='submit'>수정하기</button>
+
+              <button
+                type='button'
+                className='delete-user-btn'
+                onClick={() => {
+                  alert('이걸 누르다니 그대는 강심장')
+                }}
+              >
+                계정 지우기
+              </button>
             </form>
           </div>
         ) : (
