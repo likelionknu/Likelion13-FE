@@ -14,8 +14,9 @@ import Project1 from '../assets/images/Project1.png'
 import Project2 from '../assets/images/Project2.png'
 import Project3 from '../assets/images/Project3.png'
 
+// 메인 텍스트이미지 파일, create, learn, elevate
+// import 메인폰트 from '../assets/images/MainFont.png' 
 
-// import 메인폰트 from '../assets/images/MainFont.png'
 import styles from '../assets/MainPage.module.css'
 
 const events = [
@@ -36,23 +37,17 @@ const MainPage = () => {
 
   const [logoLoaded, setLogoLoaded] = useState(false)
 
+  // 메인 이미지 애니메이션
   useEffect(() => {
-    // 이미지 로드 후 실행
     if (!logoLoaded || !mainLogoRef.current || !mainTextRef.current) return
-
-    // 로고와 텍스트 요소가 마운트되었는지 확인
     const logo = mainLogoRef.current
     const text = mainTextRef.current
 
-    // if (!logo || !text) return
-
-    // 초기 상태 설정을 즉시 실행
     gsap.set([logo, text], {
       opacity: 0,
       y: 60,
     })
 
-    // 로고 애니메이션
     gsap.to(logo, {
       duration: 1.3,
       y: 0,
@@ -60,7 +55,6 @@ const MainPage = () => {
       ease: 'power3.out',
     })
 
-    // 메인 텍스트 애니메이션
     gsap.to(text, {
       duration: 1.3,
       y: 0,
@@ -74,6 +68,45 @@ const MainPage = () => {
     }
   }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
 
+  // 섹션 스크롤 애니메이션
+  useEffect(() => {
+    const sections = document.querySelectorAll(`.${styles.section}`)
+
+    sections.forEach((section) => {
+      gsap.fromTo(
+        section,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 90%',
+            end: 'top 30%',
+            scrub: true,
+            snap: {
+              snapTo: 'labels',
+              duration: { min: 0.1, max: 3 },
+              delay: 0.2,
+              ease: 'power1.inOut',
+            },
+          },
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power1.out',
+        }
+      )
+    })
+
+    return () => {
+      sections.forEach((section) => {
+        gsap.killTweensOf(section)
+      })
+    }
+  }, [])
+
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
@@ -82,23 +115,7 @@ const MainPage = () => {
         <div
           ref={mainTextRef}
           className={styles.mainText}
-          style={{
-            position: 'absolute',
-            top: '15%',
-            width: '1214px',
-            textAlign: 'center',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: '1',
-            fontSize: '110px',
-            fontWeight: 'bold',
-            color: 'white',
-            letterSpacing: '-2px',
-            textShadow: '0px 0px 20px rgba(255, 255, 255, 0.95)',
-
-            userSelect: 'none',
-            opacity: 0,
-          }}
+          style={{}}
         >
           Learn, Create, Elevate
         </div>
@@ -115,11 +132,6 @@ const MainPage = () => {
           className={styles.mainLogo}
           style={{ position: 'absolute', top: '60%', opacity: 0, left: '50%', transform: 'translate(-50%, -50%)' }}
         />
-        {/* <img
-          src={메인폰트}
-          alt='메인폰트'
-          className={styles.mainFont}
-        /> */}
 
         <button
           className={styles.button}

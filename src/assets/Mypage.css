@@ -122,23 +122,30 @@
   background-color: white;
   color: black;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; 
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-left: 800px;
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); }
-  50% { box-shadow: 0 0 20px #ff575799; }
-  100% { box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); }
+  0% {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px #ff575799;
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
 }
 
 .edit-form .delete-account-btn:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
   border-color: #ff575799;
   background-color: white;
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  animation: glow 1.5s infinite alternate;}
+  animation: glow 1.5s infinite alternate;
+}
 
 .password-input {
   position: relative;
