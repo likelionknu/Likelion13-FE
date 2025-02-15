@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import styles from '../assets/QuestionPage.module.css'
 import 모달3 from '../assets/images/ModalImg3.png'
 
-
 type ModalProps = {
   isOpen: boolean
   title: string
@@ -13,11 +12,7 @@ type ModalProps = {
   isSecondModal?: boolean
 }
 
-const QuestionModal: React.FC<ModalProps> = ({
-  isOpen,
-  title,
-  message,
-}) => {
+const QuestionModal: React.FC<ModalProps> = ({ isOpen, title, message }) => {
   const navigate = useNavigate()
 
   if (!isOpen) return null
@@ -38,11 +33,11 @@ const QuestionModal: React.FC<ModalProps> = ({
             className={styles.modalImage}
           />
         </div>
-        <div className={styles.modalButton} > 
+        <div className={styles.modalButton}>
           <button
             className={styles.confirmButton}
             onClick={handleHomepageRedirect}
-            style={{width:'180px',backgroundColor: '#007bff', color: 'white', paddingBottom: '30px'}}
+            style={{ width: '180px', backgroundColor: '#007bff', color: 'white', paddingBottom: '30px', marginRight: '30px', textAlign: 'center' }}
           >
             메인 페이지로
           </button>

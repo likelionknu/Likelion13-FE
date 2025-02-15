@@ -6,7 +6,6 @@ import SignUpCompleteModal from '../components/SignUpCompleteModal'
 import '../assets/SignupPage.css'
 
 const SignupPage = () => {
-
   const [isCompleted, setIsCompleted] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isEmailVerified, setIsEmailVerified] = useState(false)
@@ -104,7 +103,20 @@ const SignupPage = () => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
-  
+
+    // 유효성 검사
+    if (!formData.name || !formData.department || !formData.studentId || !formData.phone || !formData.email || !formData.password || !formData.passwordCheck || !formData.grade) {
+      setError('모든 필수 항목을 입력해주세요.')
+      setIsLoading(false)
+      return
+    }
+
+    if (formData.password !== formData.passwordCheck) {
+      setError('비밀번호가 일치하지 않습니다.')
+      setIsLoading(false)
+      return
+    }
+
     try {
       const signUpData = {
         name: formData.name,
@@ -117,7 +129,7 @@ const SignupPage = () => {
         grade: formData.grade,
         apply: false,
       }
-  
+
       const response = await fetch('http://localhost:8080/api/v1/sign-up', {
         method: 'POST',
         headers: {
@@ -126,16 +138,16 @@ const SignupPage = () => {
         },
         body: JSON.stringify(signUpData),
       })
-  
+
       const responseText = await response.text()
-  
+
       if (response.ok) {
         // 회원가입 성공 시 모달 표시
         setIsCompleted(true)
         setIsFirstModalOpen(true)
         return
       }
-  
+
       // 에러 처리
       if (response.status === 400) {
         if (responseText.includes('중복')) {
@@ -298,9 +310,7 @@ const SignupPage = () => {
             onSubmit={handleFirstModalClose}
             onClose={() => setIsFirstModalOpen(false)}
           />
-        ) : (
-          null
-        )}
+        ) : null}
       </div>
     </div>
   )
