@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
 import styles from '../assets/QuestionPage.module.css';
 import QuestionModal from "../components/QuestionModal";
 
 const BackendQuestionPage = () => {
+  const { isLoggedIn, checkAuth } = useAuthStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
@@ -27,6 +29,17 @@ const BackendQuestionPage = () => {
   const endIndex = currentPage * questionsPerPage;
   const currentQuestions = questions.slice(startIndex, endIndex);
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (isLoggedIn === false) {
+      alert("로그인이 필요합니다.");
+      navigate("/login"); 
+    }
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     const savedAnswers = localStorage.getItem("backendAnswers");
@@ -75,9 +88,7 @@ const BackendQuestionPage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          answers: answers,
-        }),
+        body: JSON.stringify({answers}),
       });
   
       if (response.ok) {
