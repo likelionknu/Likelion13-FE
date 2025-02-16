@@ -27,7 +27,7 @@ jobs:
           destination-github-username: 'Neogul02'
           destination-repository-name: 'Likelion13-FE'
           user-email: ${{ secrets.EMAIL }}
-          commit-message: ${{ github.event.commits[0].message }}
+          commit-message: ${{ github.event.head_commit.message || 'Update from GitHub Actions' }}
           target-branch: main
 
       - name: Test get variable exported by push-to-another-repository

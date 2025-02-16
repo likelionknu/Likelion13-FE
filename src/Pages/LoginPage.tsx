@@ -18,7 +18,7 @@ const LoginPage = () => {
     password: '',
   })
 
-  const { testLogin, login } = useAuthStore()
+  const { login } = useAuthStore()
   const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,15 +48,15 @@ const LoginPage = () => {
 
       // 로그인 상태 업데이트
       login({
-        name: response.data.name || '',
-        department: response.data.department || '',
-        studentId: response.data.studentId || '',
-        grade: response.data.grade || '',
-        phone: response.data.phone || '',
+        name: '',
+        department: '',
+        studentId: '',
+        grade: '',
+        phone: '',
         email: formData.email,
         password: formData.password,
-        apply: response.data.apply || false,
-        token: response.data.token,
+        apply: false,
+        token: response.data,
       })
 
       navigate('/')
@@ -70,12 +70,6 @@ const LoginPage = () => {
     } finally {
       setIsLoading(false)
     }
-  }
-
-  const handleTestLogin = () => {
-    testLogin()
-    alert('테스트 로그인 성공')
-    navigate('/')
   }
 
   return (
@@ -121,7 +115,6 @@ const LoginPage = () => {
             >
               {isLoading ? '로그인 중...' : '로그인'}
             </button>
-            
           </form>
 
           <Link
@@ -130,9 +123,6 @@ const LoginPage = () => {
           >
             <button className='signup-button'>회원가입</button>
           </Link>
-
-
-          <button onClick={handleTestLogin}>테스트로그인</button>
         </div>
       </div>
     </div>

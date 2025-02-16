@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
 
 import logo1 from '../assets/images/logo1.png'
@@ -8,11 +8,20 @@ import '../assets/Nav.css'
 const Nav = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const { isLoggedIn } = useAuthStore()
+  const navigate = useNavigate()
+
+  const handleDropdownClick = (path: string) => {
+    if (!isLoggedIn) {
+      alert('로그인이 필요합니다.')
+      navigate('/login')
+    } else {
+      navigate(path)
+    }
+  }
 
   return (
     <div>
       <div className='nav-container'>
-        
         <div className='nav-logo-container'>
           <Link
             to='/'
@@ -38,24 +47,24 @@ const Nav = () => {
             <span className='nav-link-button'>지원하기</span>
             {showDropdown && (
               <div className='dropdown-content'>
-                <Link
-                  to='/frontend-question'
+                <div
                   className='dropdown-item'
+                  onClick={() => handleDropdownClick('/frontend-question')}
                 >
                   프론트엔드
-                </Link>
-                <Link
-                  to='/backend-question'
+                </div>
+                <div
                   className='dropdown-item'
+                  onClick={() => handleDropdownClick('/backend-question')}
                 >
                   백엔드
-                </Link>
-                <Link
-                  to='/design-question'
+                </div>
+                <div
                   className='dropdown-item'
+                  onClick={() => handleDropdownClick('/design-question')}
                 >
                   디자인
-                </Link>
+                </div>
               </div>
             )}
           </button>

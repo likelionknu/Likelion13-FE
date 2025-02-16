@@ -236,18 +236,21 @@ const SignupPage = () => {
             <input
               type='email'
               name='email'
+              placeholder='likelion@kangnam.ac.kr'
               value={formData.email}
               onChange={handleChange}
               disabled={isEmailVerified}
               autoComplete='off'
             />
+
             <button
               type='button'
               onClick={handleSendVerification}
-              disabled={isLoading || isEmailVerified}
+              disabled={isLoading || isEmailVerified || formData.email.substring(formData.email.length - 13) !== 'kangnam.ac.kr'}
             >
               {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
             </button>
+            <div style={{ color: 'red' }}>{formData.email.substring(formData.email.length - 13) === 'kangnam.ac.kr' ? null : '@kangnam.ac.kr 형식이 아닙니다 '}</div>
             {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
             <div>인증번호</div>
             <input

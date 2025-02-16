@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useAuthStore } from '../store/useAuthStore'
 
 import Modal from '../components/MainSelectModal'
 import 메인 from '../assets/images/Main.png'
@@ -15,7 +16,7 @@ import Project2 from '../assets/images/Project2.png'
 import Project3 from '../assets/images/Project3.png'
 
 // 메인 텍스트이미지 파일, create, learn, elevate
-// import 메인폰트 from '../assets/images/MainFont.png' 
+// import 메인폰트 from '../assets/images/MainFont.png'
 
 import styles from '../assets/MainPage.module.css'
 
@@ -35,7 +36,21 @@ const MainPage = () => {
   const mainLogoRef = useRef(null)
   const mainTextRef = useRef(null)
 
+  const navigate = useNavigate()
+  const { isLoggedIn } = useAuthStore()
+
   const [logoLoaded, setLogoLoaded] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleApplyButtonClick = () => {
+    if (!isLoggedIn) {
+      alert('로그인이 필요합니다.')
+      navigate('/login')
+    } else {
+      setIsModalOpen(true)
+    }
+  }
+
 
   // 메인 이미지 애니메이션
   useEffect(() => {
@@ -107,8 +122,6 @@ const MainPage = () => {
     }
   }, [])
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   return (
     <div>
       <div className={`${styles.mainImageContainer} ${styles.fullWidthSection}`}>
@@ -135,7 +148,7 @@ const MainPage = () => {
 
         <button
           className={styles.button}
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => handleApplyButtonClick()}
           style={{ position: 'absolute', top: '80%', left: '50%', transform: 'translate(-50%, -50%)' }}
         >
           13기 참여하러 가기
