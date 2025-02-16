@@ -5,7 +5,7 @@ import styles from '../assets/QuestionPage.module.css';
 import QuestionModal from "../components/QuestionModal";
 
 const BackendQuestionPage = () => {
-  const { isLoggedIn, checkAuth } = useAuthStore();
+  const { isLoggedIn, checkAuth, user } = useAuthStore();
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
@@ -30,9 +30,7 @@ const BackendQuestionPage = () => {
   const currentQuestions = questions.slice(startIndex, endIndex);
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useEffect(() => { checkAuth(); }, [checkAuth]);
 
   useEffect(() => {
     if (isLoggedIn === false) {
@@ -47,6 +45,10 @@ const BackendQuestionPage = () => {
       setAnswers(JSON.parse(savedAnswers));
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("backendAnswers", JSON.stringify(answers));
+  }, [answers]);  
 
   useEffect(() => {
     window.scrollTo({top: 0, behavior: "smooth" });
@@ -70,10 +72,54 @@ const BackendQuestionPage = () => {
     }
   };
 
-  const handleSave = () => {
-    localStorage.setItem("backendAnswers", JSON.stringify(answers));
-    alert("임시 저장되었습니다.");
-  };
+  const handleSave = async () => {
+    if (!isLoggedIn || !user) {
+      alert("로그인 상태가 아닙니다.");
+      return;
+    }
+
+    const backendData = {
+      id: 0, 
+      studentId: user.studentId, 
+      name: user.name, 
+      backendcontent1: answers[0] || "",
+      backendcontent2: answers[1] || "",
+      backendcontent3: answers[2] || "",
+      backendcontent4: answers[3] || "",
+      backendcontent5: answers[4] || "",
+      backendcontent6: answers[5] || "",
+      backendcontent7: answers[6] || "",
+      backendcontent8: answers[7] || "",
+      backendcontent9: answers[8] || "",
+      backendcontent10: answers[9] || "",
+      apply: false,
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/form/backend/create", {  // 실제 서버 URL로 변경
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(backendData),
+      });
+
+      console.log('Response:', response); // 응답 출력
+    if (response.ok) {
+      alert("임시 저장되었습니다.");
+    } else {
+      const responseData = await response.json(); // 실패 시 응답 데이터 확인
+      console.log('Error response:', responseData);
+      alert("저장 실패, 서버 오류.");
+    }
+  } catch (error) {
+    console.error('Fetch error:', error); // 에러 출력
+    alert("저장 중 오류가 발생했습니다.");
+  }
+
+  console.log("로그인된 사용자 정보:", user);
+  console.log("보낼 데이터:", backendData);
+};
 
   const handleSubmit = () => {
     setIsFirstModalOpen(true);

@@ -5,7 +5,7 @@ import styles from '../assets/QuestionPage.module.css';
 import QuestionModal from "../components/QuestionModal";
 
 const DesignQuestionPage = () => {
-  const { isLoggedIn, checkAuth } = useAuthStore();
+  const { isLoggedIn, checkAuth, user } = useAuthStore();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
@@ -30,9 +30,7 @@ const DesignQuestionPage = () => {
 
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useEffect(() => { checkAuth(); }, [checkAuth]);
 
   useEffect(() => {
     if (isLoggedIn === false) {
@@ -47,6 +45,10 @@ const DesignQuestionPage = () => {
       setAnswers(JSON.parse(savedAnswers));
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("designAnswers", JSON.stringify(answers));
+  }, [answers]);  
 
   useEffect(() => {
     window.scrollTo({top: 0, behavior: "smooth" });
@@ -70,10 +72,53 @@ const DesignQuestionPage = () => {
     }
   };
 
-  const handleSave = () => {
-    localStorage.setItem("designAnswers", JSON.stringify(answers));
-    alert("임시 저장되었습니다.");
-  };
+  const handleSave = async () => {
+    if (!isLoggedIn || !user) {
+      alert("로그인 상태가 아닙니다.");
+      return;
+    }
+
+    const designData = {
+      id: 0, // 임시 ID
+      studentId: user.studentId, // 로그인된 사용자 ID로 바꿔야 할 수 있음
+      name: user.name, // 이름도 실제로 가져올 수 있으면 바꿔야 함
+      designcontent1: answers[0] || "",
+      designcontent2: answers[1] || "",
+      designcontent3: answers[2] || "",
+      designcontent4: answers[3] || "",
+      designcontent5: answers[4] || "",
+      designcontent6: answers[5] || "",
+      designcontent7: answers[6] || "",
+      designcontent8: answers[7] || "",
+      designcontent9: answers[8] || "",
+      apply: false, // 임시저장 후 상태를 "true"로 설정
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/form/design/create", {  // 실제 서버 URL로 변경
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(designData),
+      });
+
+      console.log('Response:', response); // 응답 출력
+    if (response.ok) {
+      alert("임시 저장되었습니다.");
+    } else {
+      const responseData = await response.json(); // 실패 시 응답 데이터 확인
+      console.log('Error response:', responseData);
+      alert("저장 실패, 서버 오류.");
+    }
+  } catch (error) {
+    console.error('Fetch error:', error); // 에러 출력
+    alert("저장 중 오류가 발생했습니다.");
+  }
+
+  console.log("로그인된 사용자 정보:", user);
+  console.log("보낼 데이터:", designData);
+};
 
   const handleSubmit = () => {
     setIsFirstModalOpen(true);

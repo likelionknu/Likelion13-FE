@@ -5,7 +5,7 @@ import styles from '../assets/QuestionPage.module.css';
 import QuestionModal from "../components/QuestionModal";
 
 const FrontendQuestionPage = () => {
-  const { isLoggedIn, checkAuth } = useAuthStore();
+  const { isLoggedIn, checkAuth, user } = useAuthStore();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
@@ -30,9 +30,7 @@ const FrontendQuestionPage = () => {
   const currentQuestions = questions.slice(startIndex, endIndex);
   const [answers, setAnswers] = useState<string[]>(new Array(questions.length).fill(""));
   
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  useEffect(() => { checkAuth(); }, [checkAuth]);
 
   useEffect(() => {
     if (isLoggedIn === false) {
@@ -49,6 +47,10 @@ const FrontendQuestionPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("frontendAnswers", JSON.stringify(answers));
+  }, [answers]);  // answers가 변경될 때마다 로컬스토리지에 저장
+  
   useEffect(() => {
     window.scrollTo({top: 0, behavior: "smooth" });
   }, [currentPage]);
@@ -71,11 +73,53 @@ const FrontendQuestionPage = () => {
     }
   };
 
-  const handleSave = () => {
-    localStorage.setItem("frontendAnswers", JSON.stringify(answers));
-    alert("임시 저장되었습니다.");
-  };
+  const handleSave = async () => {
+    if (!isLoggedIn || !user) {
+      alert("로그인 상태가 아닙니다.");
+      return;
+    }
 
+    const frontendData = {
+      id: 0, // 임시 ID
+      studentId: user.studentId, // 로그인된 사용자 ID로 바꿔야 할 수 있음
+      name: user.name, // 이름도 실제로 가져올 수 있으면 바꿔야 함
+      frontendcontent1: answers[0] || "",
+      frontendcontent2: answers[1] || "",
+      frontendcontent3: answers[2] || "",
+      frontendcontent4: answers[3] || "",
+      frontendcontent5: answers[4] || "",
+      frontendcontent6: answers[5] || "",
+      frontendcontent7: answers[6] || "",
+      frontendcontent8: answers[7] || "",
+      frontendcontent9: answers[8] || "",
+      apply: false, // 임시저장 후 상태를 "true"로 설정
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/form/frontend/create", {  // 실제 서버 URL로 변경
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(frontendData),
+      });
+
+      console.log('Response:', response); // 응답 출력
+    if (response.ok) {
+      alert("임시 저장되었습니다.");
+    } else {
+      const responseData = await response.json(); // 실패 시 응답 데이터 확인
+      console.log('Error response:', responseData);
+      alert("저장 실패, 서버 오류.");
+    }
+  } catch (error) {
+    console.error('Fetch error:', error); // 에러 출력
+    alert("저장 중 오류가 발생했습니다.");
+  }
+
+  console.log("로그인된 사용자 정보:", user);
+  console.log("보낼 데이터:", frontendData);
+};
   const handleSubmit = async () => {
     setIsFirstModalOpen(true);
   };
