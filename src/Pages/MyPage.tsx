@@ -9,7 +9,6 @@ const MyPage = () => {
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
-  
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -41,17 +40,18 @@ const MyPage = () => {
     }))
   }
 
+  // 계정 삭제
   const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm('정말 계정을 삭제하시겠습니까?')
     if (!confirmDelete) return
-  
+
     try {
       const jwtToken = localStorage.getItem('token')
-  
+
       const response = await axios.delete('http://localhost:8080/api/v1/delete-account', {
         data: jwtToken,
-      });
-  
+      })
+
       if (response.status === 200) {
         alert('계정이 삭제되었습니다.')
         logout() // 로그아웃 처리
@@ -62,13 +62,13 @@ const MyPage = () => {
       if (axios.isAxiosError(error) && error.response) {
         console.error('API 오류 응답:', error.response)
         alert(`삭제 실패: ${error.response.data.message || error.response.data}`)
-      }
-      else {
+      } else {
         alert('알 수 없는 오류가 발생했습니다.')
       }
     }
   }
 
+  // 정보 수정
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -76,19 +76,20 @@ const MyPage = () => {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
+    if (formData.department === user?.department) {
+      alert('기존 학부와 같습니다.')
+      return
+    }
+    
 
     try {
       const token = user?.token || localStorage.getItem('token')
       const response = await axios.put(
         'http://localhost:8080/api/v1/mypage-update',
         {
-          name: formData.name,
           department: formData.department,
-          studentId: formData.studentId,
-          phone: formData.phone,
           password: formData.password,
           passwordCheck: formData.passwordConfirm,
-          grade: formData.grade,
         },
         {
           headers: {
@@ -113,15 +114,8 @@ const MyPage = () => {
           const errorMessage = error.response.data
           if (errorMessage === '기존 비밀번호와 같습니다.') {
             alert('기존 비밀번호와 같은 비밀번호는 사용할 수 없습니다.')
-          }
-          // else if (errorMessage.includes('비워둘 수 없습니다')) {
-          //   alert('모든 필수 항목을 입력해주세요.')
-          // }
-          // else if (errorMessage.includes('중복됩니다')) {
-          //   alert('이미 사용 중인 학번 또는 전화번호입니다.')
-          // }
-          else {
-            alert(`${errorMessage} (from backend API)`)
+          } else {
+            alert(`${errorMessage} - from backend API`)
           }
         } else {
           alert('정보 수정에 실패했습니다.')
@@ -131,8 +125,8 @@ const MyPage = () => {
     }
   }
 
+  // 유저 정보 불러오기
   useEffect(() => {
-    console.log('유저정보 호출')
     const fetchUserData = async () => {
       try {
         // Zustand store나 localStorage에서 토큰 가져오기
@@ -155,7 +149,7 @@ const MyPage = () => {
           }
         )
 
-        console.log('마이페이지 데이터:', response.data)
+        // console.log('마이페이지 데이터:', response.data)
 
         // 관리자 여부 확인
         if (response.data.role === 'ADMIN') {
