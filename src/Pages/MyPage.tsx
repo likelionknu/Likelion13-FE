@@ -76,10 +76,6 @@ const MyPage = () => {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
-    if (formData.department === user?.department) {
-      alert('기존 학부와 같습니다.')
-      return
-    }
     
 
     try {
