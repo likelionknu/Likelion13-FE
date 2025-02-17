@@ -2,7 +2,7 @@
 @media screen and (min-width: 1024px) {
   .mainImage {
     width: 100%;
-    max-height: 800px;
+    /* max-height: 800px; */
   }
 
   .fullWidthSection {
@@ -21,13 +21,12 @@
 
   .mainImage {
     width: 100%;
-    max-height: 780px;
+    /* max-height: 780px; */
   }
 }
 
 .mainText{
   position: absolute;
-
   top: 15%;
   width: 1214px;
   text-align: center;
@@ -64,8 +63,19 @@
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.section {
+.container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.Section {
   padding: 10px 0px 60px 0px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .contentContainer {
@@ -77,18 +87,19 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
 }
 
 .sectionTitle {
-  font-size: 2rem;
-  line-height: 44px;
+  font-size: 1.5rem;
+  line-height: 30px;
   font-weight: bold;
-  padding: 30px;
+  padding: 5px;
+  margin-top: 160px;
 }
 
 .sectionText {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   line-height: 1.8;
 }
 
@@ -113,7 +124,7 @@
   border-radius: 12px;
   flex: 1 1 calc(33.333% - 20px);
   max-width: 350px;
-  min-height: 540px;
+  min-height: 320px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
@@ -129,7 +140,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 280px;
+  height: 200px;
 }
 
 .cardImg {
@@ -144,50 +155,82 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 210px;
+  min-height: 160px;
 }
 
 .cardTitle {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-bottom: 10px;
-  padding: 0 22px;
+  padding: 0 12px;
 }
 
 .cardDescription {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: #666;
-  line-height: 30px;
-  padding: 0 22px;
+  line-height: 22px;
+  padding: 0 12px;
   margin-bottom: 20px;
   flex-grow: 1;
+}
+/* 
+.faqCard {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.faqCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+} */
+
+.faqCard {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  cursor: pointer;
+}
+
+.faqCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+  z-index: 10;
 }
 
 .faqContainer {
   width: 100%;
   position: relative;
-  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.faqCard {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.faqContainer:hover .faqCard {
+  filter: blur(4px);
+  transition: all 0.3s ease-in-out;
+}
+
+/* hover된 카드만 블러 제거 */
+.faqContainer .faqCard:hover {
+  filter: blur(0);
 }
 
 .faqQuestion {
-  font-size: 1.2rem;
+  font-size: 1.0rem;
   font-weight: bold;
   color: #165ee0;
   margin-bottom: 10px;
 }
 
 .faqAnswer {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.2;
 }
 
 .timelineContainer {
@@ -198,7 +241,7 @@
   padding: 30px;
   background-color: #fff;
   position: relative;
-  margin: 0 auto;
+  margin-top: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
