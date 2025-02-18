@@ -125,27 +125,36 @@ const BackendQuestionPage = () => {
     setIsFirstModalOpen(true);
   };
 
-  const handleFirstModalClose = async () => {
-    setIsFirstModalOpen(false);
+  const handleFirstModalSubmit = async () => {
+
+    if (!user) {
+      alert("사용자 정보가 없습니다. 다시 로그인 해주세요.");
+      return;
+    }
   
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-        method: "POST",
+      console.log("제출 요청 시작");
+      const response = await fetch(`http://localhost:8080/api/v1/form/backend/backend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({answers}),
       });
-  
+
+      console.log('Response:', response); // 응답 출력
       if (response.ok) {
+
       const responseData = await response.json();
       console.log('서버 응답:', responseData);
       
         setIsSecondModalOpen(true);
       } else {
+        const responseData = await response.json(); // 실패 시 응답 데이터 확인
+        console.log('Error response:', responseData);
         alert("서버 오류가 발생했습니다.");
       }
-    } catch{
+    } catch (error) {
+      console.error('Fetch error:', error);
       alert("서버 요청 중 오류가 발생했습니다.");
     }
   };
@@ -196,7 +205,7 @@ const BackendQuestionPage = () => {
         isOpen={isFirstModalOpen}
         title="수정이 불가합니다"
         message="답변을 제출하면 더 이상 수정할 수 없습니다. 계속하시겠습니까?"
-        onSubmit={handleFirstModalClose}
+        onSubmit={handleFirstModalSubmit}
         onClose={() => setIsFirstModalOpen(false)}
       />
 
