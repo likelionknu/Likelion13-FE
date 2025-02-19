@@ -78,7 +78,7 @@ const SubmitPage = () => {
     if (user && user.studentId) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/api/v1/form/frontend/view?studentId=${user.studentId}`, {
+          const response = await fetch(`https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/frontend/view?studentId=${user.studentId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

@@ -48,7 +48,7 @@ const MyPage = () => {
     try {
       const jwtToken = localStorage.getItem('token')
 
-      const response = await axios.delete('http://localhost:8080/api/v1/delete-account', {
+      const response = await axios.delete('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/delete-account', {
         data: jwtToken,
       })
 
@@ -80,7 +80,7 @@ const MyPage = () => {
     try {
       const token = user?.token || localStorage.getItem('token')
       const response = await axios.put(
-        'http://localhost:8080/api/v1/mypage-update',
+        'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/mypage-update',
         {
           department: formData.department,
           password: formData.password,
@@ -133,7 +133,7 @@ const MyPage = () => {
         }
 
         const response = await axios.post(
-          'http://localhost:8080/api/v1/mypage-view',
+          'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/mypage-view',
           {}, // empty body
           {
             headers: {
@@ -203,9 +203,10 @@ const MyPage = () => {
         ) : (
           <button
             className={activeTab === 'result' ? 'active' : ''}
-            onClick={() => {setActiveTab('result')
-              alert('서류합격결과는 3/15~3/16일에 공지됩니다.')}
-            }
+            onClick={() => {
+              setActiveTab('result')
+              alert('서류합격결과는 3/15~3/16일에 공지됩니다.')
+            }}
           >
             결과보기
           </button>
@@ -336,7 +337,12 @@ const MyPage = () => {
             <div className='contents-title'>결과 보기</div>
             <div className='passing-result-container'>
               <div className='pass-name'>{user?.name}</div>
-              <div className='pass' style={{color:'gray'}}>3/15~3/16일 공지예정</div>
+              <div
+                className='pass'
+                style={{ color: 'gray' }}
+              >
+                3/15~3/16일 공지예정
+              </div>
               {/* {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>} */}
             </div>
           </div>
