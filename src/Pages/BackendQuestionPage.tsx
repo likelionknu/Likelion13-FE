@@ -207,7 +207,7 @@ const BackendQuestionPage = () => {
       }
 
       console.log("제출 요청 시작");
-      const submitResponse = await fetch(`http://localhost:8080/api/v1/form/backend/backend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
+      const submitResponse = await fetch(`http://localhost:8080/api/v1/form/backend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
