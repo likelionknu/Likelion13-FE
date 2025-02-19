@@ -57,6 +57,7 @@ const BackendQuestionPage = () => {
                 data.backendcontent7,
                 data.backendcontent8,
                 data.backendcontent9,
+                data.backendcontent10,
               ];
               setAnswers(fetchedAnswers);
             }
