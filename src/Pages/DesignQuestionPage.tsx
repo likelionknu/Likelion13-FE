@@ -43,8 +43,17 @@ const DesignQuestionPage = () => {
     if (user && user.studentId) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/api/v1/form/design/view?studentId=${user.studentId}`);
-          if (response.ok) {
+          const response = await fetch(
+            `http://localhost:8080/api/v1/form/design/view?studentId=${user.studentId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+                    if (response.ok) {
             const data = await response.json();
             if (data) {
               const fetchedAnswers = [
@@ -125,6 +134,7 @@ const DesignQuestionPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(designData),
       });
@@ -180,6 +190,7 @@ const DesignQuestionPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(designData),
       });
@@ -198,6 +209,7 @@ const DesignQuestionPage = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
       });
       console.log('Submit Response:', submitResponse); // 응답 출력

@@ -42,8 +42,17 @@ const FrontendQuestionPage = () => {
     if (user && user.studentId) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:8080/api/v1/form/frontend/view?studentId=${user.studentId}`);
-          if (response.ok) {
+          const response = await fetch(
+            `http://localhost:8080/api/v1/form/frontend/view?studentId=${user.studentId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+                    if (response.ok) {
             const data = await response.json();
             if (data) {
               const fetchedAnswers = [
@@ -124,6 +133,7 @@ const FrontendQuestionPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(frontendData),
       });
@@ -178,6 +188,7 @@ const FrontendQuestionPage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(frontendData),
       });
@@ -196,6 +207,7 @@ const FrontendQuestionPage = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
       });
 
