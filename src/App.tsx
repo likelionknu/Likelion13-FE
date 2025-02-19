@@ -12,7 +12,7 @@ function App() {
       // 토큰이 존재하면 사용자 정보를 가져와서 로그인 상태 복원
       axios
         .post(
-          'http://localhost:8080/api/v1/mypage-view',
+          'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/mypage-view',
           {},
           {
             headers: {

@@ -42,7 +42,7 @@ const SignupPage = () => {
     setIsLoading(true)
     setError('')
     try {
-      const url = `http://localhost:8080/api/v1/send?email=${formData.email}&verifyCode=string`
+      const url = `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/send?email=${formData.email}&verifyCode=string`
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -71,7 +71,7 @@ const SignupPage = () => {
     setIsLoading(true)
     setError('')
     try {
-      const url = `http://localhost:8080/api/v1/verify?email=${formData.email}&verifyCode=${formData.verificationCode}`
+      const url = `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/verify?email=${formData.email}&verifyCode=${formData.verificationCode}`
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -130,7 +130,7 @@ const SignupPage = () => {
         apply: false,
       }
 
-      const response = await fetch('http://localhost:8080/api/v1/sign-up', {
+      const response = await fetch('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/sign-up', {
         method: 'POST',
         headers: {
           accept: '*/*',

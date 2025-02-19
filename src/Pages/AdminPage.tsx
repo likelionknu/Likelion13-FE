@@ -26,7 +26,7 @@ const AdminPage = () => {
 
   const viewFrontend = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/admin/frontend/submit', {
+      const response = await axios.get('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/admin/frontend/submit', {
         headers: {
           Authorization: `Bearer ${user?.token}`,
           'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const AdminPage = () => {
 
   const viewBackend = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/admin/backend/submit', {
+      const response = await axios.get('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/admin/backend/submit', {
         headers: {
           Authorization: `Bearer ${user?.token}`,
           'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const AdminPage = () => {
 
   const viewDesign = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/v1/admin/design/submit', {
+      const response = await axios.get('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/admin/design/submit', {
         headers: {
           Authorization: `Bearer ${user?.token}`,
           'Content-Type': 'application/json',
