@@ -40,9 +40,35 @@ const DesignQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem("designAnswers");
-    if (savedAnswers) {
-      setAnswers(JSON.parse(savedAnswers));
+    if (user && user.studentId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/api/v1/form/design/view?studentId=${user.studentId}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              const fetchedAnswers = [
+                data.designcontent1,
+                data.designcontent2,
+                data.designcontent3,
+                data.designcontent4,
+                data.designcontent5,
+                data.designcontent6,
+                data.designcontent7,
+                data.designcontent8,
+                data.designcontent9,
+              ];
+              setAnswers(fetchedAnswers);
+            }
+          } else {
+            console.log("기존 데이터가 없습니다.");
+          }
+        } catch (error) {
+          console.error("데이터 가져오기 실패:", error);
+        }
+      };
+
+      fetchData();
     }
   }, []);
 
