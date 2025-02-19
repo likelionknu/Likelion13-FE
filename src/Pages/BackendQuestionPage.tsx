@@ -40,11 +40,37 @@ const BackendQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem("backendAnswers");
-    if (savedAnswers) {
-      setAnswers(JSON.parse(savedAnswers));
+    if (user && user.studentId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/api/v1/form/backend/view?studentId=${user.studentId}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              const fetchedAnswers = [
+                data.backendcontent1,
+                data.backendcontent2,
+                data.backendcontent3,
+                data.backendcontent4,
+                data.backendcontent5,
+                data.backendcontent6,
+                data.backendcontent7,
+                data.backendcontent8,
+                data.backendcontent9,
+              ];
+              setAnswers(fetchedAnswers);
+            }
+          } else {
+            console.log("기존 데이터가 없습니다.");
+          }
+        } catch (error) {
+          console.error("데이터 가져오기 실패:", error);
+        }
+      };
+
+      fetchData();
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     localStorage.setItem("backendAnswers", JSON.stringify(answers));

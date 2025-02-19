@@ -39,11 +39,37 @@ const FrontendQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem("frontendAnswers");
-    if (savedAnswers) {
-      setAnswers(JSON.parse(savedAnswers));
+    if (user && user.studentId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/api/v1/form/frontend/view?studentId=${user.studentId}`);
+          if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              const fetchedAnswers = [
+                data.frontendcontent1,
+                data.frontendcontent2,
+                data.frontendcontent3,
+                data.frontendcontent4,
+                data.frontendcontent5,
+                data.frontendcontent6,
+                data.frontendcontent7,
+                data.frontendcontent8,
+                data.frontendcontent9,
+              ];
+              setAnswers(fetchedAnswers);
+            }
+          } else {
+            console.log("기존 데이터가 없습니다.");
+          }
+        } catch (error) {
+          console.error("데이터 가져오기 실패:", error);
+        }
+      };
+
+      fetchData();
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     localStorage.setItem("frontendAnswers", JSON.stringify(answers));
@@ -79,8 +105,8 @@ const FrontendQuestionPage = () => {
 
     const frontendData = {
       id: 0, // 임시 ID
-      studentId: user.studentId, // 로그인된 사용자 ID로 바꿔야 할 수 있음
-      name: user.name, // 이름도 실제로 가져올 수 있으면 바꿔야 함
+      studentId: user.studentId,
+      name: user.name,
       frontendcontent1: answers[0] || "",
       frontendcontent2: answers[1] || "",
       frontendcontent3: answers[2] || "",
@@ -90,7 +116,7 @@ const FrontendQuestionPage = () => {
       frontendcontent7: answers[6] || "",
       frontendcontent8: answers[7] || "",
       frontendcontent9: answers[8] || "",
-      apply: false, // 임시저장 후 상태를 "true"로 설정
+      apply: false,
     };
 
     try {
@@ -102,16 +128,16 @@ const FrontendQuestionPage = () => {
         body: JSON.stringify(frontendData),
       });
 
-      console.log('Response:', response); // 응답 출력
+      console.log('Response:', response);
       if (response.ok) {
         alert("임시 저장되었습니다.");
       } else {
-        const responseData = await response.json(); // 실패 시 응답 데이터 확인
+        const responseData = await response.json();
         console.log('Error response:', responseData);
         alert("저장 실패, 서버 오류.");
       }
     } catch (error) {
-      console.error('Fetch error:', error); // 에러 출력
+      console.error('Fetch error:', error);
       alert("저장 중 오류가 발생했습니다.");
     }
 
