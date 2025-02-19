@@ -211,3 +211,29 @@
   margin-top: 30px;
   color: #ff3232;
 }
+
+.result-items {
+  height: 90px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  align-items: center;
+
+  color: #252525;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+
+  /* 컨테이너 위 외부 여백 */
+  margin-top: 25px;
+
+  /* 컨테이너 양옆 내부 여백 */
+  padding: 0 25px;
+
+  border-radius: 5px;
+  border: 1px solid #7899fe;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
