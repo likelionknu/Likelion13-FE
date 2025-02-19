@@ -76,7 +76,6 @@ const MyPage = () => {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }
-    
 
     try {
       const token = user?.token || localStorage.getItem('token')
@@ -204,7 +203,9 @@ const MyPage = () => {
         ) : (
           <button
             className={activeTab === 'result' ? 'active' : ''}
-            onClick={() => setActiveTab('result')}
+            onClick={() => {setActiveTab('result')
+              alert('서류합격결과는 3/15~3/16일에 공지됩니다.')}
+            }
           >
             결과보기
           </button>
@@ -335,7 +336,8 @@ const MyPage = () => {
             <div className='contents-title'>결과 보기</div>
             <div className='passing-result-container'>
               <div className='pass-name'>{user?.name}</div>
-              {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>}
+              <div className='pass' style={{color:'gray'}}>3/15~3/16일 공지예정</div>
+              {/* {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>} */}
             </div>
           </div>
         )}

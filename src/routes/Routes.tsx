@@ -17,6 +17,7 @@ import BackIntroPage from '../Pages/BackIntroPage'
 import DesignIntroPage from '../Pages/DesignIntroPage'
 import Footer from '../components/Footer'
 import ProjectIntroPage from '../Pages/ProjectIntroPage'
+import SubmitPage from '../Pages/SubmitPage'
 
 import './Routes.css'
 
@@ -128,6 +129,10 @@ const Router = () => {
           <Route
             path='/DesignIntro'
             element={<DesignIntroPage />}
+          />
+          <Route
+            path='/submit'
+            element={<SubmitPage />}
           />
         </Routes>
         <Footer />

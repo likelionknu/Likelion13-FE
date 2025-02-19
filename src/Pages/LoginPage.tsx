@@ -99,7 +99,7 @@ const LoginPage = () => {
                   onChange={handleChange}
                 />
                 <img
-                  src={showPassword ? Closeeye : Openeye}
+                  src={showPassword ? Openeye : Closeeye}
                   alt={showPassword ? '비밀번호 숨기기' : '비밀번호 보이기'}
                   className='password-toggle-icon'
                   onClick={() => setShowPassword((prev) => !prev)}
