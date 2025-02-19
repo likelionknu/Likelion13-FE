@@ -132,30 +132,30 @@ const DesignQuestionPage = () => {
     }
   
     try {
-      const backendData = {
+      const designData = {
         id: 0, // 임시 ID
         studentId: user.studentId,
         name: user.name,
-        backendcontent1: answers[0] || "",
-        backendcontent2: answers[1] || "",
-        backendcontent3: answers[2] || "",
-        backendcontent4: answers[3] || "",
-        backendcontent5: answers[4] || "",
-        backendcontent6: answers[5] || "",
-        backendcontent7: answers[6] || "",
-        backendcontent8: answers[7] || "",
-        backendcontent9: answers[8] || "",
-        backendcontent10: answers[9] || "",
+        designcontent1: answers[0] || "",
+        designcontent2: answers[1] || "",
+        designcontent3: answers[2] || "",
+        designcontent4: answers[3] || "",
+        designcontent5: answers[4] || "",
+        designcontent6: answers[5] || "",
+        designcontent7: answers[6] || "",
+        designcontent8: answers[7] || "",
+        designcontent9: answers[8] || "",
+        designcontent10: answers[9] || "",
         apply: false,
       };
 
       console.log("생성 요청 시작");
-      const createResponse = await fetch("http://localhost:8080/api/v1/form/backend/create", {
+      const createResponse = await fetch("http://localhost:8080/api/v1/form/design/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(backendData),
+        body: JSON.stringify(designData),
       });
 
       console.log("Create Response:", createResponse);
