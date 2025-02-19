@@ -131,22 +131,56 @@ const FrontendQuestionPage = () => {
     }
 
     try {
+      const frontendData = {
+        id: 0, // 임시 ID
+        studentId: user.studentId,
+        name: user.name,
+        frontendcontent1: answers[0] || "",
+        frontendcontent2: answers[1] || "",
+        frontendcontent3: answers[2] || "",
+        frontendcontent4: answers[3] || "",
+        frontendcontent5: answers[4] || "",
+        frontendcontent6: answers[5] || "",
+        frontendcontent7: answers[6] || "",
+        frontendcontent8: answers[7] || "",
+        frontendcontent9: answers[8] || "",
+        apply: false,
+      };
+
+      console.log("생성 요청 시작");
+      const createResponse = await fetch("http://localhost:8080/api/v1/form/frontend/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(frontendData),
+      });
+
+      console.log("Create Response:", createResponse);
+
+      if (!createResponse.ok) {
+        const createErrorData = await createResponse.json();
+        console.log("Create API Error response:", createErrorData);
+        alert("데이터 생성 중 오류가 발생했습니다.");
+        return;
+      }
+
       console.log("제출 요청 시작");
-      const response = await fetch(`http://localhost:8080/api/v1/form/frontend/frontend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
+      const submitResponse = await fetch(`http://localhost:8080/api/v1/form/frontend/frontend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
       });
 
-      console.log('Response:', response); // 응답 출력
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('서버 응답:', responseData);
+      console.log('Submit Response:', submitResponse); // 응답 출력
+      if (submitResponse.ok) {
+        const submitResponseData = await submitResponse.json();
+        console.log('서버 응답:', submitResponseData);
         setIsSecondModalOpen(true);
       } else {
-        const responseData = await response.json(); // 실패 시 응답 데이터 확인
-        console.log('Error response:', responseData);
+        const submitErrorData = await submitResponse.json(); // 실패 시 응답 데이터 확인
+        console.log('Error response:', submitErrorData);
         alert("서버 오류가 발생했습니다.");
       }
     } catch (error) {
