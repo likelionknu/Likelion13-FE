@@ -67,16 +67,10 @@ const SubmitPage = () => {
 
   useEffect(() => {
     checkAuth()
-    if (isLoggedIn && user?.studentId) {
+    if (isLoggedIn && user?.studentId && user.part) {
       fetchUserPart(user.studentId); // 지원 분야
     }
-  }, [isLoggedIn, user, checkAuth, fetchUserPart])
-
-  const partMap: Record<string, string> = {
-    backend: 'backend',
-    design: 'design',
-    frontend: 'frontend',
-  };
+  }, [user?.studentId, user?.part, isLoggedIn])
 
   const partKeys = Object.keys(questions);
 if (user?.part && !partKeys.includes(user.part)) {
@@ -85,7 +79,7 @@ if (user?.part && !partKeys.includes(user.part)) {
 
   useEffect(() => {
     if (user && user.studentId && user.part) {
-      const partPath = partMap[user.part] || 'frontend'; // 기본값 설정
+      const partPath = user.part;
 
       const fetchData = async () => {
         try {
@@ -141,8 +135,9 @@ if (user?.part && !partKeys.includes(user.part)) {
                 ]
               }
   
-              setAnswers(fetchedAnswers);
-            }
+              if (fetchedAnswers.length > 0 && !answers.length) {
+                setAnswers(fetchedAnswers);}           
+               }
           } else {
             console.log('기존 데이터가 없습니다.')
           }
@@ -152,7 +147,7 @@ if (user?.part && !partKeys.includes(user.part)) {
       }
       fetchData()
     }
-  }, [user])
+  }, [ user?.token])
 
   useEffect(() => {
     if (user) {

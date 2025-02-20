@@ -25,7 +25,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isLoggedIn: false,
       user: null,
       login: (user) => set({ isLoggedIn: true, user }),
@@ -42,17 +42,33 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       fetchUserPart: async (studentId) => {
+
+        const state = get();
+
+        if (state.user?.part) { 
+          return;
+        }
+        
         const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
         const parts = ["frontend", "backend", "design"]
     
         try {
           for (const part of parts) {
-            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`)
+            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`,{
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${state.user?.token}`,
+              },
+            })
             
             if (response.ok) {
               const data = await response.json()
+
               if (data && data.apply === true) { 
-                set((state) => ({
+                console.log(`${part} 파트를 찾았습니다.`);
+                
+                useAuthStore.setState((state) => ({
                   user: state.user ? { ...state.user, part } : null,
                 }))
                 return
