@@ -14,7 +14,7 @@ const ResultModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     <div className={styles.selectModalOverlay} onClick={onClose}>
       <div className={styles.selectModal} onClick={(e) => e.stopPropagation()}>
         <h2>아기 사자 면접 공지</h2>
-        <img src={모달} alt="파트선택택모달" className={styles.selectModalImage} />
+        <img src={모달} alt="결과" className={styles.selectModalImage} />
         <div className={styles.selectButtonContainer}>
           <b>추후에 메시지로 안내해드리겠습니다.</b>
         </div>
