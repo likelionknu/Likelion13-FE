@@ -23,7 +23,7 @@ const Nav = () => {
         }
 
         const response = await axios.post(
-          'http://localhost:8080/api/v1/mypage-view',
+          'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/mypage-view',
           {},
           {
             headers: {
@@ -33,7 +33,7 @@ const Nav = () => {
             },
           }
         )
-        console.log(`response.data:`, response.data)
+        console.log(`Nav - response.data:`, response.data)
 
         login({
           ...response.data,
