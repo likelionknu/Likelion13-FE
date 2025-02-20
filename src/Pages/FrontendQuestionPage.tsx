@@ -184,7 +184,7 @@ const FrontendQuestionPage = () => {
       };
 
       console.log("생성 요청 시작");
-      const createResponse = await fetch("http://localhost:8080/api/v1/form/frontend/create", {
+      const createResponse = await fetch("https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/frontend/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -203,7 +203,7 @@ const FrontendQuestionPage = () => {
       }
 
       console.log("제출 요청 시작");
-      const submitResponse = await fetch(`http://localhost:8080/api/v1/form/frontend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
+      const submitResponse = await fetch(`https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/frontend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
