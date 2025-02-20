@@ -85,47 +85,106 @@ const MainPage = () => {
   }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
 
   // 섹션 스크롤 애니메이션
-  useEffect(() => {
-    const sections = document.querySelectorAll(`.${styles.section}`)
+  // useEffect(() => {
+  //   const sections = document.querySelectorAll(`.${styles.section}`)
 
-    sections.forEach((section) => {
-      gsap.fromTo(
-        section,
-        {
-          opacity: 0,
-          y: 50,
-        },
-        {
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 90%',
-            end: 'top 30%',
-            scrub: true,
-            snap: {
-              snapTo: 'labels',
-              duration: { min: 0.1, max: 3 },
-              delay: 0.2,
-              ease: 'power1.inOut',
-            },
-          },
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power1.out',
-        }
-      )
-    })
+  //   sections.forEach((section) => {
+  //     gsap.fromTo(
+  //       section,
+  //       {
+  //         opacity: 0,
+  //         y: 50,
+  //       },
+  //       {
+  //         scrollTrigger: {
+  //           trigger: section,
+  //           start: 'top 90%',
+  //           end: 'top 30%',
+  //           scrub: true,
+  //           snap: {
+  //             snapTo: 'labels',
+  //             duration: { min: 0.1, max: 3 },
+  //             delay: 0.2,
+  //             ease: 'power1.inOut',
+  //           },
+  //         },
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 1,
+  //         ease: 'power1.out',
+  //       }
+  //     )
+  //   })
 
-    return () => {
-      sections.forEach((section) => {
-        gsap.killTweensOf(section)
-      })
-    }
-  }, [])
+  //   return () => {
+  //     sections.forEach((section) => {
+  //       gsap.killTweensOf(section)
+  //     })
+  //   }
+  // }, [])
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+useEffect(() => {
+  const container = containerRef.current;
+  if (!container) return; // container가 없으면 실행 안 함
+
+  const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
+
+  // 스크롤을 6개 구간으로 나누기
+  const totalSections = 6;
+
+  console.log("Total Sections:", totalSections);
+
+  if (sections.length === 0) {
+    console.error("Sections not found!");
+    return;
+  }
+
+  sections.forEach((section) => {
+    gsap.set(section, { opacity: 0, visibility: "hidden" });
+  });
+
+
+  // yPercent를 고정값으로 설정
+  gsap.to(sections, {
+    yPercent: -1 * (sections.length - 1),
+    ease: "none",
+    scrollTrigger: {
+      trigger: container,
+      start: "top top",
+      end: "bottom bottom",
+      scrub: 1,
+      snap: 1 / (sections.length - 1),
+      markers: true, // 디버깅용
+      invalidateOnRefresh: true,
+
+      onUpdate: (self) => {
+        const progress = self.progress * (sections.length - 1);
+        const currentIndex = Math.round(progress);
+
+        sections.forEach((section, index) => {
+          if (index === currentIndex) {
+            gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
+          } else {
+            gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
+              gsap.set(section, { visibility: "hidden" }); // 완전히 사라진 후 숨김 처리
+            }});
+          }
+        });
+      },
+
+    },
+  });
+
+  return () => {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  };
+}, []);
 
   return (
-    <div>
-      <div className={`${styles.mainImageContainer} ${styles.fullWidthSection}`}>
+    <div ref={containerRef} className="container">
+      <div className={`${styles.Section} ${styles.mainImageContainer} ${styles.fullWidthSection}`}>
         <div
           ref={mainTextRef}
           className={styles.mainText}
@@ -160,7 +219,8 @@ const MainPage = () => {
         />
       </div>
 
-      <div className={styles.section}>
+     
+      <div className={styles.Section}>
         <h1
           className={styles.sectionTitle}
           style={{ textAlign: 'center' }}
@@ -184,7 +244,7 @@ const MainPage = () => {
       </div>
 
       <div
-        className={`${styles.section} ${styles.fullWidthSection}`}
+        className={`${styles.Section} ${styles.fullWidthSection}`}
         style={{ backgroundColor: '#E0E8FF' }}
       >
         <div className={styles.contentContainer}>
@@ -271,7 +331,7 @@ const MainPage = () => {
         </div>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.Section}>
         <div className={styles.contentContainer}>
           <h1
             className={styles.sectionTitle}
@@ -340,7 +400,7 @@ const MainPage = () => {
               </div>
             </div>
           </div>
-          <div style={{ marginTop: '90px' }}>
+          <div style={{ marginTop: '16px' }}>
             <Link
               to='/project-introduce'
               style={{ textDecoration: 'none' }}
@@ -352,7 +412,7 @@ const MainPage = () => {
       </div>
 
       <div
-        className={`${styles.section} ${styles.fullWidthSection}`}
+        className={`${styles.Section} ${styles.fullWidthSection}`}
         style={{ backgroundColor: '#E0E8FF' }}
       >
         <div className={styles.contentContainer}>
@@ -411,7 +471,7 @@ const MainPage = () => {
         </div>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.Section}>
         <div className={styles.contentContainer}>
           <h1
             className={styles.sectionTitle}
@@ -457,7 +517,10 @@ const MainPage = () => {
           </div>
         </div>
       </div>
-    </div>
+
+      </div>
+
+
   )
 }
 
