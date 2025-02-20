@@ -156,7 +156,7 @@ useEffect(() => {
       end: "bottom bottom",
       scrub: 1,
       snap: 1 / (sections.length - 1),
-      markers: true, // 디버깅용
+      markers: false, // 디버깅용
       invalidateOnRefresh: true,
 
       onUpdate: (self) => {
@@ -225,15 +225,15 @@ useEffect(() => {
           className={styles.sectionTitle}
           style={{ textAlign: 'center' }}
         >
-          강남대학교 멋쟁이 사자처럼
+          강남대학교 멋쟁이사자처럼
         </h1>
         <p
           className={styles.sectionText}
           style={{ textAlign: 'center' }}
         >
-          멋쟁이 사자처럼은 2013년 서울대학교에서 시작해, 올해로 13기째 활동 중인 전국 최대 규모의 웹 프로그래밍 동아리입니다.
+          멋쟁이사자처럼은 2013년 서울대학교에서 시작해, 올해로 13기째 활동 중인 전국 최대 규모의 웹 프로그래밍 동아리입니다.
           <br />
-          강남대학교 멋쟁이 사자처럼은 2023년부터 11기로 활동을 시작해, 현재 3년째 활발히 다양한 서비스를 개발하며 성장하고 있습니다.
+          강남대학교 멋쟁이사자처럼은 2023년부터 11기로 활동을 시작해, 현재 3년째 활발히 다양한 서비스를 개발하며 성장하고 있습니다.
           <br />
           이번 13기의 슬로건은 “Learn, Create, Elevate”로, 운영진과 아기사자가 함께 배우고, 창조하며, 성장하자는 뜻을 담고 있습니다.
           <br />
@@ -489,7 +489,7 @@ useEffect(() => {
             <div className={styles.faqCard}>
               <div className={styles.faqQuestion}>저는 코딩을 처음 해보는데, 동아리 활동이 가능할까요?</div>
               <div className={styles.faqAnswer}>
-                저희 강남대 멋쟁이 사자처럼 13기는 실력이 아닌, 열정적으로 동아리 활동을 하실 분들을 찾고 있습니다! 동아리 창립 이념에 따라, 코딩을 전혀 접해보지 않은 비전공자분들도 입부를 받고
+                저희 강남대 멋쟁이사자처럼 13기는 실력이 아닌, 열정적으로 동아리 활동을 하실 분들을 찾고 있습니다! 동아리 창립 이념에 따라, 코딩을 전혀 접해보지 않은 비전공자분들도 입부를 받고
                 있습니다.
               </div>
             </div>
