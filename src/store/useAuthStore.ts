@@ -43,8 +43,6 @@ export const useAuthStore = create<AuthState>()(
       },
       fetchUserPart: async (studentId) => {
 
-        const state = get();
-
         if (state.user?.part) { 
           return;
         }
@@ -64,9 +62,6 @@ export const useAuthStore = create<AuthState>()(
             
             if (response.ok) {
               const data = await response.json()
-
-              if (data && data.apply === true) { 
-                console.log(`${part} 파트를 찾았습니다.`);
                 
                 useAuthStore.setState((state) => ({
                   user: state.user ? { ...state.user, part } : null,
