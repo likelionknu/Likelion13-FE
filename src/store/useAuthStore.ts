@@ -25,7 +25,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       isLoggedIn: false,
       user: null,
       login: (user) => set({ isLoggedIn: true, user }),
@@ -42,28 +42,17 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       fetchUserPart: async (studentId) => {
-
-        if (state.user?.part) { 
-          return;
-        }
-        
         const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
         const parts = ["frontend", "backend", "design"]
     
         try {
           for (const part of parts) {
-            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`,{
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${state.user?.token}`,
-              },
-            })
+            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`)
             
             if (response.ok) {
               const data = await response.json()
-                
-                useAuthStore.setState((state) => ({
+              if (data && data.apply === true) { 
+                set((state) => ({
                   user: state.user ? { ...state.user, part } : null,
                 }))
                 return
@@ -83,7 +72,7 @@ export const useAuthStore = create<AuthState>()(
           const item = localStorage.getItem(name);
           return item ? JSON.parse(item) : null;
         },
-        setItem: (name: string, value: unknown) => {
+        setItem: (name: string, value: any) => {
           localStorage.setItem(name, JSON.stringify(value));
         },
         removeItem: (name: string) => {

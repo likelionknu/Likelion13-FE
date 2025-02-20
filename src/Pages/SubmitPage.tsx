@@ -48,7 +48,7 @@ const SubmitPage = () => {
     ],
   };
   
-  const userQuestions = questions[user?.part as Part] || [];
+  const userQuestions = user ? questions[user.part as Part] || [] : [];
   const questionsPerPage = 5
   const startIndex = (currentPage - 1) * questionsPerPage
   const endIndex = currentPage * questionsPerPage
@@ -67,10 +67,16 @@ const SubmitPage = () => {
 
   useEffect(() => {
     checkAuth()
-    if (isLoggedIn && user?.studentId && user.part) {
+    if (isLoggedIn && user?.studentId) {
       fetchUserPart(user.studentId); // 지원 분야
     }
-  }, [user?.studentId, user?.part, isLoggedIn])
+  }, [isLoggedIn, user, checkAuth, fetchUserPart])
+
+  const partMap: Record<string, string> = {
+    backend: 'backend',
+    design: 'design',
+    frontend: 'frontend',
+  };
 
   const partKeys = Object.keys(questions);
 if (user?.part && !partKeys.includes(user.part)) {
@@ -79,7 +85,7 @@ if (user?.part && !partKeys.includes(user.part)) {
 
   useEffect(() => {
     if (user && user.studentId && user.part) {
-      const partPath = user.part;
+      const partPath = partMap[user.part] || 'frontend'; // 기본값 설정
 
       const fetchData = async () => {
         try {
@@ -135,9 +141,8 @@ if (user?.part && !partKeys.includes(user.part)) {
                 ]
               }
   
-              if (fetchedAnswers.length > 0 && !answers.length) {
-                setAnswers(fetchedAnswers);}           
-               }
+              setAnswers(fetchedAnswers);
+            }
           } else {
             console.log('기존 데이터가 없습니다.')
           }
@@ -147,7 +152,7 @@ if (user?.part && !partKeys.includes(user.part)) {
       }
       fetchData()
     }
-  }, [ user?.token])
+  }, [user])
 
   useEffect(() => {
     if (user) {
