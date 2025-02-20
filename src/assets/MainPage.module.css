@@ -91,7 +91,7 @@
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   line-height: 30px;
   font-weight: bold;
   padding: 5px;
@@ -99,7 +99,7 @@
 }
 
 .sectionText {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   line-height: 1.8;
 }
 
@@ -155,20 +155,20 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 160px;
+  min-height: 200px;
 }
 
 .cardTitle {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 10px;
   padding: 0 12px;
 }
 
 .cardDescription {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #666;
-  line-height: 22px;
+  line-height: 26px;
   padding: 0 12px;
   margin-bottom: 20px;
   flex-grow: 1;
@@ -221,14 +221,14 @@
 }
 
 .faqQuestion {
-  font-size: 1.0rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: #165ee0;
   margin-bottom: 10px;
 }
 
 .faqAnswer {
-  font-size: 0.9rem;
+  font-size: 1.0rem;
   color: #666;
   line-height: 1.2;
 }
