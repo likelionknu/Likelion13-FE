@@ -72,7 +72,7 @@ export const useAuthStore = create<AuthState>()(
           const item = localStorage.getItem(name);
           return item ? JSON.parse(item) : null;
         },
-        setItem: (name: string, value: any) => {
+        setItem: (name: string, value: unknown) => {
           localStorage.setItem(name, JSON.stringify(value));
         },
         removeItem: (name: string) => {

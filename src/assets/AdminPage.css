@@ -108,6 +108,7 @@
 .result-items {
   z-index: 1;
   height: 90px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: row;
@@ -131,6 +132,13 @@
   border: 1px solid #7899fe;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+.result-items:hover {
+  background: #f0f4ff;
+  /* 조금 커지게 */
+  transform: scale(1.01);
+  /* 천천히 */
+  transition: transform 0.3s ease;
+}
 
 .items-info {
   width: 600px;
@@ -143,4 +151,117 @@
 .items-result {
   width: 65px;
   margin-top: 25px;
+}
+
+.form-title {
+  color: #000;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  margin: 15px 0px;
+}
+.form-info {
+  width: 1700px;
+  display: flex;
+  flex-direction: row;
+
+  margin-top: 80px;
+
+  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
+  margin-bottom: 15px;
+}
+.form-name {
+  color: #000;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+
+  margin-right: 40px;
+}
+
+.form-id {
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+}
+
+.user-submit-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: 15px;
+}
+
+.user-question {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 33px;
+
+  margin-bottom: 5px;
+}
+
+.user-answer {
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+
+  margin-bottom: 10px;
+}
+
+.modal-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50px;
+
+}
+
+
+.prev-btn,
+.close-btn,
+.next-btn {
+  width: 80px;
+  height: 40px;
+
+  text-align: center;
+  align-items: center;
+  justify-self: center;
+
+  padding: 8px 16px;
+  margin: 0 8px;
+  border: solid #989898 1px;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.close-btn {
+  width: 65px;
+  display: flex;
+  position: absolute;
+
+  background-color: #ffffff36;
+
+  left: 5%;
+}
+
+
+.prev-btn:hover,
+.close-btn:hover,
+.next-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 1px 1px 1px rgb(0, 123, 255);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
