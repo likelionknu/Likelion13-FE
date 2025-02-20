@@ -42,6 +42,13 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       fetchUserPart: async (studentId) => {
+
+        const state = useAuthStore.getState();
+
+        if (state.user?.part) { 
+          return;
+        }
+        
         const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
         const parts = ["frontend", "backend", "design"]
     
@@ -51,8 +58,8 @@ export const useAuthStore = create<AuthState>()(
             
             if (response.ok) {
               const data = await response.json()
-              if (data) { 
-                set((state) => ({
+              if (data && data.apply === true) { 
+                useAuthStore.setState((state) => ({
                   user: state.user ? { ...state.user, part } : null,
                 }))
                 return
@@ -72,7 +79,7 @@ export const useAuthStore = create<AuthState>()(
           const item = localStorage.getItem(name);
           return item ? JSON.parse(item) : null;
         },
-        setItem: (name: string, value: any) => {
+        setItem: (name: string, value: unknown) => {
           localStorage.setItem(name, JSON.stringify(value));
         },
         removeItem: (name: string) => {
