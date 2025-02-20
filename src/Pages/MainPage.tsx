@@ -141,12 +141,9 @@ useEffect(() => {
     return;
   }
 
-  sections.forEach((section) => {
-    gsap.set(section, { opacity: 0, visibility: "hidden" });
-  });
+  gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 }); 
 
-
-  // yPercent를 고정값으로 설정
+  // yPercent를 고정값
   gsap.to(sections, {
     yPercent: -1 * (sections.length - 1),
     ease: "none",

@@ -12,7 +12,7 @@ const Footer = () => {
           <a href="https://www.instagram.com/likelion.knu/" className="link">
             <img src={인스타} alt="강남대_멋쟁이사자처럼_인스타그램" />
           </a>
-          <a href="https://likelion13-fe.vercel.app/" className="link">
+          <a href="https://www.likelionknu.com/" className="link">
             <img src={멋사2} alt="강남대_멋쟁이사자처럼" />
           </a>
           <a href="https://likelion.net/" className="link">
@@ -22,7 +22,6 @@ const Footer = () => {
             <img src={멋사4} alt="멋사_공식홈페이지" />
           </a>
         </div>
-
         <div className="bt-container">
           <p className="bt-font">©2024 LIKE LION KNU. All rights reserved.</p>
           <p className="bt-font">동아리실: 경기도 용인시 기흥구 강남로 40 강남대학교 후생관</p>
