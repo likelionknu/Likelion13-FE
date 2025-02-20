@@ -35,7 +35,7 @@ const LoginPage = () => {
     setError('')
 
     try {
-      const response = await axios.post('http://localhost:8080/api/v1/login', formData, {
+      const response = await axios.post('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/login', formData, {
         headers: {
           accept: '*/*',
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ const LoginPage = () => {
                   onChange={handleChange}
                 />
                 <img
-                  src={showPassword ? Closeeye : Openeye}
+                  src={showPassword ? Openeye : Closeeye}
                   alt={showPassword ? '비밀번호 숨기기' : '비밀번호 보이기'}
                   className='password-toggle-icon'
                   onClick={() => setShowPassword((prev) => !prev)}

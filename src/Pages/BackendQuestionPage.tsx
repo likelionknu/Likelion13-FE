@@ -40,11 +40,47 @@ const BackendQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    const savedAnswers = localStorage.getItem("backendAnswers");
-    if (savedAnswers) {
-      setAnswers(JSON.parse(savedAnswers));
+    if (user && user.studentId) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/backend/view?studentId=${user.studentId}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+                    if (response.ok) {
+            const data = await response.json();
+            if (data) {
+              const fetchedAnswers = [
+                data.backendcontent1,
+                data.backendcontent2,
+                data.backendcontent3,
+                data.backendcontent4,
+                data.backendcontent5,
+                data.backendcontent6,
+                data.backendcontent7,
+                data.backendcontent8,
+                data.backendcontent9,
+                data.backendcontent10,
+              ];
+              setAnswers(fetchedAnswers);
+            }
+          } else {
+            console.log("기존 데이터가 없습니다.");
+          }
+        } catch (error) {
+          console.error("데이터 가져오기 실패:", error);
+        }
+      };
+
+      fetchData();
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     localStorage.setItem("backendAnswers", JSON.stringify(answers));
@@ -96,10 +132,11 @@ const BackendQuestionPage = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/v1/form/backend/create", {  // 실제 서버 URL로 변경
+      const response = await fetch("https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/backend/create", {  // 실제 서버 URL로 변경
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(backendData),
       });
@@ -125,27 +162,73 @@ const BackendQuestionPage = () => {
     setIsFirstModalOpen(true);
   };
 
-  const handleFirstModalClose = async () => {
-    setIsFirstModalOpen(false);
+  const handleFirstModalSubmit = async () => {
+
+    if (!user) {
+      alert("사용자 정보가 없습니다. 다시 로그인 해주세요.");
+      return;
+    }
   
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      const backendData = {
+        id: 0, // 임시 ID
+        studentId: user.studentId,
+        name: user.name,
+        backendcontent1: answers[0] || "",
+        backendcontent2: answers[1] || "",
+        backendcontent3: answers[2] || "",
+        backendcontent4: answers[3] || "",
+        backendcontent5: answers[4] || "",
+        backendcontent6: answers[5] || "",
+        backendcontent7: answers[6] || "",
+        backendcontent8: answers[7] || "",
+        backendcontent9: answers[8] || "",
+        backendcontent10: answers[9] || "",
+        apply: false,
+      };
+
+      console.log("생성 요청 시작");
+      const createResponse = await fetch("https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/backend/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
         },
-        body: JSON.stringify({answers}),
+        body: JSON.stringify(backendData),
       });
-  
-      if (response.ok) {
-      const responseData = await response.json();
-      console.log('서버 응답:', responseData);
+
+      console.log("Create Response:", createResponse);
+
+      if (!createResponse.ok) {
+        const createErrorData = await createResponse.json();
+        console.log("Create API Error response:", createErrorData);
+        alert("데이터 생성 중 오류가 발생했습니다.");
+        return;
+      }
+
+      console.log("제출 요청 시작");
+      const submitResponse = await fetch(`https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/backend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
+      console.log('Submit Response:', submitResponse); // 응답 출력
+      if (submitResponse.ok) {
+
+      const submitResponseData = await submitResponse.json();
+      console.log('서버 응답:', submitResponseData);
       
         setIsSecondModalOpen(true);
       } else {
+        const submitErrorData = await submitResponse.json(); // 실패 시 응답 데이터 확인
+        console.log('Error response:', submitErrorData);
         alert("서버 오류가 발생했습니다.");
       }
-    } catch{
+    } catch (error) {
+      console.error('Fetch error:', error);
       alert("서버 요청 중 오류가 발생했습니다.");
     }
   };
@@ -196,7 +279,7 @@ const BackendQuestionPage = () => {
         isOpen={isFirstModalOpen}
         title="수정이 불가합니다"
         message="답변을 제출하면 더 이상 수정할 수 없습니다. 계속하시겠습니까?"
-        onSubmit={handleFirstModalClose}
+        onSubmit={handleFirstModalSubmit}
         onClose={() => setIsFirstModalOpen(false)}
       />
 

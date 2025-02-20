@@ -42,6 +42,7 @@ const MainPage = () => {
   const [logoLoaded, setLogoLoaded] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+
   const handleApplyButtonClick = () => {
     if (!isLoggedIn) {
       alert('로그인이 필요합니다.')
