@@ -364,7 +364,7 @@ const handleCloseModal = () => setIsModalOpen(false)
             <div 
               className='passing-result-container' 
               onClick={handleOpenModal} 
-              style={{ cursor: user?.apply ? 'pointer' : 'default' }} // 불합격이면 클릭 불가능하게 변경
+              style={{ cursor: user?.apply ? 'pointer' : 'default' }} // 불합격이면 클릭 불가능
             >
               <div className='pass-name'>{user?.name}</div>
               {user?.apply ? (
