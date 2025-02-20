@@ -50,6 +50,7 @@ const LoginPage = () => {
       login({
         name: '',
         department: '',
+        part: '',
         studentId: '',
         grade: '',
         phone: '',

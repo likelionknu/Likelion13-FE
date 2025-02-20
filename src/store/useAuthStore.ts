@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware"
 interface User {
   name: string
   department: string
+  part?: string // 지원 분야
   studentId: string
   grade: string
   phone: string
@@ -19,6 +20,7 @@ interface AuthState {
   login: (user: User) => void
   logout: () => void
   checkAuth: () => void
+  fetchUserPart: (studentId: string) => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -37,6 +39,29 @@ export const useAuthStore = create<AuthState>()(
           if (parsedData?.user) {
             set({ isLoggedIn: true, user: parsedData.user });
           }
+        }
+      },
+      fetchUserPart: async (studentId) => {
+        const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
+        const parts = ["frontend", "backend", "design"]
+    
+        try {
+          for (const part of parts) {
+            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`)
+            
+            if (response.ok) {
+              const data = await response.json()
+              if (data) { 
+                set((state) => ({
+                  user: state.user ? { ...state.user, part } : null,
+                }))
+                return
+              }
+            }
+          }
+          
+        } catch (error) {
+          console.error('지원 분야 조회 오류:', error)
         }
       },
     }),
