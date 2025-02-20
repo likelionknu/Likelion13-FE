@@ -48,7 +48,7 @@ const SubmitPage = () => {
     ],
   };
   
-  const userQuestions = user ? questions[user.part as Part] || [] : [];
+  const userQuestions = questions[user?.part as Part] || [];
   const questionsPerPage = 5
   const startIndex = (currentPage - 1) * questionsPerPage
   const endIndex = currentPage * questionsPerPage
