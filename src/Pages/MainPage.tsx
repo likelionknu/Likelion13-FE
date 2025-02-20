@@ -33,11 +33,14 @@ const MainPage = () => {
   const mainTextRef = useRef(null)
 
   const navigate = useNavigate()
-  const { isLoggedIn } = useAuthStore()
+  const { checkAuth, isLoggedIn } = useAuthStore()
 
   const [logoLoaded, setLogoLoaded] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  useEffect(() => {
+    checkAuth()  // 페이지 로드 시 로그인 상태 확인
+  }, [checkAuth]) // checkAuth 함수가 바뀔 때마다 실행
 
   const handleApplyButtonClick = () => {
     if (!isLoggedIn) {
