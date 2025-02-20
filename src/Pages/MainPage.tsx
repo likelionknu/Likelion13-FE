@@ -42,7 +42,13 @@ const MainPage = () => {
     if (!sessionStorage.getItem('hasReloaded')) {
       sessionStorage.setItem('hasReloaded', 'true');
       window.location.reload();
+
+      if (navigator.userAgent.match(/Mobi/)) {
+        window.location.reload();
+        sessionStorage.setItem('hasReloaded', 'true');
+      }
     }
+    
   }, []);
 
   useEffect(() => {
