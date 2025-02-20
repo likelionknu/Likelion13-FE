@@ -8,6 +8,8 @@ const SubmitPage = () => {
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1)
   const [answers, setAnswers] = useState<string[]>([]);
+  const [isFirstLoad, setIsFirstLoad] = useState(true); // 상태 추가
+
 
   type Part = 'backend' | 'design' | 'frontend';
 
@@ -84,7 +86,7 @@ if (user?.part && !partKeys.includes(user.part)) {
 }
 
   useEffect(() => {
-    if (user && user.studentId && user.part) {
+    if (isFirstLoad && user && user.studentId && user.part) {
       const partPath = partMap[user.part] || 'frontend'; // 기본값 설정
 
       const fetchData = async () => {
@@ -142,6 +144,7 @@ if (user?.part && !partKeys.includes(user.part)) {
               }
   
               setAnswers(fetchedAnswers);
+              setIsFirstLoad(false);
             }
           } else {
             console.log('기존 데이터가 없습니다.')
@@ -152,7 +155,7 @@ if (user?.part && !partKeys.includes(user.part)) {
       }
       fetchData()
     }
-  }, [user])
+  }, [isFirstLoad, user, partMap, questions])
 
   useEffect(() => {
     if (user) {
