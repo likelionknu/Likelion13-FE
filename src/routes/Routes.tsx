@@ -9,6 +9,7 @@ import MyPage from '../Pages/MyPage'
 import AdminPage from '../Pages/AdminPage'
 import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
+import ForgotPasswordPage from '../Pages/ForgotPasswordPage'
 import BackendQuestionPage from '../Pages/BackendQuestionPage'
 import FrontendQuestionPage from '../Pages/FrontendQuestionPage'
 import DesignQuestionPage from '../Pages/DesignQuestionPage'
@@ -106,6 +107,11 @@ const Router = () => {
             path='/signup'
             element={<SignupPage />}
           />
+          <Route
+            path='forgot-password'
+            element={<ForgotPasswordPage />}
+          />
+
           <Route
             path='/backend-question'
             element={<BackendQuestionPage />}

@@ -125,6 +125,9 @@ const LoginPage = () => {
             <button className='signup-button'>회원가입</button>
           </Link>
         </div>
+        <Link to='/forgot-password'>
+          <div className='find-password'> 비밀번호 찾기 </div>
+        </Link>
       </div>
     </div>
   )

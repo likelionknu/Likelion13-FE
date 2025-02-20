@@ -33,6 +33,7 @@ const AdminPage = () => {
         },
       })
 
+      // frontend 데이터 로드
       console.log(`response_front`, response)
 
       if (response.status === 200) {
@@ -54,6 +55,7 @@ const AdminPage = () => {
         },
       })
 
+      // backend 데이터 로드
       console.log(`response_backend`, response)
 
       if (response.status === 200) {
@@ -75,6 +77,7 @@ const AdminPage = () => {
         },
       })
 
+      // design 데이터 로드
       console.log(`response_Design`, response)
 
       if (response.status === 200) {
@@ -131,7 +134,7 @@ const AdminPage = () => {
             <div>
               {frontendData.length > 0 ? (
                 <div>
-                  {frontendData.map((item: any) => (
+                  {frontendData.map((item: { studentId: string; name: string; department: string; phoneNumber: string; resultStatus: string }) => (
                     <div
                       key={item.studentId}
                       className='result-items'
@@ -166,7 +169,7 @@ const AdminPage = () => {
             <div>
               {backendData.length > 0 ? (
                 <div>
-                  {backendData.map((item: any) => (
+                  {backendData.map((item: { studentId: string; name: string; department: string; phoneNumber: string; resultStatus: string }) => (
                     <div
                       key={item.studentId}
                       className='result-items'
@@ -201,7 +204,7 @@ const AdminPage = () => {
             <div>
               {designData.length > 0 ? (
                 <div>
-                  {designData.map((item: any) => (
+                  {designData.map((item: { studentId: string; name: string; department: string; phoneNumber: string; resultStatus: string }) => (
                     <div
                       key={item.studentId}
                       className='result-items'
