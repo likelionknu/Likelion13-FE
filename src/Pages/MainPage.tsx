@@ -39,6 +39,13 @@ const MainPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
+    if (!sessionStorage.getItem('hasReloaded')) {
+      sessionStorage.setItem('hasReloaded', 'true');
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     checkAuth()  // 페이지 로드 시 로그인 상태 확인
   }, [checkAuth]) // checkAuth 함수가 바뀔 때마다 실행
 
