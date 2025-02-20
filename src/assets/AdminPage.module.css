@@ -17,10 +17,10 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  min-width: 1900px;
-  max-width: 1900px;
+  min-width: 300px;
+  max-width: 95vw;
   
-  max-height: 90%;
+  max-height: 80vh;
 
   background: white;
   padding: 20px;
@@ -30,3 +30,10 @@
   overflow-y: scroll; /* 모달 내부 스크롤 추가 */
 }
 
+.modalContent {
+  max-height: 70vh;
+  line-height: 1.5;
+  margin-left: 60px;
+  margin-right: 60px;
+  word-wrap: break-word;
+}

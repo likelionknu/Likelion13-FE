@@ -386,18 +386,22 @@ const AdminPage = () => {
                     >
                       닫기
                     </button>
-                    <button
-                      className='prev-btn'
-                      onClick={prevPage}
-                    >
-                      이전
-                    </button>
-                    <button
-                      className='next-btn'
-                      onClick={nextPage}
-                    >
-                      다음
-                    </button>
+                    {currentPage > 0 && (
+              <button
+                className='prev-btn'
+                onClick={prevPage}
+              >
+                이전
+              </button>
+            )}
+                    {currentPage < 1 && (
+              <button
+                className='next-btn'
+                onClick={nextPage}
+              >
+                다음
+              </button>
+            )}
                   </div>
                 </div>
               )}

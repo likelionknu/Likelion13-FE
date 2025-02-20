@@ -167,7 +167,7 @@
   width: 1700px;
   display: flex;
   flex-direction: row;
-
+  
   margin-top: 80px;
 
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
@@ -179,7 +179,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 33px;
-
+  margin-left: 60px;
   margin-right: 40px;
 }
 
@@ -201,20 +201,18 @@
 
 .user-question {
   color: #000;
-  font-size: 20px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 600;
   line-height: 33px;
-
   margin-bottom: 5px;
 }
 
 .user-answer {
   color: #000;
-  font-size: 18px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
-
   margin-bottom: 10px;
 }
 
@@ -255,7 +253,7 @@
 
   background-color: #ffffff36;
 
-  left: 5%;
+  right: 5%;
 }
 
 
