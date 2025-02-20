@@ -10,18 +10,14 @@ import 백 from '../assets/images/BackIntro.png'
 import 프론트 from '../assets/images/FrontIntro.png'
 import 디자인 from '../assets/images/DesignIntro.png'
 import 메인로고 from '../assets/images/MainLogo.png'
-
 import Project1 from '../assets/images/Project1.png'
 import Project2 from '../assets/images/Project2.png'
 import Project3 from '../assets/images/Project3.png'
 
-// 메인 텍스트이미지 파일, create, learn, elevate
-// import 메인폰트 from '../assets/images/MainFont.png'
-
 import styles from '../assets/MainPage.module.css'
 
 const events = [
-  { line: 1, months: ['Mar', 'Apr'], label: '아기사자 모집 및 지원', color: '#779BFE' },
+  { line: 1, months: ['Feb', 'Mar'], label: '아기사자 모집 및 지원', color: '#779BFE' },
   { line: 2, months: ['Mar', 'Mar'], label: '오티', color: '#4A7EDC' },
   { line: 2, months: ['Apr', 'Jun'], label: '파트별 세션', color: '#4A7EDC' },
   { line: 3, months: ['May', 'May'], label: '아이디어톤', color: '#165EE0' },
@@ -125,59 +121,59 @@ const MainPage = () => {
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-useEffect(() => {
-  const container = containerRef.current;
-  if (!container) return; // container가 없으면 실행 안 함
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return; // container가 없으면 실행 안 함
 
-  const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
+    const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
 
-  // 스크롤을 6개 구간으로 나누기
-  const totalSections = 6;
+    // 스크롤을 6개 구간으로 나누기
+    const totalSections = 6;
 
-  console.log("Total Sections:", totalSections);
+    console.log("Total Sections:", totalSections);
 
-  if (sections.length === 0) {
-    console.error("Sections not found!");
-    return;
-  }
+    if (sections.length === 0) {
+      console.error("Sections not found!");
+      return;
+    }
 
-  gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 }); 
+    gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 }); 
 
-  // yPercent를 고정값
-  gsap.to(sections, {
-    yPercent: -1 * (sections.length - 1),
-    ease: "none",
-    scrollTrigger: {
-      trigger: container,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1,
-      snap: 1 / (sections.length - 1),
-      markers: false, // 디버깅용
-      invalidateOnRefresh: true,
+    // yPercent를 고정값
+    gsap.to(sections, {
+      yPercent: -1 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        snap: 1 / (sections.length - 1),
+        markers: false, // 디버깅용
+        invalidateOnRefresh: true,
 
-      onUpdate: (self) => {
-        const progress = self.progress * (sections.length - 1);
-        const currentIndex = Math.round(progress);
+        onUpdate: (self) => {
+          const progress = self.progress * (sections.length - 1);
+          const currentIndex = Math.round(progress);
 
-        sections.forEach((section, index) => {
-          if (index === currentIndex) {
-            gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
-          } else {
-            gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
-              gsap.set(section, { visibility: "hidden" }); // 완전히 사라진 후 숨김 처리
-            }});
-          }
-        });
+          sections.forEach((section, index) => {
+            if (index === currentIndex) {
+              gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
+            } else {
+              gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
+                gsap.set(section, { visibility: "hidden" }); // 완전히 사라진 후 숨김 처리
+              }});
+            }
+          });
+        },
+
       },
+    });
 
-    },
-  });
-
-  return () => {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  };
-}, []);
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
 
   return (
     <div ref={containerRef} className="container">
@@ -216,7 +212,6 @@ useEffect(() => {
         />
       </div>
 
-     
       <div className={styles.Section}>
         <h1
           className={styles.sectionTitle}
@@ -514,10 +509,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
-
-      </div>
-
-
+    </div>
   )
 }
 
