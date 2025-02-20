@@ -1,11 +1,23 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
+import ResultModal from '../components/ResultModal'
 import axios from 'axios'
-
 import '../assets/Mypage.css'
 
 const MyPage = () => {
+
+  
+const [isModalOpen, setIsModalOpen] = useState(false)
+
+const handleOpenModal = () => {
+  if (user?.apply) {
+    setIsModalOpen(true);
+  }
+};
+
+const handleCloseModal = () => setIsModalOpen(false)
+
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
@@ -333,18 +345,35 @@ const MyPage = () => {
           </div>
         ) : (
           //  결과보기 탭
+          // <div className='result-tab'>
+          //   <div className='contents-title'>결과 보기</div>
+          //   <div className='passing-result-container'>
+          //     <div className='pass-name'>{user?.name}</div>
+          //     <div
+          //       className='pass'
+          //       style={{ color: 'gray' }}
+          //     >
+          //       3/15~3/16일 공지예정
+          //     </div>
+          //     {/* {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>} */}
+          //   </div>
+          // </div>
+
           <div className='result-tab'>
             <div className='contents-title'>결과 보기</div>
-            <div className='passing-result-container'>
+            <div 
+              className='passing-result-container' 
+              onClick={handleOpenModal} 
+              style={{ cursor: user?.apply ? 'pointer' : 'default' }} // 불합격이면 클릭 불가능하게 변경
+            >
               <div className='pass-name'>{user?.name}</div>
-              <div
-                className='pass'
-                style={{ color: 'gray' }}
-              >
-                3/15~3/16일 공지예정
-              </div>
-              {/* {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>} */}
+              {user?.apply ? (
+                <div className='pass' style={{ color: 'green' }}>합격</div>
+              ) : (
+                <div className='pass-x' style={{ color: 'red' }}>불합격</div>
+              )}
             </div>
+            {isModalOpen && <ResultModal isOpen={isModalOpen} onClose={handleCloseModal} />}
           </div>
         )}
       </div>
