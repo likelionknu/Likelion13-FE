@@ -84,25 +84,29 @@ const SubmitPage = () => {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1 className={styles.title}>지원서 조회</h1>
-        <p className={styles.description}>최종 제출한 지원서 내용이에요, 제출한 내용을 바탕으로 면접까지 미리 연습해봅시다!</p>
+        <h1 className={styles.title} style={{ marginTop: '20px', marginBottom: '50px' }}>지원서 조회</h1>
 
         {applications.length > 0 ? (
           applications.map((app, index) => (
             <div
               key={index}
-              className={styles.application}
-            >
-              <h2>{app.name}님의 지원서</h2>
-              <p>학번: {app.studentId}</p>
+              className={styles.application}>
+
+              <h2 className={styles.questionBox}
+              style={{ marginTop: '15px', marginBottom: '50px' }}>
+                
+                {app.name}님의 지원서</h2>
               {Object.keys(app)
                 .filter((key) => key.startsWith(`${partIndex === 0 ? 'frontend' : partIndex === 1 ? 'backend' : 'design'}content`))
                 .map((key, idx) => (
-                  <div key={idx}>
+                  <div key={idx} className={styles.question}>
                     {/* 각 파트별 질문 */}
-                    <div>{partIndex === 0 ? questions_frontend[idx] : partIndex === 1 ? questions_backend[idx] : questions_design[idx]}</div>
+                    <div className={styles.textareaWrapper}
+                    style={{ marginBottom: '20px' }}> {partIndex === 0 ? questions_frontend[idx] : partIndex === 1 ? questions_backend[idx] : questions_design[idx]}</div>
                     {/* 각 파트별 answer 대답 */}
-                    <div>{app[key]}</div>
+                    <div className={styles.textarea}
+                    style={{ marginBottom: '40px' }}
+                    >{app[key]}</div>
                   </div>
                 ))}
             </div>
