@@ -193,6 +193,7 @@ const MainPage = () => {
 
   return (
     <div ref={containerRef} className="container">
+    {isMobile ? "Mobile View" : "Desktop View"}
       <div className={`${styles.Section} ${styles.mainImageContainer} ${styles.fullWidthSection}`}>
         <div
           ref={mainTextRef}
