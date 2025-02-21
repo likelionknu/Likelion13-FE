@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from "zustand/middleware"
+import { persist } from 'zustand/middleware'
 
 interface User {
   name: string
@@ -20,7 +20,6 @@ interface AuthState {
   login: (user: User) => void
   logout: () => void
   checkAuth: () => void
-  fetchUserPart: (studentId: string) => Promise<void>
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -31,54 +30,32 @@ export const useAuthStore = create<AuthState>()(
       login: (user) => set({ isLoggedIn: true, user }),
       logout: () => {
         localStorage.removeItem('token')
-        set({ isLoggedIn: false, user: null })},
-      checkAuth: () => {
-        const storedData = localStorage.getItem("auth-storage");
-        if (storedData) {
-          const parsedData = JSON.parse(storedData); 
-          if (parsedData?.user) {
-            set({ isLoggedIn: true, user: parsedData.user });
-          }
-        }
+        set({ isLoggedIn: false, user: null })
       },
-      fetchUserPart: async (studentId) => {
-        const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
-        const parts = [ "dummy", "design", "frontend", "backend"]
-    
-        try {
-          for (const part of parts) {
-            const response = await fetch(`${baseUrl}/${part}/view?studentId=${studentId}`)
-            
-            if (response.ok) {
-              const data = await response.json()
-              if (data.apply === true) { 
-                set((state) => ({
-                  user: state.user ? { ...state.user, part } : null,
-                }))
-                return
-              }
-            }
+      checkAuth: () => {
+        const storedData = localStorage.getItem('auth-storage')
+        if (storedData) {
+          const parsedData = JSON.parse(storedData)
+          if (parsedData?.user) {
+            set({ isLoggedIn: true, user: parsedData.user })
           }
-          
-        } catch (error) {
-          console.error('지원 분야 조회 오류:', error)
         }
       },
     }),
     {
-      name: "auth-storage",
+      name: 'auth-storage',
       storage: {
         getItem: (name: string) => {
-          const item = localStorage.getItem(name);
-          return item ? JSON.parse(item) : null;
+          const item = localStorage.getItem(name)
+          return item ? JSON.parse(item) : null
         },
         setItem: (name: string, value: any) => {
-          localStorage.setItem(name, JSON.stringify(value));
+          localStorage.setItem(name, JSON.stringify(value))
         },
         removeItem: (name: string) => {
-          localStorage.removeItem(name);
+          localStorage.removeItem(name)
         },
       },
     }
   )
-);
+)
