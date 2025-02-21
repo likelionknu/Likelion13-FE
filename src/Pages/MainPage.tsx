@@ -96,67 +96,53 @@ const MainPage = () => {
     }
   }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
 
-  // 섹션 스크롤 애니메이션
-  // useEffect(() => {
-  //   const sections = document.querySelectorAll(`.${styles.section}`)
 
-  //   sections.forEach((section) => {
-  //     gsap.fromTo(
-  //       section,
-  //       {
-  //         opacity: 0,
-  //         y: 50,
-  //       },
-  //       {
-  //         scrollTrigger: {
-  //           trigger: section,
-  //           start: 'top 90%',
-  //           end: 'top 30%',
-  //           scrub: true,
-  //           snap: {
-  //             snapTo: 'labels',
-  //             duration: { min: 0.1, max: 3 },
-  //             delay: 0.2,
-  //             ease: 'power1.inOut',
-  //           },
-  //         },
-  //         opacity: 1,
-  //         y: 0,
-  //         duration: 1,
-  //         ease: 'power1.out',
-  //       }
-  //     )
-  //   })
-
-  //   return () => {
-  //     sections.forEach((section) => {
-  //       gsap.killTweensOf(section)
-  //     })
-  //   }
-  // }, [])
+  
+  useEffect(() => {
+    // 브라우저가 자동으로 스크롤 위치를 기억하는 것 방지
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  
+    //새로고침 후 강제 이동
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
+  }, []);
+  
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
+    
+    if (isMobile) {
+      console.log("모바일");
+      return;
+    }
+
+    console.log("데스크톱");
+
     const container = containerRef.current;
-    if (!container) return; // container가 없으면 실행 안 함
+    if (!container) return;
 
     const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
-
-    // 스크롤을 6개 구간으로 나누기
-    const totalSections = 6;
-
-    console.log("Total Sections:", totalSections);
-
     if (sections.length === 0) {
       console.error("Sections not found!");
       return;
     }
 
-    gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 }); 
+    gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
 
-    // yPercent를 고정값
-    gsap.to(sections, {
+    const animation = gsap.to(sections, {
       yPercent: -1 * (sections.length - 1),
       ease: "none",
       scrollTrigger: {
@@ -165,9 +151,8 @@ const MainPage = () => {
         end: "bottom bottom",
         scrub: 1,
         snap: 1 / (sections.length - 1),
-        markers: false, // 디버깅용
+        markers: false,
         invalidateOnRefresh: true,
-
         onUpdate: (self) => {
           const progress = self.progress * (sections.length - 1);
           const currentIndex = Math.round(progress);
@@ -177,20 +162,20 @@ const MainPage = () => {
               gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
             } else {
               gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
-                gsap.set(section, { visibility: "hidden" }); // 완전히 사라진 후 숨김 처리
+                gsap.set(section, { visibility: "hidden" });
               }});
             }
           });
         },
-
       },
     });
 
     return () => {
+      animation.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
-
+  }, [isMobile]);
+  
   return (
     <div ref={containerRef} className="container">
       <div className={`${styles.Section} ${styles.mainImageContainer} ${styles.fullWidthSection}`}>
@@ -205,6 +190,7 @@ const MainPage = () => {
           src={메인}
           alt='메인'
           className={styles.mainImage}
+          style={{height:'100vh' }}
         />
         <img
           ref={mainLogoRef}
