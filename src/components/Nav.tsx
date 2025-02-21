@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore'
+import { useRef } from 'react'
 
 import axios from 'axios'
 
@@ -12,7 +13,9 @@ const Nav = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const { user, isLoggedIn, login, logout } = useAuthStore()
   const navigate = useNavigate()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -55,6 +58,20 @@ const Nav = () => {
     }
   }, [isLoggedIn, user?.token, login, logout, navigate])
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+  
+
   const handleDropdownClick = (path: string) => {
     if (!isLoggedIn) {
       alert('로그인이 필요합니다.')
@@ -81,7 +98,7 @@ const Nav = () => {
           </Link>
         </div>
 
-        <div className='nav-dropdown'>
+        <div className='nav-dropdown' ref={dropdownRef}>
           {user?.apply === true ? (
             <button
               className='nav-button'
