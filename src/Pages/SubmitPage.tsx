@@ -68,10 +68,10 @@ const SubmitPage = () => {
   }, [isLoggedIn, navigate])
 
   useEffect(() => {
-    if (isLoggedIn && user?.studentId) {
+    if (user?.studentId) {
       fetchUserPart(user.studentId); // 지원 분야
     }
-  }, [isLoggedIn, user?.studentId, fetchUserPart, checkAuth])
+  }, [user?.studentId, checkAuth])
 
   const partMap: Record<string, string> = {
     backend: 'backend',

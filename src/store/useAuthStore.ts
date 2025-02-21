@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthState>()(
             
             if (response.ok) {
               const data = await response.json()
-              if (data && data.apply === true) { 
+              if (data.apply === true) { 
                 set((state) => ({
                   user: state.user ? { ...state.user, part } : null,
                 }))
