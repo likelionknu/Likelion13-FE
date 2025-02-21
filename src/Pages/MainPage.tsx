@@ -110,73 +110,7 @@ const MainPage = () => {
     }, 50);
   }, []);
   
-
-  // const containerRef = useRef<HTMLDivElement>(null);
-  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
   
-  // useEffect(() => {
-  //   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-  //   window.addEventListener("resize", checkMobile);
-
-  //   return () => window.removeEventListener("resize", checkMobile);
-  // }, []);
-
-  // useEffect(() => {
-    
-  //   if (isMobile) {
-  //     console.log("모바일");
-  //     return;
-  //   }
-
-  //   console.log("데스크톱");
-
-  //   const container = containerRef.current;
-  //   if (!container) return;
-
-  //   const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
-  //   if (sections.length === 0) {
-  //     console.error("Sections not found!");
-  //     return;
-  //   }
-
-  //   gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
-
-  //   const animation = gsap.to(sections, {
-  //     yPercent: -1 * (sections.length - 1),
-  //     ease: "none",
-  //     scrollTrigger: {
-  //       trigger: container,
-  //       start: "top top",
-  //       end: "bottom bottom",
-  //       scrub: 1,
-  //       snap: 1 / (sections.length - 1),
-  //       markers: false,
-  //       invalidateOnRefresh: true,
-  //       onUpdate: (self) => {
-  //         const progress = self.progress * (sections.length - 1);
-  //         const currentIndex = Math.round(progress);
-
-  //         sections.forEach((section, index) => {
-  //           if (index === currentIndex) {
-  //             gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
-  //           } else {
-  //             gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
-  //               gsap.set(section, { visibility: "hidden" });
-  //             }});
-  //           }
-  //         });
-  //       },
-  //     },
-  //   });
-
-  //   return () => {
-  //     animation.kill();
-  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  //   };
-  // }, [isMobile]);
-
-
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
