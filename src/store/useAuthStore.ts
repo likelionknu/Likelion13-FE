@@ -43,7 +43,7 @@ export const useAuthStore = create<AuthState>()(
       },
       fetchUserPart: async (studentId) => {
         const baseUrl = "https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form"
-        const parts = ["frontend", "backend", "design"]
+        const parts = [ "dummy", "design", "frontend", "backend"]
     
         try {
           for (const part of parts) {
