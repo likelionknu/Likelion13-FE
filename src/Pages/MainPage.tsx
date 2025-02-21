@@ -111,71 +111,152 @@ const MainPage = () => {
   }, []);
   
 
+  // const containerRef = useRef<HTMLDivElement>(null);
+  // const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  
+  // useEffect(() => {
+  //   const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+  //   window.addEventListener("resize", checkMobile);
+
+  //   return () => window.removeEventListener("resize", checkMobile);
+  // }, []);
+
+  // useEffect(() => {
+    
+  //   if (isMobile) {
+  //     console.log("모바일");
+  //     return;
+  //   }
+
+  //   console.log("데스크톱");
+
+  //   const container = containerRef.current;
+  //   if (!container) return;
+
+  //   const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
+  //   if (sections.length === 0) {
+  //     console.error("Sections not found!");
+  //     return;
+  //   }
+
+  //   gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
+
+  //   const animation = gsap.to(sections, {
+  //     yPercent: -1 * (sections.length - 1),
+  //     ease: "none",
+  //     scrollTrigger: {
+  //       trigger: container,
+  //       start: "top top",
+  //       end: "bottom bottom",
+  //       scrub: 1,
+  //       snap: 1 / (sections.length - 1),
+  //       markers: false,
+  //       invalidateOnRefresh: true,
+  //       onUpdate: (self) => {
+  //         const progress = self.progress * (sections.length - 1);
+  //         const currentIndex = Math.round(progress);
+
+  //         sections.forEach((section, index) => {
+  //           if (index === currentIndex) {
+  //             gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
+  //           } else {
+  //             gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
+  //               gsap.set(section, { visibility: "hidden" });
+  //             }});
+  //           }
+  //         });
+  //       },
+  //     },
+  //   });
+
+  //   return () => {
+  //     animation.kill();
+  //     ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+  //   };
+  // }, [isMobile]);
+
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", checkMobile);
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
 
-    return () => window.removeEventListener("resize", checkMobile);
+  useEffect(() => {
+    window.addEventListener("resize", checkMobile);
+    // 초기 모바일 상태 확인
+    checkMobile();
+
+    return () => {
+      // 컴포넌트 언마운트 시 리스너 제거
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
 
+
   useEffect(() => {
-    
-    if (isMobile) {
-      console.log("모바일");
-      return;
-    }
+    const mm = gsap.matchMedia();
 
-    console.log("데스크톱");
+    //pc
+    mm.add("(min-width: 800px)", () => {
+      const container = containerRef.current;
+      if (!container) return;
 
-    const container = containerRef.current;
-    if (!container) return;
+      const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
+      if (sections.length === 0) {
+        console.error("Sections not found!");
+        return;
+      }
 
-    const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
-    if (sections.length === 0) {
-      console.error("Sections not found!");
-      return;
-    }
+      gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
 
-    gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
+      const animation = gsap.to(sections, {
+        yPercent: -1 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          markers: false,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const progress = self.progress * (sections.length - 1);
+            const currentIndex = Math.round(progress);
 
-    const animation = gsap.to(sections, {
-      yPercent: -1 * (sections.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-        snap: 1 / (sections.length - 1),
-        markers: false,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const progress = self.progress * (sections.length - 1);
-          const currentIndex = Math.round(progress);
-
-          sections.forEach((section, index) => {
-            if (index === currentIndex) {
-              gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
-            } else {
-              gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
-                gsap.set(section, { visibility: "hidden" });
-              }});
-            }
-          });
+            sections.forEach((section, index) => {
+              if (index === currentIndex) {
+                gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
+              } else {
+                gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
+                  gsap.set(section, { visibility: "hidden" });
+                }});
+              }
+            });
+          },
         },
-      },
+      });
+
+      return () => {
+        animation.kill();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    });
+
+    // 모바일_비활성화
+    mm.add("(max-width: 799px)", () => {
     });
 
     return () => {
-      animation.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      mm.revert();
     };
-  }, [isMobile]);
-  
+  }, []);
+
+
+
   return (
     <div ref={containerRef} className="container">
       <div className={`${styles.Section} ${styles.mainImageContainer} ${styles.fullWidthSection}`}>
