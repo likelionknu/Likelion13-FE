@@ -61,12 +61,12 @@ const LoginPage = () => {
       })
 
       navigate('/')
-    } catch (err) {
+    } catch (err : unknown) {
       console.error('[로그인 에러]', err)
       if (axios.isAxiosError(err)) {
-        setError((err as AxiosError<{ message: string }>).response?.data?.message || '로그인에 실패했습니다.')
+        setError((err as AxiosError<{ message: string }>).response?.data?.message || '비밀번호가 틀렸습니다.')
       } else {
-        setError('로그인 중 오류가 발생했습니다.')
+        setError(`서버 오류가 발생했습니다. ${(err as Error).message}`)
       }
     } finally {
       setIsLoading(false)

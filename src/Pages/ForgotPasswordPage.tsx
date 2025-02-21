@@ -38,8 +38,8 @@ const ForgotPasswordPage = () => {
   const handleSendVerification = async () => {
     setIsLoading(true)
     setError('')
-
-    setSendEmailcode(true)
+    setSendEmailcode(false) // 인증번호 전송 버튼을 다시 표시하기 위해 초기화
+  
     try {
       const url = `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/send?email=${formData.email}`
       const response = await fetch(url, {
@@ -48,11 +48,12 @@ const ForgotPasswordPage = () => {
           'Content-Type': 'application/json',
         },
       })
-
+  
       if (response.ok) {
         setSendResponseMessage(await response.text())
+        setSendEmailcode(true) // 인증번호 전송 성공 시 버튼을 숨김
       } else {
-        throw new Error('인증번호 전송에 실패했습니다.')
+        throw new Error('이메일을 입력해주세요')
       }
     } catch (err) {
       if (err instanceof Error) {
@@ -147,7 +148,7 @@ const ForgotPasswordPage = () => {
         <h1>비밀번호 찾기</h1>
 
         <div>
-        <div className={`form-container 'fade-in' : 'fade-out'`}>
+        <div>
           {!isEmailVerified ? (
             <>
               <form

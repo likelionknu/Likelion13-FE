@@ -1,33 +1,28 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "../assets/QuestionPage.module.css";
-import 모달1 from "../assets/images/ModalImg1.png";
-import 모달2 from "../assets/images/ModalImg2.png";
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import styles from '../assets/QuestionPage.module.css'
+import 모달1 from '../assets/images/ModalImg1.png'
+import 모달2 from '../assets/images/ModalImg2.png'
 
 type ModalProps = {
-  isOpen: boolean;
-  title: string;
-  message: string;
-  onSubmit?: () => void;
-  onClose: () => void;
-  isSecondModal?: boolean;
-};
+  isOpen: boolean
+  title: string
+  message: string
+  onSubmit?: () => void
+  onClose: () => void
+  isSecondModal?: boolean
+}
 
-const QuestionModal: React.FC<ModalProps> = ({
-  isOpen,
-  title,
-  message,
-  onSubmit,
-  onClose,
-  isSecondModal = false,
-}) => {
-  const navigate = useNavigate();
+const QuestionModal: React.FC<ModalProps> = ({ isOpen, title, message, onSubmit, onClose, isSecondModal = false }) => {
+  const navigate = useNavigate()
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   const handleHomepageRedirect = () => {
-    navigate("/MainPage");
-  };
+    navigate('/MainPage')
+    window.location.reload()
+    // 새로고침 후 MainPage로 이동
+  }
 
   return (
     <div className={styles.modalOverlay}>
@@ -38,13 +33,13 @@ const QuestionModal: React.FC<ModalProps> = ({
           {isSecondModal ? (
             <img
               src={모달2}
-              alt="제출완"
+              alt='제출완'
               className={styles.modalImage}
             />
           ) : (
             <img
               src={모달1}
-              alt="수정불가"
+              alt='수정불가'
               className={styles.modalImage}
             />
           )}
@@ -59,10 +54,16 @@ const QuestionModal: React.FC<ModalProps> = ({
             </button>
           ) : (
             <>
-              <button className={styles.cancelButton} onClick={onClose}>
+              <button
+                className={styles.cancelButton}
+                onClick={onClose}
+              >
                 취소
               </button>
-              <button className={styles.confirmButton} onClick={onSubmit}>
+              <button
+                className={styles.confirmButton}
+                onClick={onSubmit}
+              >
                 제출
               </button>
             </>
@@ -70,7 +71,7 @@ const QuestionModal: React.FC<ModalProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default QuestionModal;
+export default QuestionModal
