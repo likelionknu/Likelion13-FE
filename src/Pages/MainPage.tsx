@@ -64,7 +64,6 @@ const MainPage = () => {
     }
   }
 
-
   // 메인 이미지 애니메이션
   useEffect(() => {
     if (!logoLoaded || !mainLogoRef.current || !mainTextRef.current) return
@@ -95,7 +94,6 @@ const MainPage = () => {
       gsap.killTweensOf([logo, text])
     }
   }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
-
 
   
   useEffect(() => {
@@ -189,8 +187,6 @@ const MainPage = () => {
     };
   }, []);
 
-
-
   return (
     <div ref={containerRef} className="container">
     {isMobile ? "Mobile View" : "Desktop View"}
@@ -206,7 +202,7 @@ const MainPage = () => {
           src={메인}
           alt='메인'
           className={styles.mainImage}
-          style={{height:'100vh' }}
+          style={{height:'100vh',minHeight:'730px' }}
         />
         <img
           ref={mainLogoRef}
