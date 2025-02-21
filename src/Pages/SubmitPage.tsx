@@ -207,6 +207,7 @@ if (user?.part && !partKeys.includes(user.part)) {
             <p className={styles.question}>{question}</p>
             <div className={styles.textareaWrapper}>
               <textarea
+                readOnly
                 placeholder='내용을 입력해주세요.'
                 rows={10}
                 maxLength={1000}

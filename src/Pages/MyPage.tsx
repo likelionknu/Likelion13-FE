@@ -7,11 +7,11 @@ import '../assets/Mypage.css'
 
 const MyPage = () => {
 
-  
+
 const [isModalOpen, setIsModalOpen] = useState(false)
 
 const handleOpenModal = () => {
-  if (user?.apply) {
+  if (resultStatus === 'PASS') {
     setIsModalOpen(true);
   }
 };
@@ -21,6 +21,8 @@ const handleCloseModal = () => setIsModalOpen(false)
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
+  const [resultStatus, setResultStatus] = useState<string | null>(null);
+
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -195,6 +197,32 @@ const handleCloseModal = () => setIsModalOpen(false)
     fetchUserData()
   }, [user?.token, login, logout, navigate])
 
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const response = await fetch(
+          'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/check-pass-fail',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${user?.token}`,
+            },
+          }
+        );
+        if (!response.ok) throw new Error('API 요청 실패');
+
+        const data = await response.json();
+        setResultStatus(data.resultStatus);
+      } catch (error) {
+        console.error('결과를 불러오는 중 오류 발생:', error);
+      }
+    };
+
+    if (user?.token) fetchResult();
+  }, [user?.token]);
+
+
   return (
     <div className='mypage-container'>
       <div className='mypage-tabs'>
@@ -364,13 +392,15 @@ const handleCloseModal = () => setIsModalOpen(false)
             <div 
               className='passing-result-container' 
               onClick={handleOpenModal} 
-              style={{ cursor: user?.apply ? 'pointer' : 'default' }} // 불합격이면 클릭 불가능
+              style={{ cursor: resultStatus === 'PASS' ? 'pointer' : 'default' }}
             >
               <div className='pass-name'>{user?.name}</div>
-              {user?.apply ? (
+              {resultStatus === 'PASS' ? (
                 <div className='pass' style={{ color: 'green' }}>합격</div>
+              ) : resultStatus === 'FAIL' ? (
+                <div className="pass-x" style={{ color: 'red' }}>불합격</div>
               ) : (
-                <div className='pass-x' style={{ color: 'red' }}>불합격</div>
+                <div className="pass-hold" style={{ color: 'orange' }}>보류</div>
               )}
             </div>
             {isModalOpen && <ResultModal isOpen={isModalOpen} onClose={handleCloseModal} />}
