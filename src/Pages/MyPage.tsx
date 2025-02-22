@@ -244,7 +244,7 @@ const handleCloseModal = () => setIsModalOpen(false)
           <button
             className={activeTab === 'result' ? 'active' : ''}
             onClick={() => {
-              setActiveTab('result')
+              // setActiveTab('result')
               alert('서류합격결과는 3/15~3/16일에 공지됩니다.')
             }}
           >

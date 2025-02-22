@@ -24,7 +24,6 @@ const SignupPage = () => {
   })
 
   const [sendResponseMessage, setSendResponseMessage] = useState('')
-  const [verificationMessage, setVerificationMessage] = useState('')
 
   const navigate = useNavigate()
 
@@ -80,15 +79,13 @@ const SignupPage = () => {
       })
 
       if (response.ok) {
-        setVerificationMessage(await response.text())
-        if (verificationMessage === '인증이 완료되었습니다.') {
-          setIsEmailVerified(true)
-        }
+        setIsEmailVerified(true)
       } else {
         throw new Error('인증 확인에 실패했습니다.')
       }
     } catch (err) {
       if (err instanceof Error) {
+        console.log(`인증 확인 에러: ${err.message}`)
         setError(err.message)
       } else {
         setError('인증 확인에 실패했습니다.')
