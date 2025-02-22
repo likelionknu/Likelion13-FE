@@ -40,6 +40,13 @@ const BackendQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
+    if (user && user.apply) {
+      navigate("/submit");
+      alert('이미 지원한 사용자입니다. 지원서 조회 페이지로 이동합니다.')
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
     if (user && user.studentId) {
       const fetchData = async () => {
         try {
