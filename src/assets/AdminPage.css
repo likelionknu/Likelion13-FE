@@ -156,36 +156,36 @@
 
 .form-title {
   color: #000;
-  font-size: 28px;
+  font-size: 2vw;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 
-  margin: 15px 0px;
+  margin: 2vh 0;
 }
 .form-info {
-  width: 1700px;
+  width: 90%;
   display: flex;
   flex-direction: row;
   
-  margin-top: 80px;
+  margin-top: 5vh;
 
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
-  margin-bottom: 15px;
+  margin-bottom: 2vh;
 }
 .form-name {
   color: #000;
-  font-size: 26px;
+  font-size: 2vh;
   font-style: normal;
   font-weight: 600;
   line-height: 33px;
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 5%;
+  margin-right: 3%;
 }
 
 .form-id {
   color: #000;
-  font-size: 18px;
+  font-size: 2vh;
   font-style: normal;
   font-weight: 600;
   line-height: 33px;
@@ -196,31 +196,32 @@
   flex-direction: column;
   justify-content: center;
 
-  margin-bottom: 15px;
+  margin-bottom: 2vh;
 }
 
 .user-question {
   color: #000;
-  font-size: 16px;
+  font-size: 1.1vw;
   font-style: normal;
   font-weight: 600;
-  line-height: 33px;
-  margin-bottom: 5px;
+  line-height: 2;
+  margin-bottom: 1vh;
 }
 
 .user-answer {
   color: #000;
-  font-size: 14px;
+  font-size: 1vw;
   font-style: normal;
   font-weight: 400;
-  margin-bottom: 10px;
+  margin-bottom: 1.5vh;
 }
 
 .modal-buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 3vh;
+  width: 100%;
 
 }
 
@@ -228,15 +229,15 @@
 .prev-btn,
 .close-btn,
 .next-btn {
-  width: 80px;
-  height: 40px;
+  width: 5vw;
+  height: 5vh;
 
   text-align: center;
   align-items: center;
   justify-self: center;
 
-  padding: 8px 16px;
-  margin: 0 8px;
+  padding: 1vh 1vw;
+  margin: 0 1vw;
   border: solid #989898 1px;
   border-radius: 8px;
   font-size: 1rem;
@@ -247,7 +248,6 @@
 }
 
 .close-btn {
-  width: 80px;
   justify-content: center;
   display: flex;
   position: absolute;
