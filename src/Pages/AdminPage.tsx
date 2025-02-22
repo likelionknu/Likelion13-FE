@@ -20,6 +20,8 @@ const AdminPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
 
+  const [comment, setComment] = useState('')
+
   const questions_frontend = [
     'Q. 동아리에 지원하게 된 이유를 작성해주세요.',
     'Q. 본인의 성격에서 장점과 단점을 작성해주세요.',
@@ -108,7 +110,6 @@ const AdminPage = () => {
     viewFrontend()
   }, [])
 
-  
   const viewFrontend = async () => {
     try {
       const response = await axios.get('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/admin/frontend/submit', {
@@ -208,6 +209,36 @@ const AdminPage = () => {
 
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1)
+  }
+
+  const handlePassState = async (resultStatus: 'PASS' | 'HOLD' | 'FAIL') => {
+    if (!selectedUser) return
+
+    try {
+      const response = await axios.post(
+        `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/admin/result/${selectedUser.studentId}?resultStatus=${resultStatus}&comment=${comment}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
+      if (response.status === 200) {
+        console.log('결과 저장 성공:', response.data.comment)
+        alert('결과가 성공적으로 저장되었습니다.')
+        closeModal()
+
+        setComment(response.data.comment)
+        window.location.reload()
+      } else {
+        console.error('결과 저장 실패:', response.status)
+      }
+    } catch (error) {
+      console.error('결과 저장 실패:', error)
+    }
   }
 
   return (
@@ -339,7 +370,14 @@ const AdminPage = () => {
                         </div>
                       </div>
 
-                      <div className='items-result'>{item.resultStatus}</div>
+                      <div
+                        className='items-result'
+                        style={{
+                          color: item.resultStatus === 'PASS' ? '#4A7EDC' : item.resultStatus == 'FAIL' ? '#FF3232' : 'orange',
+                        }}
+                      >
+                        {item.resultStatus}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -365,46 +403,57 @@ const AdminPage = () => {
                     <div className='form-id'>{selectedUser.studentId}</div>
                   </div>
                   <div className={styles.modalBody}>
-                  <div className={styles.modalContent}>
-                    {[...Array(5)].map((_, i) => {
-                      const questionIndex = currentPage * 5 + i
-                      if (questionIndex >= 11) return null
-                      return (
-                        <div key={questionIndex}>
-                          <div className='user-question'>
-                            {activeTab === 'frontend' ? questions_frontend[questionIndex] : activeTab === 'backend' ? questions_backend[questionIndex] : questions_Design[questionIndex]}
+                    <div className={styles.modalContent}>
+                      {[...Array(5)].map((_, i) => {
+                        const questionIndex = currentPage * 5 + i
+                        if (questionIndex >= 11) return null
+                        return (
+                          <div key={questionIndex}>
+                            <div className='user-question'>
+                              {activeTab === 'frontend' ? questions_frontend[questionIndex] : activeTab === 'backend' ? questions_backend[questionIndex] : questions_Design[questionIndex]}
+                            </div>
+                            <div className='user-answer'>{(selectedUser as Record<string, string | undefined>)[`${activeTab}content${questionIndex + 1}`]}</div>
                           </div>
-                          <div className='user-answer'>{(selectedUser as Record<string, string | undefined>)[`${activeTab}content${questionIndex + 1}`]}</div>
-                        </div>
-                      )
-                    })}
+                        )
+                      })}
+                    </div>
                   </div>
-                  </div>
-                    <div className={styles.modalFooter}>
-                  <div className='modal-buttons'>
-                    <button
-                      className='close-btn'
-                      onClick={closeModal}
-                    >
-                      닫기
-                    </button>
-                    {currentPage > 0 && (
-              <button
-                className='prev-btn'
-                onClick={prevPage}
-              >
-                이전
-              </button>
-            )}
-                    {currentPage < 1 && (
-              <button
-                className='next-btn'
-                onClick={nextPage}
-              >
-                다음
-              </button>
-            )}
-                  </div>
+                  <div className={styles.modalFooter}>
+                    <div className='modal-buttons'>
+                      <div className='pass-container'>
+                        <button
+                          style={{ backgroundColor: '' }}
+                          onClick={() => handlePassState('PASS')}
+                        >
+                          합격
+                        </button>
+                        <button onClick={() => handlePassState('HOLD')}>보류</button>
+                        <button onClick={() => handlePassState('FAIL')}>불합격</button>
+                      </div>
+
+                      {currentPage > 0 && (
+                        <button
+                          className='prev-btn'
+                          onClick={prevPage}
+                        >
+                          이전
+                        </button>
+                      )}
+                      {currentPage < 1 && (
+                        <button
+                          className='next-btn'
+                          onClick={nextPage}
+                        >
+                          다음
+                        </button>
+                      )}
+                      <button
+                        className='close-btn'
+                        onClick={closeModal}
+                      >
+                        닫기
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

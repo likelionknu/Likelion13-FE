@@ -5,9 +5,11 @@
 
   color: #252525;
 
-  height: 1200px;
+  height: 1500px;
 
-  margin: 50px;
+  max-width: 1900px;
+  
+  margin: 100px;
 }
 
 .mypage-tabs {
@@ -15,18 +17,23 @@
   flex-direction: column;
   justify-content: flex-start;
 
+  min-width: 220px;
+
   text-align: left;
 
-  width: 250px;
-  margin-right: 200px;
+  margin-left: 200px;
+
 }
 
 .result-tab {
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
   text-align: left;
+
+  
 }
 
 .mypage-tabs > h2 {
@@ -58,6 +65,11 @@
   background: #f0f4ff; /* hover 시 밝은 배경색 */
 }
 
+.mypage-contents{
+  width: 100%;
+  margin-left: -100px;
+}
+
 .contents-title {
   color: #000;
 
@@ -68,7 +80,7 @@
 
   box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.25);
 
-  width: 1200px;
+  width: 900px;
   padding: 15px 0px;
   margin: 15px 0px;
 }

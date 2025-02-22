@@ -107,6 +107,8 @@
 }
 
 .result-items {
+
+  width: 1200px;
   z-index: 1;
   height: 90px;
   cursor: pointer;
@@ -163,8 +165,13 @@
 
   margin: 2vh 0;
 }
+
+.user-form{
+  width: 100%;
+}
+
 .form-info {
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   
@@ -264,4 +271,27 @@
   transform: scale(1.02);
   box-shadow: 1px 1px 1px rgb(0, 123, 255);
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.pass-container{
+  display: flex;
+  position: absolute;
+  left: 5%;
+  
+}
+
+.pass-container button{
+  text-align: center;
+  align-items: center;
+  justify-self: center;
+
+  padding: 1vh 1vw;
+  margin: 0 0.2vw;
+  border: solid #989898 1px;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }

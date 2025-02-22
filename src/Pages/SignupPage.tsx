@@ -37,6 +37,7 @@ const SignupPage = () => {
     }))
   }
 
+  
   const handleSendVerification = async () => {
     setIsLoading(true)
     setError('')
@@ -67,6 +68,12 @@ const SignupPage = () => {
   }
 
   const handleVerification = async () => {
+
+    if (!formData.verificationCode) {
+      setError('인증번호를 입력해주세요.')
+      return
+    }
+
     setIsLoading(true)
     setError('')
     try {
@@ -78,7 +85,10 @@ const SignupPage = () => {
         },
       })
 
-      if (response.ok) {
+      const responseText = await response.text()
+      console.log(`responseText ${responseText}`)
+
+      if (response.ok && responseText === '인증이 완료되었습니다.') {
         setIsEmailVerified(true)
       } else {
         throw new Error('인증 확인에 실패했습니다.')
