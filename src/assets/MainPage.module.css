@@ -71,7 +71,7 @@
 }
 
 .Section {
-  padding: 10px 0px 60px 0px;
+  padding: 0px 0px 60px 0px;
   height: 100vh;
   min-height:730px;
   display: flex;
