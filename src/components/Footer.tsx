@@ -23,8 +23,8 @@ const Footer = () => {
           </a>
         </div>
         <div className="bt-container">
-          <p className="bt-font">©2024 LIKE LION KNU. All rights reserved.</p>
-          <p className="bt-font">동아리실: 경기도 용인시 기흥구 강남로 40 강남대학교 후생관</p>
+          <p className="bt-font">©2025 LIKELION KNU. All rights reserved.</p>
+          <p className="bt-font">경기도 용인시 기흥구 강남로 40 강남대학교 후생관</p>
         </div>
       </div>
     </footer>
