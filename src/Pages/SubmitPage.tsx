@@ -84,30 +84,41 @@ const SubmitPage = () => {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1 className={styles.title} style={{ marginTop: '20px', marginBottom: '50px' }}>지원서 조회</h1>
+        <h1
+          className={styles.title}
+          style={{ marginTop: '20px', marginBottom: '50px' }}
+        >
+          지원서 조회
+        </h1>
 
         {applications.length > 0 ? (
           applications.map((app, index) => (
             <div
               key={index}
-              className={styles.application}>
-
-              <h2 
-              style={{ marginTop: '15px', marginBottom: '50px' }}>
-                
-                {app.name}님의 지원서</h2>
+              className={styles.application}
+            >
+              <h2 style={{ marginTop: '15px', marginBottom: '50px' }}>
+                {app.name}님의 {partIndex === 0 ? 'frontend' : partIndex === 1 ? 'backend' : 'design'} 지원서
+              </h2>
               {Object.keys(app)
                 .filter((key) => key.startsWith(`${partIndex === 0 ? 'frontend' : partIndex === 1 ? 'backend' : 'design'}content`))
                 .map((key, idx) => (
                   <div className={styles.questionBox}>
-                  <div key={idx} className={styles.question}>
-                    {/* 각 파트별 질문 */}
-                    <div className={styles.textareaWrapper}
-                    style={{ marginBottom: '20px' }}> {partIndex === 0 ? questions_frontend[idx] : partIndex === 1 ? questions_backend[idx] : questions_design[idx]}</div>
-                    {/* 각 파트별 answer 대답 */}
-                    <div className={styles.textarea}
-                    >{app[key]}</div>
-                  </div>
+                    <div
+                      key={idx}
+                      className={styles.question}
+                    >
+                      {/* 각 파트별 질문 */}
+                      <div
+                        className={styles.textareaWrapper}
+                        style={{ marginBottom: '20px' }}
+                      >
+                        {' '}
+                        {partIndex === 0 ? questions_frontend[idx] : partIndex === 1 ? questions_backend[idx] : questions_design[idx]}
+                      </div>
+                      {/* 각 파트별 answer 대답 */}
+                      <div className={styles.textarea}>{app[key]}</div>
+                    </div>
                   </div>
                 ))}
             </div>
