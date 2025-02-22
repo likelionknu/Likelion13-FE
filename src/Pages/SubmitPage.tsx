@@ -92,21 +92,22 @@ const SubmitPage = () => {
               key={index}
               className={styles.application}>
 
-              <h2 className={styles.questionBox}
+              <h2 
               style={{ marginTop: '15px', marginBottom: '50px' }}>
                 
                 {app.name}님의 지원서</h2>
               {Object.keys(app)
                 .filter((key) => key.startsWith(`${partIndex === 0 ? 'frontend' : partIndex === 1 ? 'backend' : 'design'}content`))
                 .map((key, idx) => (
+                  <div className={styles.questionBox}>
                   <div key={idx} className={styles.question}>
                     {/* 각 파트별 질문 */}
                     <div className={styles.textareaWrapper}
                     style={{ marginBottom: '20px' }}> {partIndex === 0 ? questions_frontend[idx] : partIndex === 1 ? questions_backend[idx] : questions_design[idx]}</div>
                     {/* 각 파트별 answer 대답 */}
                     <div className={styles.textarea}
-                    style={{ marginBottom: '40px' }}
                     >{app[key]}</div>
+                  </div>
                   </div>
                 ))}
             </div>

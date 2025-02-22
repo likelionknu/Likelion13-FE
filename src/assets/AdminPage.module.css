@@ -30,6 +30,17 @@
   overflow-y: scroll; /* 모달 내부 스크롤 추가 */
 }
 
+.modalBody {
+  flex-grow: 1;
+  overflow-y: auto; /* 스크롤 활성화 */
+  padding: 10px;
+}
+
+.modalFooter {
+  border-top: 1px solid #ddd;
+  bottom: 0;
+}
+
 .modalContent {
   max-height: 70vh;
   line-height: 1.5;

@@ -247,7 +247,8 @@
 }
 
 .close-btn {
-  width: 65px;
+  width: 80px;
+  justify-content: center;
   display: flex;
   position: absolute;
 

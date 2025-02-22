@@ -364,6 +364,7 @@ const AdminPage = () => {
                     <div className='form-name'>{selectedUser.name}</div>
                     <div className='form-id'>{selectedUser.studentId}</div>
                   </div>
+                  <div className={styles.modalBody}>
                   <div className={styles.modalContent}>
                     {[...Array(5)].map((_, i) => {
                       const questionIndex = currentPage * 5 + i
@@ -378,7 +379,8 @@ const AdminPage = () => {
                       )
                     })}
                   </div>
-
+                  </div>
+                    <div className={styles.modalFooter}>
                   <div className='modal-buttons'>
                     <button
                       className='close-btn'
@@ -402,6 +404,7 @@ const AdminPage = () => {
                 다음
               </button>
             )}
+                  </div>
                   </div>
                 </div>
               )}

@@ -87,7 +87,7 @@ const LoginPage = () => {
               <input
                 type='email'
                 name='email'
-                placeholder='이메일'
+                placeholder='강남대학교 메일(@kangnam.ac.kr)'
                 value={formData.email}
                 onChange={handleChange}
               />
