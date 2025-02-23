@@ -337,7 +337,7 @@ const AdminPage = () => {
                       <div
                         className='items-result'
                         style={{
-                          color: item.resultStatus === 'PASS' ? 'blue' : item.resultStatus == 'FAIL' ? 'red' : 'yellow',
+                          color: item.resultStatus === 'PASS' ? '#4A7EDC' : item.resultStatus == 'FAIL' ? '#FF3232' : 'orange',
                         }}
                       >
                         {item.resultStatus}
