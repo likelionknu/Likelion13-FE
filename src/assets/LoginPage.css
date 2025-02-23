@@ -67,6 +67,8 @@
   top: 35%;
   width: 20px;
   cursor: pointer;
+
+  filter: invert(10%) sepia(1%) saturate(0%) hue-rotate(31deg) brightness(103%) contrast(90%);
 }
 
 .login-box .login-button {
@@ -90,7 +92,7 @@
   margin-bottom: 5px;
 }
 
-.find-password{
+.find-password {
   color: #989898;
   font-size: 16px;
   margin-top: 10px;

@@ -13,6 +13,7 @@ import 메인로고 from '../assets/images/MainLogo.png'
 import Project1 from '../assets/images/Project1.png'
 import Project2 from '../assets/images/Project2.png'
 import Project3 from '../assets/images/Project3.png'
+import up_btn from '../assets/images/upbtn-light.png'
 
 import styles from '../assets/MainPage.module.css'
 
@@ -40,19 +41,18 @@ const MainPage = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem('hasReloaded')) {
-      sessionStorage.setItem('hasReloaded', 'true');
-      window.location.reload();
+      sessionStorage.setItem('hasReloaded', 'true')
+      window.location.reload()
 
       if (navigator.userAgent.match(/Mobi/)) {
-        window.location.reload();
-        sessionStorage.setItem('hasReloaded', 'true');
+        window.location.reload()
+        sessionStorage.setItem('hasReloaded', 'true')
       }
     }
-    
-  }, []);
+  }, [])
 
   useEffect(() => {
-    checkAuth()  // 페이지 로드 시 로그인 상태 확인
+    checkAuth() // 페이지 로드 시 로그인 상태 확인
   }, [checkAuth]) // checkAuth 함수가 바뀔 때마다 실행
 
   const handleApplyButtonClick = () => {
@@ -95,106 +95,110 @@ const MainPage = () => {
     }
   }, [logoLoaded]) // 컴포넌트 마운트 시에만 실행
 
-  
   useEffect(() => {
     // 브라우저가 자동으로 스크롤 위치를 기억하는 것 방지
     if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+      window.history.scrollRestoration = 'manual'
     }
-  
+
     //새로고침 후 강제 이동
     setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
-  }, []);
-  
-  
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+      window.scrollTo(0, 0)
+    }, 50)
+  }, [])
+
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
   const checkMobile = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
+    setIsMobile(window.innerWidth <= 768)
+  }
 
   useEffect(() => {
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile)
     // 초기 모바일 상태 확인
-    checkMobile();
+    checkMobile()
 
     return () => {
       // 컴포넌트 언마운트 시 리스너 제거
-      window.removeEventListener("resize", checkMobile);
-    };
-  }, []);
-
+      window.removeEventListener('resize', checkMobile)
+    }
+  }, [])
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia()
 
     //pc
-    mm.add("(min-width: 800px)", () => {
-      const container = containerRef.current;
-      if (!container) return;
+    mm.add('(min-width: 800px)', () => {
+      const container = containerRef.current
+      if (!container) return
 
-      const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[];
+      const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[]
       if (sections.length === 0) {
-        console.error("Sections not found!");
-        return;
+        console.error('Sections not found!')
+        return
       }
 
-      gsap.set(sections, { opacity: 1, visibility: "visible", zIndex: 10 });
+      gsap.set(sections, { opacity: 1, visibility: 'visible', zIndex: 10 })
 
       const animation = gsap.to(sections, {
         yPercent: -1 * (sections.length - 1),
-        ease: "none",
+        ease: 'none',
         scrollTrigger: {
           trigger: container,
-          start: "top top",
-          end: "bottom bottom",
+          start: 'top top',
+          end: 'bottom bottom',
           scrub: 1,
           snap: 1 / (sections.length - 1),
           markers: false,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            const progress = self.progress * (sections.length - 1);
-            const currentIndex = Math.round(progress);
+            const progress = self.progress * (sections.length - 1)
+            const currentIndex = Math.round(progress)
 
             sections.forEach((section, index) => {
               if (index === currentIndex) {
-                gsap.to(section, { opacity: 1, visibility: "visible", zIndex: 10, duration: 0.6, ease: "power2.out" });
+                gsap.to(section, { opacity: 1, visibility: 'visible', zIndex: 10, duration: 0.6, ease: 'power2.out' })
               } else {
-                gsap.to(section, { opacity: 0, zIndex: 1, duration: 0.6, ease: "power2.out", onComplete: () => {
-                  gsap.set(section, { visibility: "hidden" });
-                }});
+                gsap.to(section, {
+                  opacity: 0,
+                  zIndex: 1,
+                  duration: 0.6,
+                  ease: 'power2.out',
+                  onComplete: () => {
+                    gsap.set(section, { visibility: 'hidden' })
+                  },
+                })
               }
-            });
+            })
           },
         },
-      });
+      })
 
       return () => {
-        animation.kill();
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    });
+        animation.kill()
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      }
+    })
 
     // 모바일_비활성화
-    mm.add("(max-width: 799px)", () => {
-    });
+    mm.add('(max-width: 799px)', () => {})
 
     return () => {
-      mm.revert();
-    };
-  }, []);
+      mm.revert()
+    }
+  }, [])
 
   return (
-    <div ref={containerRef} className="container">
-    {isMobile && "Mobile View"}
+    <div
+      ref={containerRef}
+      className='container'
+    >
+      {isMobile}
       <div className={`${styles.Section} ${styles.mainImageContainer} ${styles.fullWidthSection}`}>
         <div
           ref={mainTextRef}
           className={styles.mainText}
-          style={{}}
         >
           Learn, Create, Elevate
         </div>
@@ -202,7 +206,7 @@ const MainPage = () => {
           src={메인}
           alt='메인'
           className={styles.mainImage}
-          style={{height:'100vh',minHeight:'730px' }}
+          style={{ height: '100vh', minHeight: '730px' }}
         />
         <img
           ref={mainLogoRef}
@@ -522,6 +526,13 @@ const MainPage = () => {
             </div>
           </div>
         </div>
+
+        <img
+          className={styles.upbtn}
+          alt='pageUpBtn'
+          src={up_btn}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        />
       </div>
     </div>
   )

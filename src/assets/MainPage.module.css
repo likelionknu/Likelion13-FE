@@ -2,6 +2,7 @@
 @media screen and (min-width: 1024px) {
   .mainImage {
     width: 100%;
+    
   }
 
   .fullWidthSection {
@@ -273,4 +274,22 @@
   text-align: center;
   z-index: 2;
   transform: translateY(-50%);
+}
+.upbtn {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 100px;
+  border: none;
+
+  width: 50px;
+  filter: invert(5%) sepia(1%) saturate(0%) hue-rotate(31deg) brightness(103%) contrast(90%);
+  z-index: 1001;
+  
+  cursor: pointer;
+}
+.upbtn:hover{
+  transform: scale(1.05);
+  z-index: 10;
 }
