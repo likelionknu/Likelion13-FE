@@ -105,6 +105,13 @@
 }
 
 .edit-form > button {
+  display: flex;
+  position: absolute;
+
+  align-items: center;
+  justify-content: center;
+
+
   width: 150px;
   height: 45px;
 
@@ -125,8 +132,8 @@
 }
 
 .edit-form .delete-account-btn {
-  padding: 8px 16px;
-  margin: 0 8px;
+
+ 
   border: solid #007bff 1px;
   border-radius: 8px;
   background-color: white;
