@@ -34,6 +34,13 @@ const LoginPage = () => {
     setIsLoading(true)
     setError('')
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@kangnam\.ac\.kr$/;
+  if (!emailRegex.test(formData.email)) {
+    setError('강남대학교 이메일(@kangnam.ac.kr) 형식이 아닙니다.');
+    setIsLoading(false);
+    return;
+  }
+
     try {
       const response = await axios.post('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/login', formData, {
         headers: {
@@ -64,7 +71,7 @@ const LoginPage = () => {
     } catch (err : unknown) {
       console.error('[로그인 에러]', err)
       if (axios.isAxiosError(err)) {
-        setError((err as AxiosError<{ message: string }>).response?.data?.message || '비밀번호가 틀렸습니다.')
+        setError((err as AxiosError<{ message: string }>).response?.data?.message || '이메일 또는 비밀번호가 틀렸습니다.')
       } else {
         setError(`서버 오류가 발생했습니다. ${(err as Error).message}`)
       }
