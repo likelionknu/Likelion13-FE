@@ -11,6 +11,7 @@ const SignupPage = () => {
   const [isEmailVerified, setIsEmailVerified] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+
   const [formData, setFormData] = useState({
     name: '',
     department: '',
@@ -31,16 +32,20 @@ const SignupPage = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
   }
 
-  
   const handleSendVerification = async () => {
+    if (formData.email.substring(formData.email.length - 13) !== 'kangnam.ac.kr') {
+      return setError('kangnam.ac.kr 형식의 이메일을 입력해주세요.')
+    }
     setIsLoading(true)
     setError('')
+
     try {
       const url = `https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/send?email=${formData.email}&verifyCode=string`
       const response = await fetch(url, {
@@ -68,7 +73,6 @@ const SignupPage = () => {
   }
 
   const handleVerification = async () => {
-
     if (!formData.verificationCode) {
       setError('인증번호를 입력해주세요.')
       return
@@ -108,12 +112,31 @@ const SignupPage = () => {
 
   const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setIsLoading(true)
-    setError('')
+
+    // 학번이 8자리가 아니면
+    if (formData.studentId.length !== 9) {
+      setError('학번은 9자리여야 합니다.')
+      setIsLoading(false)
+      return
+    }
+
+    // 학년이 1,2,3,4 가 아니면
+    if (formData.grade !== '1' && formData.grade !== '2' && formData.grade !== '3' && formData.grade !== '4') {
+      setError('학년은 1, 2, 3, 4 중 하나여야 합니다.')
+      setIsLoading(false)
+      return
+    }
+
+    // 전화번호가 11자리가 아니면
+    if (formData.phone.length !== 11) {
+      setError('전화번호는 11자리여야 합니다.')
+      setIsLoading(false)
+      return
+    }
 
     // 유효성 검사
     if (!formData.name || !formData.department || !formData.studentId || !formData.phone || !formData.email || !formData.password || !formData.passwordCheck || !formData.grade) {
-      setError('모든 필수 항목을 입력해주세요.')
+      setError('모든 항목을 입력해주세요.')
       setIsLoading(false)
       return
     }
@@ -123,6 +146,15 @@ const SignupPage = () => {
       setIsLoading(false)
       return
     }
+
+    if (!isEmailVerified) {
+      setError('이메일 인증을 완료해주세요.')
+      setIsLoading(false)
+      return
+    }
+
+    setIsLoading(true)
+    setError('')
 
     try {
       const signUpData = {
@@ -200,7 +232,6 @@ const SignupPage = () => {
               onChange={handleChange}
               autoComplete='off'
             />
-
             <div>학부</div>
             <input
               type='text'
@@ -209,7 +240,6 @@ const SignupPage = () => {
               onChange={handleChange}
               autoComplete='off'
             />
-
             <div>학번</div>
             <input
               type='text'
@@ -221,8 +251,9 @@ const SignupPage = () => {
 
             <div>학년</div>
             <input
-              type='text'
+              type='int'
               name='grade'
+              placeholder='0'
               value={formData.grade}
               onChange={handleChange}
               autoComplete='off'
@@ -238,7 +269,6 @@ const SignupPage = () => {
               onChange={handleChange}
               autoComplete='off'
             />
-
             <div>이메일</div>
             <input
               type='email'
@@ -249,15 +279,15 @@ const SignupPage = () => {
               disabled={isEmailVerified}
               autoComplete='off'
             />
-
             <button
               type='button'
               onClick={handleSendVerification}
-              disabled={isLoading || isEmailVerified || formData.email.substring(formData.email.length - 13) !== 'kangnam.ac.kr'}
+              disabled={isLoading || isEmailVerified}
             >
+              {/* || formData.email.substring(formData.email.length - 13) !== 'kangnam.ac.kr' */}
               {isLoading ? '전송 중...' : sendResponseMessage ? '재전송' : '인증번호 전송'}
             </button>
-            <div style={{ color: 'red' }}>{formData.email.substring(formData.email.length - 13) === 'kangnam.ac.kr' ? null : '@kangnam.ac.kr 형식이 아닙니다 '}</div>
+
             {sendResponseMessage && <div style={{ color: 'green' }}>인증코드 전송 완료</div>}
             <div>인증번호</div>
             <input
@@ -276,7 +306,6 @@ const SignupPage = () => {
               {isLoading ? '인증 중...' : isEmailVerified ? '인증 완료' : '인증 확인'}
             </button>
             {isEmailVerified && <div style={{ color: 'green' }}>인증 완료</div>}
-
             <div>비밀번호</div>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -285,14 +314,12 @@ const SignupPage = () => {
               onChange={handleChange}
               autoComplete='new-password'
             />
-
             <button
               type='button'
               onClick={() => setShowPassword((prev) => !prev)}
             >
               {showPassword ? '감추기' : '보이기'}
             </button>
-
             <div>비밀번호 확인</div>
             <input
               type={showPassword ? 'text' : 'password'}
