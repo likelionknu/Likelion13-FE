@@ -8,8 +8,8 @@
   height: 1500px;
 
   max-width: 1900px;
-
-  margin: 100px;
+  width: 100%;
+  padding: 0 250px;
 }
 
 .mypage-tabs {
@@ -20,8 +20,6 @@
   min-width: 220px;
 
   text-align: left;
-
-  margin-left: 200px;
 }
 
 .result-tab {

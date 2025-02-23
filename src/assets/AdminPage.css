@@ -243,8 +243,6 @@
 .prev-btn,
 .close-btn,
 .next-btn {
-  width: 5vw;
-  height: 5vh;
 
   text-align: center;
   align-items: center;
