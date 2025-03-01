@@ -14,6 +14,7 @@ import Project1 from '../assets/images/Project1.png'
 import Project2 from '../assets/images/Project2.png'
 import Project3 from '../assets/images/Project3.png'
 import up_btn from '../assets/images/upbtn-light.png'
+import ApplicationPeriodModal from '../components/ApplicationPeriodModal'
 
 import styles from '../assets/MainPage.module.css'
 
@@ -190,6 +191,8 @@ const MainPage = () => {
   }, [])
 
   return (
+  <div>
+    <ApplicationPeriodModal />
     <div
       ref={containerRef}
       className='container'
@@ -535,6 +538,7 @@ const MainPage = () => {
         />
       </div>
     </div>
+  </div>
   )
 }
 
