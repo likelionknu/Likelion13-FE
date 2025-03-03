@@ -40,9 +40,19 @@ const DesignQuestionPage = () => {
   }, [isLoggedIn, navigate]);
 
   useEffect(() => {
-    if (user && user.apply) {
+    const deadline = new Date("2025-03-13T00:00:05").getTime();
+    
+    if (Date.now() > deadline) {
+      if (user?.apply) {
+        alert("이미 지원한 사용자입니다. 지원서 조회 페이지로 이동합니다.");
+        navigate("/submit");
+      } else {
+        alert("지원 기간이 종료되었습니다.");
+        navigate("/MainPage");
+      }
+    } else if (user?.apply) {
+      alert("이미 지원한 사용자입니다. 지원서 조회 페이지로 이동합니다.");
       navigate("/submit");
-      alert('이미 지원한 사용자입니다. 지원서 조회 페이지로 이동합니다.')
     }
   }, [user, navigate]);
 
