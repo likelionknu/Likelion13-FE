@@ -49,7 +49,7 @@ const LoginPage = () => {
         },
       })
 
-      console.log('[로그인 응답, 토큰값]', response.data)
+      // console.log('[로그인 응답, 토큰값]', response.data)
       // JWT 토큰 저장
       localStorage.setItem('token', response.data)
 
@@ -69,7 +69,7 @@ const LoginPage = () => {
 
       navigate('/')
     } catch (err : unknown) {
-      console.error('[로그인 에러]', err)
+      // console.error('[로그인 에러]', err)
       if (axios.isAxiosError(err)) {
         setError((err as AxiosError<{ message: string }>).response?.data?.message || '이메일 또는 비밀번호가 틀렸습니다.')
       } else {

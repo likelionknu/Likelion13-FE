@@ -61,7 +61,7 @@ const ForgotPasswordPage = () => {
       } else {
         setError('인증번호 전송에 실패했습니다.')
       }
-      console.error('[이메일 인증 에러]', err)
+      // console.error('[이메일 인증 에러]', err)
     } finally {
       setIsLoading(false)
     }
@@ -94,7 +94,7 @@ const ForgotPasswordPage = () => {
       } else {
         setError('인증 확인에 실패했습니다.')
       }
-      console.error('[인증 확인 에러]', err)
+      // console.error('[인증 확인 에러]', err)
     } finally {
       setIsLoading(false)
     }
@@ -135,7 +135,7 @@ const ForgotPasswordPage = () => {
         setError('비밀번호 재설정에 실패했습니다.')
       }
     } catch (err) {
-      console.error('[비밀번호 재설정 에러]', err)
+      // console.error('[비밀번호 재설정 에러]', err)
       setError('비밀번호 재설정 중 오류가 발생했습니다.')
     } finally {
       setIsLoading(false)

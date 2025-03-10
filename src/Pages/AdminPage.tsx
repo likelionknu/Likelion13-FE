@@ -120,15 +120,15 @@ const AdminPage = () => {
       })
 
       // frontend 데이터 로드
-      console.log(`response_front`, response)
+      // console.log(`response_front`, response)
 
       if (response.status === 200) {
         setFrontendData(response.data)
       } else {
-        console.error('프론트엔드 데이터 로드 실패:', response.status)
+        // console.error('프론트엔드 데이터 로드 실패:', response.status)
       }
     } catch (error) {
-      console.error('프론트엔드 데이터 로드 실패:', error)
+      // console.error('프론트엔드 데이터 로드 실패:', error)
     }
   }
 
@@ -142,15 +142,15 @@ const AdminPage = () => {
       })
 
       // backend 데이터 로드
-      console.log(`response_backend`, response)
+      // console.log(`response_backend`, response)
 
       if (response.status === 200) {
         setBackendData(response.data)
       } else {
-        console.error('백엔드 데이터 로드 실패:', response.status)
+        // console.error('백엔드 데이터 로드 실패:', response.status)
       }
     } catch (error) {
-      console.error('백엔드 데이터 로드 실패:', error)
+      // console.error('백엔드 데이터 로드 실패:', error)
     }
   }
 
@@ -164,15 +164,15 @@ const AdminPage = () => {
       })
 
       // design 데이터 로드
-      console.log(`response_Design`, response)
+      // console.log(`response_Design`, response)
 
       if (response.status === 200) {
         setDesignData(response.data)
       } else {
-        console.error('디자인 데이터 로드 실패:', response.status)
+        // console.error('디자인 데이터 로드 실패:', response.status)
       }
     } catch (error) {
-      console.error('디자인 데이터 로드 실패:', error)
+      // console.error('디자인 데이터 로드 실패:', error)
     }
   }
 
@@ -185,16 +185,16 @@ const AdminPage = () => {
         },
       })
 
-      console.log(`response_userform`, response.data)
+      // console.log(`response_userform`, response.data)
 
       if (response.status === 200) {
         setSelectedUser(response.data)
         setIsModalOpen(true)
       } else {
-        console.error('지원서 데이터 로드 실패:', response.status)
+        // console.error('지원서 데이터 로드 실패:', response.status)
       }
     } catch (error) {
-      console.error('지원서 데이터 로드 실패:', error)
+      // console.error('지원서 데이터 로드 실패:', error)
     }
   }
 
@@ -227,17 +227,17 @@ const AdminPage = () => {
       )
 
       if (response.status === 200) {
-        console.log('결과 저장 성공:', response.data.comment)
+        // console.log('결과 저장 성공:', response.data.comment)
         alert('결과가 성공적으로 저장되었습니다.')
         closeModal()
 
         setComment(response.data.comment)
         window.location.reload()
       } else {
-        console.error('결과 저장 실패:', response.status)
+        // console.error('결과 저장 실패:', response.status)
       }
     } catch (error) {
-      console.error('결과 저장 실패:', error)
+      // console.error('결과 저장 실패:', error)
     }
   }
 

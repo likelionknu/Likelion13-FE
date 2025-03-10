@@ -36,7 +36,7 @@ const Nav = () => {
             },
           }
         )
-        console.log(`Nav - response.data:`, response.data)
+        // console.log(`Nav - response.data:`, response.data)
 
         login({
           ...response.data,
@@ -44,7 +44,7 @@ const Nav = () => {
           apply: response.data.apply,
         })
       } catch (error) {
-        console.error('마이페이지 데이터 로드 실패:', error)
+        // console.error('마이페이지 데이터 로드 실패:', error)
         if (axios.isAxiosError(error) && error.response?.status === 401) {
           alert('인증이 만료되었습니다. 다시 로그인해주세요.')
           logout()

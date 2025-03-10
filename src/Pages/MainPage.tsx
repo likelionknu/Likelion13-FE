@@ -136,7 +136,7 @@ const MainPage = () => {
 
       const sections = gsap.utils.toArray('[class^="_Section"]') as HTMLElement[]
       if (sections.length === 0) {
-        console.error('Sections not found!')
+        // console.error('Sections not found!')
         return
       }
 

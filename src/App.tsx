@@ -30,7 +30,7 @@ function App() {
           }
         })
         .catch((error) => {
-          console.error('로그인 상태 복원 실패:', error)
+          // console.error('로그인 상태 복원 실패:', error)
           localStorage.removeItem('token') // 토큰이 유효하지 않으면 제거
         })
     }

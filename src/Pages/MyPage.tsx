@@ -72,9 +72,9 @@ const handleCloseModal = () => setIsModalOpen(false)
         navigate('/') // 메인 페이지로 이동
       }
     } catch (error) {
-      console.error('계정 삭제 실패:', error)
+      // console.error('계정 삭제 실패:', error)
       if (axios.isAxiosError(error) && error.response) {
-        console.error('API 오류 응답:', error.response)
+        // console.error('API 오류 응답:', error.response)
         alert(`삭제 실패: ${error.response.data.message || error.response.data}`)
       } else {
         alert('알 수 없는 오류가 발생했습니다.')
@@ -130,7 +130,7 @@ const handleCloseModal = () => setIsModalOpen(false)
           alert('정보 수정에 실패했습니다.')
         }
       }
-      console.error('정보 수정 실패:', error)
+      // console.error('정보 수정 실패:', error)
     }
   }
 
@@ -158,7 +158,7 @@ const handleCloseModal = () => setIsModalOpen(false)
           }
         )
 
-        // console.log('마이페이지 데이터:', response.data)
+        // // console.log('마이페이지 데이터:', response.data)
 
         // 관리자 여부 확인
         if (response.data.role === 'ADMIN') {
@@ -185,7 +185,7 @@ const handleCloseModal = () => setIsModalOpen(false)
           })
         }
       } catch (error) {
-        console.error('마이페이지 데이터 로드 실패:', error)
+        // console.error('마이페이지 데이터 로드 실패:', error)
         if (axios.isAxiosError(error) && error.response?.status === 401) {
           alert('인증이 만료되었습니다. 다시 로그인해주세요.')
           logout()
@@ -215,7 +215,7 @@ const handleCloseModal = () => setIsModalOpen(false)
         const data = await response.json();
         setResultStatus(data.resultStatus);
       } catch (error) {
-        console.error('결과를 불러오는 중 오류 발생:', error);
+        // console.error('결과를 불러오는 중 오류 발생:', error);
       }
     };
 

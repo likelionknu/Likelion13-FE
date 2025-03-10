@@ -86,10 +86,10 @@ const FrontendQuestionPage = () => {
               setAnswers(fetchedAnswers);
             }
           } else {
-            console.log("기존 데이터가 없습니다.");
+            // console.log("기존 데이터가 없습니다.");
           }
         } catch (error) {
-          console.error("데이터 가져오기 실패:", error);
+          // console.error("데이터 가져오기 실패:", error);
         }
       };
 
@@ -155,21 +155,21 @@ const FrontendQuestionPage = () => {
         body: JSON.stringify(frontendData),
       });
 
-      console.log('Response:', response);
+      // console.log('Response:', response);
       if (response.ok) {
         alert("임시 저장되었습니다.");
       } else {
         const responseData = await response.json();
-        console.log('Error response:', responseData);
+        // console.log('Error response:', responseData);
         alert("저장 실패, 서버 오류.");
       }
     } catch (error) {
-      console.error('Fetch error:', error);
+      // console.error('Fetch error:', error);
       alert("저장 중 오류가 발생했습니다.");
     }
 
-    console.log("로그인된 사용자 정보:", user);
-    console.log("보낼 데이터:", frontendData);
+    // console.log("로그인된 사용자 정보:", user);
+    // console.log("보낼 데이터:", frontendData);
   };
 
   const handleSubmit = async () => {
@@ -200,7 +200,7 @@ const FrontendQuestionPage = () => {
         apply: false,
       };
 
-      console.log("생성 요청 시작");
+      // console.log("생성 요청 시작");
       const createResponse = await fetch("https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/frontend/create", {
         method: "POST",
         headers: {
@@ -210,16 +210,16 @@ const FrontendQuestionPage = () => {
         body: JSON.stringify(frontendData),
       });
 
-      console.log("Create Response:", createResponse);
+      // console.log("Create Response:", createResponse);
 
       if (!createResponse.ok) {
         const createErrorData = await createResponse.json();
-        console.log("Create API Error response:", createErrorData);
+        // console.log("Create API Error response:", createErrorData);
         alert("데이터 생성 중 오류가 발생했습니다.");
         return;
       }
 
-      console.log("제출 요청 시작");
+      // console.log("제출 요청 시작");
       const submitResponse = await fetch(`https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/form/frontend/submit/${user.studentId}?studentId=${user.studentId}`, { // 실제 서버 URL로 변경 필요
         method: "PUT",
         headers: {
@@ -228,18 +228,18 @@ const FrontendQuestionPage = () => {
         },
       });
 
-      console.log('Submit Response:', submitResponse); // 응답 출력
+      // console.log('Submit Response:', submitResponse); // 응답 출력
       if (submitResponse.ok) {
         const submitResponseData = await submitResponse.json();
-        console.log('서버 응답:', submitResponseData);
+        // console.log('서버 응답:', submitResponseData);
         setIsSecondModalOpen(true);
       } else {
         const submitErrorData = await submitResponse.json(); // 실패 시 응답 데이터 확인
-        console.log('Error response:', submitErrorData);
+        // console.log('Error response:', submitErrorData);
         alert("서버 오류가 발생했습니다.");
       }
     } catch (error) {
-      console.error('Fetch error:', error);
+      // console.error('Fetch error:', error);
       alert("서버 요청 중 오류가 발생했습니다.");
     }
   };

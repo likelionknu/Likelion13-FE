@@ -62,19 +62,19 @@ const SubmitPage = () => {
           const data = await Promise.all(responses.map((res) => res.json()))
           const filteredApplications = data.filter((app) => app.apply === true)
 
-          // 몇번째 api 인지 확인하기 위해 console.log로 출력
-          console.log('data:', data)
+          // 몇번째 api 인지 확인하기 위해 // console.log로 출력
+          // // console.log('data:', data)
           const userPartIndex = data.findIndex((app) => app.apply === true)
           setPartIndex(userPartIndex)
 
-          console.log('userPart:', userPartIndex)
+          // // console.log('userPart:', userPartIndex)
           // userPart == 0 -> frontend
           // userPart == 1 -> backend
           // userPart == 2 -> design
 
           setApplications(filteredApplications)
         } catch (error) {
-          console.error('Error fetching applications:', error)
+          // console.error('Error fetching applications:', error)
         }
       }
       fetchApplications()

@@ -66,7 +66,7 @@ const SignupPage = () => {
       } else {
         setError('인증번호 전송에 실패했습니다.')
       }
-      console.error('[이메일 인증 에러]', err)
+      // console.error('[이메일 인증 에러]', err)
     } finally {
       setIsLoading(false)
     }
@@ -90,7 +90,7 @@ const SignupPage = () => {
       })
 
       const responseText = await response.text()
-      console.log(`responseText ${responseText}`)
+      // console.log(`responseText ${responseText}`)
 
       if (response.ok && responseText === '인증이 완료되었습니다.') {
         setIsEmailVerified(true)
@@ -99,12 +99,12 @@ const SignupPage = () => {
       }
     } catch (err) {
       if (err instanceof Error) {
-        console.log(`인증 확인 에러: ${err.message}`)
+        // console.log(`인증 확인 에러: ${err.message}`)
         setError(err.message)
       } else {
         setError('인증 확인에 실패했습니다.')
       }
-      console.error('[인증 확인 에러]', err)
+      // console.error('[인증 확인 에러]', err)
     } finally {
       setIsLoading(false)
     }
@@ -197,13 +197,13 @@ const SignupPage = () => {
           setError(responseText)
         }
       } else if (response.status === 500) {
-        console.error('서버 에러 상세:', responseText)
+        // console.error('서버 에러 상세:', responseText)
         setError('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
       } else {
         setError(responseText || '회원가입에 실패했습니다.')
       }
     } catch (err) {
-      console.error('[회원가입 에러]', err)
+      // console.error('[회원가입 에러]', err)
       if (!error) {
         setError(err instanceof Error ? err.message : '회원가입에 실패했습니다.')
       }
