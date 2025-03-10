@@ -162,7 +162,7 @@ const BackendQuestionPage = () => {
     if (response.ok) {
       alert("임시 저장되었습니다.");
     } else {
-      const responseData = await response.json(); // 실패 시 응답 데이터 확인
+      // const responseData = await response.json(); // 실패 시 응답 데이터 확인
       // console.log('Error response:', responseData);
       alert("저장 실패, 서버 오류.");
     }
@@ -217,7 +217,7 @@ const BackendQuestionPage = () => {
       // console.log("Create Response:", createResponse);
 
       if (!createResponse.ok) {
-        const createErrorData = await createResponse.json();
+        // const createErrorData = await createResponse.json();
         // console.log("Create API Error response:", createErrorData);
         alert("데이터 생성 중 오류가 발생했습니다.");
         return;
@@ -235,12 +235,12 @@ const BackendQuestionPage = () => {
       // console.log('Submit Response:', submitResponse); // 응답 출력
       if (submitResponse.ok) {
 
-      const submitResponseData = await submitResponse.json();
+      // const submitResponseData = await submitResponse.json();
       // console.log('서버 응답:', submitResponseData);
       
         setIsSecondModalOpen(true);
       } else {
-        const submitErrorData = await submitResponse.json(); // 실패 시 응답 데이터 확인
+        // const submitErrorData = await submitResponse.json(); // 실패 시 응답 데이터 확인
         // console.log('Error response:', submitErrorData);
         alert("서버 오류가 발생했습니다.");
       }
