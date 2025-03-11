@@ -407,12 +407,14 @@ const AdminPage = () => {
                       {[...Array(5)].map((_, i) => {
                         const questionIndex = currentPage * 5 + i
                         if (questionIndex >= 11) return null
+                        const answer = (selectedUser as Record<string, string | undefined>)[`${activeTab}content${questionIndex + 1}`] || ''
                         return (
                           <div key={questionIndex}>
                             <div className='user-question'>
                               {activeTab === 'frontend' ? questions_frontend[questionIndex] : activeTab === 'backend' ? questions_backend[questionIndex] : questions_Design[questionIndex]}
+                              {answer.length != 0 ? <span style={{ color: '#4A7EDC', fontSize: '17px' }}> {answer.length} 자</span> : null}
                             </div>
-                            <div className='user-answer'>{(selectedUser as Record<string, string | undefined>)[`${activeTab}content${questionIndex + 1}`]}</div>
+                            <div className='user-answer'>{answer}</div>
                           </div>
                         )
                       })}
