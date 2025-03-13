@@ -4,25 +4,23 @@ import { useAuthStore } from '../store/useAuthStore'
 import ResultModal from '../components/ResultModal'
 import axios from 'axios'
 import '../assets/Mypage.css'
+import confetti from 'canvas-confetti'
 
 const MyPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-
-const [isModalOpen, setIsModalOpen] = useState(false)
-
-const handleOpenModal = () => {
-  if (resultStatus === 'PASS') {
-    setIsModalOpen(true);
+  const handleOpenModal = () => {
+    if (resultStatus === 'PASS') {
+      setIsModalOpen(true)
+    }
   }
-};
 
-const handleCloseModal = () => setIsModalOpen(false)
+  const handleCloseModal = () => setIsModalOpen(false)
 
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
-  const [resultStatus, setResultStatus] = useState<string | null>(null);
-
+  const [resultStatus, setResultStatus] = useState<string | null>('HOLD')
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -53,7 +51,47 @@ const handleCloseModal = () => setIsModalOpen(false)
       [name]: value,
     }))
   }
+  // 결과보기 탭 전환 시 firework 호출하도록 수정
+  // const handleResultTabClick = () => {
+  //   setActiveTab('result')
+  //   if (resultStatus === 'PASS') {
+  //     firework()
+  //   }
+  // }
 
+  // firework 함수 수정 (var -> const/let 사용)
+  function firework() {
+    const duration = 15 * 100
+    const animationEnd = Date.now() + duration
+    const defaults = { startVelocity: 25, spread: 360, ticks: 50, zIndex: 0 }
+
+    function randomInRange(min: number, max: number) {
+      return Math.random() * (max - min) + min
+    }
+
+    const interval = setInterval(function () {
+      const timeLeft = animationEnd - Date.now()
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval)
+      }
+
+      const particleCount = 50 * (timeLeft / duration)
+      // confetti 함수 호출 - canvas-confetti 라이브러리의 함수
+      confetti(
+        Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        })
+      )
+      confetti(
+        Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        })
+      )
+    }, 250)
+  }
   // 계정 삭제
   const handleDeleteAccount = async () => {
     const confirmDelete = window.confirm('정말 계정을 삭제하시겠습니까?')
@@ -200,28 +238,27 @@ const handleCloseModal = () => setIsModalOpen(false)
   useEffect(() => {
     const fetchResult = async () => {
       try {
-        const response = await fetch(
-          'https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/check-pass-fail',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${user?.token}`,
-            },
-          }
-        );
-        if (!response.ok) throw new Error('API 요청 실패');
+        const response = await fetch('https://port-0-likelion13-be-m6qgk7bv4a85692b.sel4.cloudtype.app/api/v1/check-pass-fail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user?.token}`,
+          },
+        })
+        if (!response.ok) throw new Error('API 요청 실패')
 
-        const data = await response.json();
-        setResultStatus(data.resultStatus);
+        const data = await response.json()
+        setResultStatus(data.resultStatus)
+        if (data.resultStatus === 'PASS') {
+          firework() // 합격 시 firework 함수 호출
+        }
       } catch (error) {
         // console.error('결과를 불러오는 중 오류 발생:', error);
       }
-    };
+    }
 
-    if (user?.token) fetchResult();
-  }, [user?.token]);
-
+    if (user?.token) fetchResult()
+  }, [user?.token])
 
   return (
     <div className='mypage-container'>
@@ -243,10 +280,8 @@ const handleCloseModal = () => setIsModalOpen(false)
         ) : (
           <button
             className={activeTab === 'result' ? 'active' : ''}
-            onClick={() => {
-              // setActiveTab('result')
-              alert('서류합격결과는 3/15~3/16일에 공지됩니다.')
-            }}
+            // onClick={handleResultTabClick}
+            onClick={() => alert('서류합격결과는 3/15~3/16일에 공지됩니다.')}
           >
             결과보기
           </button>
@@ -372,38 +407,46 @@ const handleCloseModal = () => setIsModalOpen(false)
             </form>
           </div>
         ) : (
-          //  결과보기 탭
-          // <div className='result-tab'>
-          //   <div className='contents-title'>결과 보기</div>
-          //   <div className='passing-result-container'>
-          //     <div className='pass-name'>{user?.name}</div>
-          //     <div
-          //       className='pass'
-          //       style={{ color: 'gray' }}
-          //     >
-          //       3/15~3/16일 공지예정
-          //     </div>
-          //     {/* {user?.apply ? <div className='pass'>합격</div> : <div className='pass-x'>불합격</div>} */}
-          //   </div>
-          // </div>
-
           <div className='result-tab'>
             <div className='contents-title'>결과 보기</div>
-            <div 
-              className='passing-result-container' 
-              onClick={handleOpenModal} 
-              style={{ cursor: resultStatus === 'PASS' ? 'pointer' : 'default' }}
+            <div
+              className={`passing-result-container ${resultStatus === 'PASS' ? 'confetti' : ''}`}
+              onClick={handleOpenModal}
+              style={{
+                cursor: resultStatus === 'PASS' ? 'pointer' : 'default',
+              }}
             >
               <div className='pass-name'>{user?.name}</div>
               {resultStatus === 'PASS' ? (
-                <div className='pass' style={{ color: 'green' }}>합격</div>
+                <div
+                  className='pass'
+                  style={{ color: '#4A7EDC' }}
+                >
+                  합격
+                </div>
               ) : resultStatus === 'FAIL' ? (
-                <div className="pass-x" style={{ color: 'red' }}>불합격</div>
+                <div
+                  className='pass-x'
+                  style={{ color: '#FF3232' }}
+                >
+                  불합격
+                </div>
               ) : (
-                <div className="pass-hold" style={{ color: 'orange' }}>보류</div>
+                <div
+                  className='pass-hold'
+                  style={{ color: 'orange' }}
+                >
+                  보류
+                </div>
               )}
             </div>
-            {isModalOpen && <ResultModal isOpen={isModalOpen} onClose={handleCloseModal} />}
+
+            {isModalOpen && (
+              <ResultModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+              />
+            )}
           </div>
         )}
       </div>
