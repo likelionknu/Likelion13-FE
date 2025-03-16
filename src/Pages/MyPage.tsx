@@ -20,7 +20,7 @@ const MyPage = () => {
   const navigate = useNavigate()
   const user = useAuthStore((state) => state.user)
   const { login, logout } = useAuthStore()
-  const [resultStatus, setResultStatus] = useState<string | null>('HOLD')
+  const [resultStatus, setResultStatus] = useState<string | null>(null)
 
   const [showPassword, setShowPassword] = useState(false)
 
@@ -52,14 +52,13 @@ const MyPage = () => {
     }))
   }
   // 결과보기 탭 전환 시 firework 호출하도록 수정
-  // const handleResultTabClick = () => {
-  //   setActiveTab('result')
-  //   if (resultStatus === 'PASS') {
-  //     firework()
-  //   }
-  // }
+  const handleResultTabClick = () => {
+    setActiveTab('result')
+    if (resultStatus === 'PASS') {
+      firework()
+    }
+  }
 
-  // firework 함수 수정 (var -> const/let 사용)
   function firework() {
     const duration = 15 * 100
     const animationEnd = Date.now() + duration
@@ -280,8 +279,9 @@ const MyPage = () => {
         ) : (
           <button
             className={activeTab === 'result' ? 'active' : ''}
-            // onClick={handleResultTabClick}
-            onClick={() => alert('서류합격결과는 3/15~3/16일에 공지됩니다.')}
+            onClick={handleResultTabClick}
+            // onClick={() => alert('서류합격결과는 3/15~3/16일에 공지됩니다.')}
+            // 3/16일에 주석 풀기
           >
             결과보기
           </button>
