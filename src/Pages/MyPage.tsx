@@ -248,9 +248,6 @@ const MyPage = () => {
 
         const data = await response.json()
         setResultStatus(data.resultStatus)
-        if (data.resultStatus === 'PASS') {
-          firework() // 합격 시 firework 함수 호출
-        }
       } catch (error) {
         // console.error('결과를 불러오는 중 오류 발생:', error);
       }
